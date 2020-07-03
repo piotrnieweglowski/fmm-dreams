@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using FMM.Persistent;
+using FMM.Features.Dream.Commands;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using MediatR;
+using FMM.Features.Dream.Queries;
 
 namespace FMM.Features.Dream
 {
@@ -12,52 +11,43 @@ namespace FMM.Features.Dream
     [Route("api/[controller]")]
     public class DreamController : ControllerBase
     {
-        DataContext _dbContext;
+        IMediator _mediator;
 
-        public DreamController(DataContext dbContext)
+        public DreamController(IMediator mediator)
         {
-            _dbContext = dbContext;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            return Ok(await _dbContext.Dreams.ToListAsync());
+            return Ok(await _mediator.Send(new GetAllQuery()));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(Guid Id)
+        public async Task<ActionResult> Get(Guid id)
         {
-            return Ok(await _dbContext.Dreams.FirstOrDefaultAsync(x => x.Id == Id));
+            return Ok(await _mediator.Send(new GetQuery(id)));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(FMM.Persistent.Dream dream)
+        public async Task<ActionResult> Post(DreamRequest dto)
         {
-            await _dbContext.Dreams.AddAsync(dream);
-            await _dbContext.SaveChangesAsync();
-
+            await _mediator.Send(new CreateCommand(dto));
             return NoContent();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Put(FMM.Persistent.Dream dream)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(Guid id, DreamRequest dto)
         {
-            var toUpdate = await _dbContext.Dreams.FirstAsync(x => x.Id == dream.Id);
-            toUpdate.Title = dream.Title;
-            toUpdate.Description = dream.Description;
-            await _dbContext.SaveChangesAsync();
-
+            await _mediator.Send(new UpdateCommand(id, dto));
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            var toRemove = await _dbContext.Dreams.FirstAsync(x => x.Id == id);
-            _dbContext.Dreams.Remove(toRemove);
-            await _dbContext.SaveChangesAsync();
-
+            await _mediator.Send(new DeleteCommand(id));
             return NoContent();
         }
     }
