@@ -42,30 +42,39 @@ namespace FMM.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("dream")
+                    b.Property<Guid?>("DreamId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FirstName")
                         .HasColumnType("text");
 
-                    b.Property<string>("firstName")
+                    b.Property<string>("GuardianContact")
                         .HasColumnType("text");
 
-                    b.Property<string>("guardianContact")
+                    b.Property<string>("PhotoAsBase64")
                         .HasColumnType("text");
 
-                    b.Property<string>("photoAsBase64")
+                    b.Property<string>("Sex")
                         .HasColumnType("text");
 
-                    b.Property<string>("sex")
+                    b.Property<string>("Url")
                         .HasColumnType("text");
 
-                    b.Property<string>("url")
-                        .HasColumnType("text");
-
-                    b.Property<int>("yearOfBirth")
+                    b.Property<int>("YearOfBirth")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DreamId");
+
                     b.ToTable("Dreamers");
+                });
+
+            modelBuilder.Entity("FMM.Persistent.Dreamer", b =>
+                {
+                    b.HasOne("FMM.Persistent.Dream", "Dream")
+                        .WithMany()
+                        .HasForeignKey("DreamId");
                 });
 #pragma warning restore 612, 618
         }

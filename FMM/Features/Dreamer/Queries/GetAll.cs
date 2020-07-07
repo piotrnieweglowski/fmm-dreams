@@ -28,7 +28,7 @@ namespace FMM.Features.Dreamer.Queries
 
             public async Task<List<DreamerResponse>> Handle(GetAllQuery query, CancellationToken cancellationToken)
             {
-                return await _dbContext.Dreams
+                return await _dbContext.Dreamers
                     .ProjectTo<DreamerResponse>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken);
             }
