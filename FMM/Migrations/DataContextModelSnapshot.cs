@@ -35,6 +35,52 @@ namespace FMM.Migrations
 
                     b.ToTable("Dreams");
                 });
+
+            modelBuilder.Entity("FMM.Persistent.Step", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Steps");
+                });
+
+            modelBuilder.Entity("FMM.Persistent.Task", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("StepId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StepId");
+
+                    b.ToTable("Task");
+                });
+
+            modelBuilder.Entity("FMM.Persistent.Task", b =>
+                {
+                    b.HasOne("FMM.Persistent.Step", null)
+                        .WithMany("Tasks")
+                        .HasForeignKey("StepId");
+                });
 #pragma warning restore 612, 618
         }
     }
