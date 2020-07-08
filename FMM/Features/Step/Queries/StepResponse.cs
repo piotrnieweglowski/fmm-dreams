@@ -8,7 +8,14 @@ namespace FMM.Features.Step.Queries
     {
         public Guid Id { get; set; }
         public string Description { get; set; }
-        public IList<FMM.Persistent.Task> TaskList { get; set; }
+        public IList<Task> Tasks { get; set; }
+        public bool IsCompleted { get; set; }
+    }
+
+    public class Task
+    {
+        public Guid Id { get; set; }
+        public string Description { get; set; }
         public bool IsCompleted { get; set; }
     }
 
@@ -16,6 +23,7 @@ namespace FMM.Features.Step.Queries
     {
         public StepResponseProfile()
         {
+            CreateMap<FMM.Persistent.Task, Task>();
             CreateMap<FMM.Persistent.Step, StepResponse>();
         }
     }

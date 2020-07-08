@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using static FMM.Persistent.Step;
 using FMM.Features.Step.Commands;
 using FMM.Features.Step.Queries;
+using FMM.Persistent;
+using AutoMapper;
 
 namespace FMM.Features.Step
 {
@@ -14,7 +16,6 @@ namespace FMM.Features.Step
     [Route("api/[controller]")]
     public class StepController : ControllerBase
     {
-
         IMediator _mediator;
 
         public StepController(IMediator mediator)
@@ -34,7 +35,6 @@ namespace FMM.Features.Step
         {
             return Ok(await _mediator.Send(new GetQuery(id)));
         }
-
 
         [HttpPost]
         public async Task<ActionResult> Post(StepRequest dto)

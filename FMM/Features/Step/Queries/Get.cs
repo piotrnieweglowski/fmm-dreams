@@ -30,7 +30,7 @@ namespace FMM.Features.Step.Queries
 
             public async Task<StepResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
-                var dream = await _dbContext.Steps.FirstAsync(x => x.Id == query.Id);
+                var dream = await _dbContext.Steps.Include(x => x.Tasks).FirstAsync(x => x.Id == query.Id);
                 return _mapper.Map<StepResponse>(dream);
             }
         }
