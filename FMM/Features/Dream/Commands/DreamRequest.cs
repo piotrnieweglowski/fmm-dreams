@@ -1,5 +1,6 @@
 using System;
 using AutoMapper;
+using FluentValidation;
 
 namespace FMM.Features.Dream.Commands
 {

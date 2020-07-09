@@ -1,5 +1,6 @@
 using AutoMapper;
 using FMM.Persistent;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
+using FMM.Common;
 
 namespace FMM
 {
@@ -24,7 +27,10 @@ namespace FMM
         {
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(typeof(Startup));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            
             services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("DbConnection"))
             );
