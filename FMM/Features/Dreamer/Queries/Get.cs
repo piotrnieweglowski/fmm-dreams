@@ -30,7 +30,7 @@ namespace FMM.Features.Dreamer.Queries
 
             public async Task<DreamerResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
-                var dreamer = await _dbContext.Dreamers.FirstAsync(x => x.Id == query.Id);
+                var dreamer = await _dbContext.Dreamers.Include(x => x.Dream).FirstAsync(x => x.Id == query.Id);
                 return _mapper.Map<DreamerResponse>(dreamer);
             }
         }

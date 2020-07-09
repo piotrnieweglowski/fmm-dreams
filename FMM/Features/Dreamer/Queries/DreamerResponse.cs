@@ -24,6 +24,7 @@ namespace FMM.Features.Dreamer.Queries
             public DreamerResponseProfile()
             {
                 CreateMap<FMM.Persistent.Dreamer, DreamerResponse>();
+                CreateMap<FMM.Persistent.Dream, Dream>();
             }
         }
 
