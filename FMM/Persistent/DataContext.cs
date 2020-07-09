@@ -10,5 +10,7 @@ namespace FMM.Persistent
 
         public DbSet<Dream> Dreams { get; set; }
         public DbSet<Dreamer> Dreamers { get; set; }
+        public DbSet<Step> Steps { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
