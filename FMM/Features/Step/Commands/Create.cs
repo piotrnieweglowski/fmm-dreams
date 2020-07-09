@@ -1,17 +1,16 @@
-using System.Linq;
+﻿using MediatR;
+using AutoMapper;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using FMM.Persistent;
-using MediatR;
 
-namespace FMM.Features.Dreamer.Commands
+namespace FMM.Features.Step.Commands
 {
     public class CreateCommand : IRequest
     {
-        public DreamerRequest Dto { get; }
+        public StepRequest Dto { get; }
 
-        public CreateCommand(DreamerRequest dto)
+        public CreateCommand(StepRequest dto)
         {
             Dto = dto;
         }
@@ -29,14 +28,8 @@ namespace FMM.Features.Dreamer.Commands
 
             public async Task<Unit> Handle(CreateCommand command, CancellationToken cancellationToken)
             {
-                var dreamer = _mapper.Map<Persistent.Dreamer>(command.Dto);
-                var dreamId = command.Dto.Dream?.Id;
-                if (dreamId.HasValue)
-                {
-                    dreamer.Dream = _dbContext.Dreams.First(x => x.Id == dreamId);
-                }
-
-                await _dbContext.Dreamers.AddAsync(dreamer);
+                var step = _mapper.Map<Persistent.Step>(command.Dto);
+                await _dbContext.Steps.AddAsync(step);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
