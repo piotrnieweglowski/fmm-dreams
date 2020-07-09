@@ -8,26 +8,26 @@ namespace FMM.Features.Dreamer.Commands
     public class DreamerRequest
     {
         public Guid Id { get; set; }
-        public string firstName { get; set; }
-        public string sex { get; set; }
-        
-        public string dream { get; set; }
-
-        public int yearOfBirth { get; set; }
-
-        public string url { get; set; }
-        
-        public string guardianContact { get; set; }
-
-        public string photoAsBase64 { get; set; }
-
+        public string FirstName { get; set; }
+        public string Sex { get; set; }
+        public Dream Dream { get; set; }
+        public int YearOfBirth { get; set; }
+        public string Url { get; set; }
+        public string GuardianContact { get; set; }
+        public string PhotoAsBase64 { get; set; }
     }
 
     public class DreamerRequestProfile : Profile
     {
         public DreamerRequestProfile()
         {
+            CreateMap<Dream, FMM.Persistent.Dream>();
             CreateMap<DreamerRequest, FMM.Persistent.Dreamer>();
         }
+    }
+
+    public class Dream
+    {
+        public Guid Id { get; set; }
     }
 }
