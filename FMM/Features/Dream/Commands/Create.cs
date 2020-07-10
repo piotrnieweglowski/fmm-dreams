@@ -40,6 +40,9 @@ namespace FMM.Features.Dream.Commands
         {
             public CreateCommandValidator()
             {
+                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Description).NotEmpty();
+                RuleFor(x => x.Dto.Title).NotEmpty();
             }
         }
     }

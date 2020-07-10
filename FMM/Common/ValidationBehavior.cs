@@ -29,13 +29,12 @@ namespace FMM.Common
             if (errors.Any())
             {
                 var errorBuilder = new StringBuilder();
-                errorBuilder.AppendLine("Invalid command, reason: ");
                 foreach (var error in errors)
                 {
                     errorBuilder.AppendLine(error.ErrorMessage);
                 }
     
-                throw new Exception(errorBuilder.ToString());
+                throw new InvalidValidationException("Invalid validation, please see detail", errorBuilder.ToString());
             }
     
             return next();

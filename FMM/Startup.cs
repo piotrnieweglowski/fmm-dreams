@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using FMM.Common;
+using Hellang.Middleware.ProblemDetails;
 
 namespace FMM
 {
@@ -30,6 +31,11 @@ namespace FMM
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(typeof(Startup));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddProblemDetails(x => 
+            {
+                x.IncludeExceptionDetails = (ctx, ex) => false;
+                x.Map<InvalidValidationException>(ex => new InvalidValidationProblemDetails(ex));
+            });
             
             services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options => 
                 options.UseNpgsql(Configuration.GetConnectionString("DbConnection"))
@@ -45,10 +51,9 @@ namespace FMM
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseProblemDetails();
 
             app.UseEndpoints(endpoints =>
             {

@@ -32,12 +32,15 @@ namespace FMM.Features.Dream.Queries
             public async Task<DreamResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
                 var dream = await _dbContext.Dreams.FirstOrDefaultAsync(x => x.Id == query.Id);
-                if (dream == null)
-                {
-                 
-                }
-
                 return _mapper.Map<DreamResponse>(dream);
+            }
+        }
+
+        public class GetQueryValidator : AbstractValidator<GetQuery>
+        {
+            public GetQueryValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
             }
         }
     }
