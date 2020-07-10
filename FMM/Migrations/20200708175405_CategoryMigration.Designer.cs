@@ -138,7 +138,9 @@ namespace FMM.Migrations
                         .WithMany("Tasks")
                         .HasForeignKey("StepId");
                 });
+
     #pragma warning restore 612, 618
+
         }
     }
 }
