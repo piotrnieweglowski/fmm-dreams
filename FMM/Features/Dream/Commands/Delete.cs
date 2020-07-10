@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,14 @@ namespace FMM.Features.Dream.Commands
                 _dbContext.Dreams.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+
+        public class DeleteCommandValidator : AbstractValidator<DeleteCommand>
+        {
+            public DeleteCommandValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
             }
         }
     }
