@@ -3,6 +3,7 @@ using AutoMapper;
 using System.Threading;
 using System.Threading.Tasks;
 using FMM.Persistent;
+using FluentValidation;
 
 namespace FMM.Features.Step.Commands
 {
@@ -32,6 +33,22 @@ namespace FMM.Features.Step.Commands
                 await _dbContext.Steps.AddAsync(step);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+
+        public class CreateCommandValidator : AbstractValidator<CreateCommand>
+        {
+            public CreateCommandValidator()
+            {
+                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Description).NotEmpty().NotNull().MaximumLength(500);
+                RuleFor(x => x.Dto.Tasks).NotEmpty().NotNull();
+                RuleForEach(x => x.Dto.Tasks).NotNull().NotEmpty();
+                RuleForEach(x => x.Dto.Tasks).ChildRules(tasks =>
+                {
+                    tasks.RuleFor(x => x.Description).NotNull().NotEmpty().MaximumLength(500);
+                });
+                RuleFor(x => x.Dto.IsCompleted).NotNull();
             }
         }
     }

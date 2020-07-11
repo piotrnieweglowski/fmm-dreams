@@ -31,13 +31,15 @@ namespace FMM
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(typeof(Startup));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            services.AddProblemDetails(x => 
+            services.AddProblemDetails(x =>
             {
                 x.IncludeExceptionDetails = (ctx, ex) => false;
                 x.Map<InvalidValidationException>(ex => new InvalidValidationProblemDetails(ex));
+                x.Map<NotFoundException>(ex => new NotFoundProblemDetails(ex));
+                x.Map<DbUpdateException>(ex => new DuplicateGuidDbProblemDetails(ex));
             });
-            
-            services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options => 
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DbConnection"))
             );
         }

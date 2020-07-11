@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using FMM.Persistent;
+using FluentValidation;
 
 namespace FMM.Features.Step.Commands
 {
@@ -31,6 +32,13 @@ namespace FMM.Features.Step.Commands
                 _dbContext.Steps.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+        public class DeleteCommandValidator : AbstractValidator<DeleteCommand>
+        {
+            public DeleteCommandValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FMM.Persistent;
 using MediatR;
+using FluentValidation;
 
 namespace FMM.Features.Category.Commands
 {
@@ -32,6 +33,14 @@ namespace FMM.Features.Category.Commands
                 await _dbContext.Categories.AddAsync(category);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+        public class CreateCommandValidator : AbstractValidator<CreateCommand>
+        {
+            public CreateCommandValidator()
+            {
+                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Description).NotEmpty().NotNull().MaximumLength(500);
             }
         }
     }

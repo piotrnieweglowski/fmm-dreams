@@ -5,6 +5,8 @@ using AutoMapper;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using FMM.Common;
 
 namespace FMM.Features.Category.Queries
 {
@@ -30,8 +32,22 @@ namespace FMM.Features.Category.Queries
 
             public async Task<CategoryResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
-                var category = await _dbContext.Categories.FirstAsync(x => x.Id == query.Id);
+                var category = await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == query.Id);
+
+                if (category == null)
+                {
+                    throw new NotFoundException("Category", "Not found");
+                }
+
                 return _mapper.Map<CategoryResponse>(category);
+            }
+        }
+
+        public class GetQueryValidator : AbstractValidator<GetQuery>
+        {
+            public GetQueryValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
             }
         }
     }
