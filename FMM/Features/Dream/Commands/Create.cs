@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation;
 using FMM.Persistent;
 using MediatR;
 
@@ -32,6 +33,16 @@ namespace FMM.Features.Dream.Commands
                 await _dbContext.Dreams.AddAsync(dream);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+
+        public class CreateCommandValidator : AbstractValidator<CreateCommand>
+        {
+            public CreateCommandValidator()
+            {
+                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Description).NotEmpty();
+                RuleFor(x => x.Dto.Title).NotEmpty();
             }
         }
     }

@@ -5,6 +5,7 @@ using AutoMapper;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 namespace FMM.Features.Category.Commands
 {
@@ -36,6 +37,17 @@ namespace FMM.Features.Category.Commands
                 _mapper.Map<CategoryRequest, Persistent.Category>(command.Dto, toUpdate);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+
+        public class UpdateCommandValidator : AbstractValidator<UpdateCommand>
+        {
+            public UpdateCommandValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Id).Equal(x => x.Id);
+                RuleFor(x => x.Dto.Description).NotNull().NotEmpty().MaximumLength(500);
             }
         }
     }

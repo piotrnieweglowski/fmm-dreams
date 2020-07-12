@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
 
 namespace FMM.Features.Category.Commands
 {
@@ -31,6 +32,14 @@ namespace FMM.Features.Category.Commands
                 _dbContext.Categories.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+
+        public class DeleteCommandValidator : AbstractValidator<DeleteCommand>
+        {
+            public DeleteCommandValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
             }
         }
     }

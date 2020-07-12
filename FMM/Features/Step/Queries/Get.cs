@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FMM.Persistent;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using FMM.Common;
 
 namespace FMM.Features.Step.Queries
 {
@@ -31,8 +33,20 @@ namespace FMM.Features.Step.Queries
             public async Task<StepResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
                 var step = await _dbContext.Steps.Include(x => x.Tasks)
-                                                    .FirstAsync(x => x.Id == query.Id);
+                                                    .FirstOrDefaultAsync(x => x.Id == query.Id);
+                if (step == null)
+                {
+                    throw new NotFoundException("Step", "Not found");
+                }
+
                 return _mapper.Map<StepResponse>(step);
+            }
+        }
+        public class GetQueryValidator : AbstractValidator<GetQuery>
+        {
+            public GetQueryValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
             }
         }
     }
