@@ -1,12 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentValidation;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace FMM.Features.Dream.Commands
+namespace FMM.Features.Dreamer.Commands
 {
     public class DeleteCommand : IRequest
     {
@@ -28,18 +27,10 @@ namespace FMM.Features.Dream.Commands
 
             public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
-                var toRemove = await _dbContext.Dreams.FirstAsync(x => x.Id == command.Id);
-                _dbContext.Dreams.Remove(toRemove);
+                var toRemove = await _dbContext.Dreamers.FirstAsync(x => x.Id == command.Id);
+                _dbContext.Dreamers.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
-            }
-        }
-
-        public class DeleteCommandValidator : AbstractValidator<DeleteCommand>
-        {
-            public DeleteCommandValidator()
-            {
-                RuleFor(x => x.Id).NotNull().NotEmpty();
             }
         }
     }

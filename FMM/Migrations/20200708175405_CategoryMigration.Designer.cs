@@ -52,6 +52,40 @@ namespace FMM.Migrations
                     b.ToTable("Dreams");
                 });
 
+            modelBuilder.Entity("FMM.Persistent.Dreamer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DreamId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GuardianContact")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhotoAsBase64")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.Property<int>("YearOfBirth")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DreamId");
+
+                    b.ToTable("Dreamers");
+                });
+
             modelBuilder.Entity("FMM.Persistent.Step", b =>
                 {
                     b.Property<Guid>("Id")
@@ -91,13 +125,22 @@ namespace FMM.Migrations
                     b.ToTable("Task");
                 });
 
+            modelBuilder.Entity("FMM.Persistent.Dreamer", b =>
+                {
+                    b.HasOne("FMM.Persistent.Dream", "Dream")
+                        .WithMany()
+                        .HasForeignKey("DreamId");
+                });
+
             modelBuilder.Entity("FMM.Persistent.Task", b =>
                 {
                     b.HasOne("FMM.Persistent.Step", null)
                         .WithMany("Tasks")
                         .HasForeignKey("StepId");
                 });
-#pragma warning restore 612, 618
+
+    #pragma warning restore 612, 618
+
         }
     }
 }

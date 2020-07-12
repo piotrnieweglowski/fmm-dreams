@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,18 @@ namespace FMM.Features.Dream.Commands
                 _mapper.Map<DreamRequest, Persistent.Dream>(command.Dto, toUpdate);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
+            }
+        }
+
+        public class UpdateCommandValidator : AbstractValidator<UpdateCommand>
+        {
+            public UpdateCommandValidator()
+            {
+                RuleFor(x => x.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
+                RuleFor(x => x.Dto.Id).Equal(x => x.Id);
+                RuleFor(x => x.Dto.Description).NotEmpty();
+                RuleFor(x => x.Dto.Title).NotEmpty();
             }
         }
     }

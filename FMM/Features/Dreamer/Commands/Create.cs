@@ -1,17 +1,17 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using FluentValidation;
 using FMM.Persistent;
 using MediatR;
 
-namespace FMM.Features.Dream.Commands
+namespace FMM.Features.Dreamer.Commands
 {
     public class CreateCommand : IRequest
     {
-        public DreamRequest Dto { get; }
+        public DreamerRequest Dto { get; }
 
-        public CreateCommand(DreamRequest dto)
+        public CreateCommand(DreamerRequest dto)
         {
             Dto = dto;
         }
@@ -29,20 +29,16 @@ namespace FMM.Features.Dream.Commands
 
             public async Task<Unit> Handle(CreateCommand command, CancellationToken cancellationToken)
             {
-                var dream = _mapper.Map<Persistent.Dream>(command.Dto);
-                await _dbContext.Dreams.AddAsync(dream);
+                var dreamer = _mapper.Map<Persistent.Dreamer>(command.Dto);
+                var dreamId = command.Dto.Dream?.Id;
+                if (dreamId.HasValue)
+                {
+                    dreamer.Dream = _dbContext.Dreams.First(x => x.Id == dreamId);
+                }
+
+                await _dbContext.Dreamers.AddAsync(dreamer);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
-            }
-        }
-
-        public class CreateCommandValidator : AbstractValidator<CreateCommand>
-        {
-            public CreateCommandValidator()
-            {
-                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
-                RuleFor(x => x.Dto.Description).NotEmpty();
-                RuleFor(x => x.Dto.Title).NotEmpty();
             }
         }
     }

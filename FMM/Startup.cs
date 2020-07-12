@@ -1,5 +1,6 @@
 using AutoMapper;
 using FMM.Persistent;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
+using FMM.Common;
+using Hellang.Middleware.ProblemDetails;
 
 namespace FMM
 {
@@ -24,8 +28,18 @@ namespace FMM
         {
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(typeof(Startup));
-            services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options => 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddProblemDetails(x =>
+            {
+                x.IncludeExceptionDetails = (ctx, ex) => false;
+                x.Map<InvalidValidationException>(ex => new InvalidValidationProblemDetails(ex));
+                x.Map<NotFoundException>(ex => new NotFoundProblemDetails(ex));
+                x.Map<DbUpdateException>(ex => new DuplicateGuidDbProblemDetails(ex));
+            });
+
+            services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DbConnection"))
             );
         }
@@ -39,10 +53,9 @@ namespace FMM
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
+            app.UseProblemDetails();
 
             app.UseEndpoints(endpoints =>
             {

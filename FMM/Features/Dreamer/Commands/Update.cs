@@ -1,20 +1,19 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using FluentValidation;
 
-namespace FMM.Features.Category.Commands
+namespace FMM.Features.Dreamer.Commands
 {
     public class UpdateCommand : IRequest
     {
         public Guid Id { get; }
-        public CategoryRequest Dto { get; }
+        public DreamerRequest Dto { get; }
 
-        public UpdateCommand(Guid id, CategoryRequest dto)
+        public UpdateCommand(Guid id, DreamerRequest dto)
         {
             Id = id;
             Dto = dto;
@@ -33,21 +32,10 @@ namespace FMM.Features.Category.Commands
 
             public async Task<Unit> Handle(UpdateCommand command, CancellationToken cancellationToken)
             {
-                var toUpdate = await _dbContext.Categories.FirstAsync(x => x.Id == command.Id);
-                _mapper.Map<CategoryRequest, Persistent.Category>(command.Dto, toUpdate);
+                var toUpdate = await _dbContext.Dreamers.FirstAsync(x => x.Id == command.Id);
+                _mapper.Map<DreamerRequest, Persistent.Dreamer>(command.Dto, toUpdate);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
-            }
-        }
-
-        public class UpdateCommandValidator : AbstractValidator<UpdateCommand>
-        {
-            public UpdateCommandValidator()
-            {
-                RuleFor(x => x.Id).NotNull().NotEmpty();
-                RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
-                RuleFor(x => x.Dto.Id).Equal(x => x.Id);
-                RuleFor(x => x.Dto.Description).NotNull().NotEmpty().MaximumLength(500);
             }
         }
     }
