@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FMM.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200710162125_AddVolunteers")]
-    partial class AddVolunteers
+    [Migration("20200713055244_VolunteerMigration")]
+    partial class VolunteerMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,14 +61,43 @@ namespace FMM.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("VolunteerId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Dreams");
+                });
+
+            modelBuilder.Entity("FMM.Persistent.Dreamer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DreamId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GuardianContact")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhotoAsBase64")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.Property<int>("YearOfBirth")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VolunteerId");
+                    b.HasIndex("DreamId");
 
-                    b.ToTable("Dreams");
+                    b.ToTable("Dreamers");
                 });
 
             modelBuilder.Entity("FMM.Persistent.Step", b =>
@@ -133,6 +162,9 @@ namespace FMM.Migrations
                     b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("DreamId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
@@ -152,16 +184,18 @@ namespace FMM.Migrations
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("DreamId");
+
                     b.HasIndex("UserTypeId");
 
                     b.ToTable("Volunteers");
                 });
 
-            modelBuilder.Entity("FMM.Persistent.Dream", b =>
+            modelBuilder.Entity("FMM.Persistent.Dreamer", b =>
                 {
-                    b.HasOne("FMM.Persistent.Volunteer", null)
-                        .WithMany("Dreams")
-                        .HasForeignKey("VolunteerId");
+                    b.HasOne("FMM.Persistent.Dream", "Dream")
+                        .WithMany()
+                        .HasForeignKey("DreamId");
                 });
 
             modelBuilder.Entity("FMM.Persistent.Task", b =>
@@ -176,6 +210,10 @@ namespace FMM.Migrations
                     b.HasOne("FMM.Persistent.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId");
+
+                    b.HasOne("FMM.Persistent.Dream", "Dream")
+                        .WithMany("Volunteers")
+                        .HasForeignKey("DreamId");
 
                     b.HasOne("FMM.Persistent.UserType", "UserType")
                         .WithMany()

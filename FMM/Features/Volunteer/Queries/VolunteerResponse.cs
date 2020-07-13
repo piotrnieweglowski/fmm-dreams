@@ -14,12 +14,12 @@ namespace FMM.Features.Volunteer.Queries
         public Department Department { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public IList<Dream> Dreams { get; set; }
         public UserType UserType { get; set; }
+        public Dream Dream { get; set; }
     }
     public class Dream
     {
-        public Guid Id { get; set; }
+        public Guid Id;
     }
     public class Department
     {

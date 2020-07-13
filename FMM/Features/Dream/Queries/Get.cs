@@ -31,7 +31,9 @@ namespace FMM.Features.Dream.Queries
 
             public async Task<DreamResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
-                var dream = await _dbContext.Dreams.FirstOrDefaultAsync(x => x.Id == query.Id);
+                var dream = await _dbContext.Dreams
+                                                    .Include(x => x.Volunteers)
+                                                    .FirstOrDefaultAsync(x => x.Id == query.Id);
                 return _mapper.Map<DreamResponse>(dream);
             }
         }

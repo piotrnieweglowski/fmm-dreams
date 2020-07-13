@@ -13,7 +13,7 @@ namespace FMM.Persistent
         public Department Department { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public IList<Dream> Dreams { get; set; }
         public UserType UserType { get; set; }
+        public Dream Dream { get; set; }
     }
 }

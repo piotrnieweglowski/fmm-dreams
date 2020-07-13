@@ -3,15 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FMM.Migrations
 {
-    public partial class AddVolunteers : Migration
+    public partial class VolunteerMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<Guid>(
-                name: "VolunteerId",
-                table: "Dreams",
-                nullable: true);
-
             migrationBuilder.CreateTable(
                 name: "Department",
                 columns: table => new
@@ -46,7 +41,8 @@ namespace FMM.Migrations
                     DepartmentId = table.Column<Guid>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    UserTypeId = table.Column<Guid>(nullable: true)
+                    UserTypeId = table.Column<Guid>(nullable: true),
+                    DreamId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,6 +54,12 @@ namespace FMM.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Volunteers_Dreams_DreamId",
+                        column: x => x.DreamId,
+                        principalTable: "Dreams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Volunteers_UserType_UserTypeId",
                         column: x => x.UserTypeId,
                         principalTable: "UserType",
@@ -66,35 +68,23 @@ namespace FMM.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dreams_VolunteerId",
-                table: "Dreams",
-                column: "VolunteerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Volunteers_DepartmentId",
                 table: "Volunteers",
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Volunteers_DreamId",
+                table: "Volunteers",
+                column: "DreamId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Volunteers_UserTypeId",
                 table: "Volunteers",
                 column: "UserTypeId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Dreams_Volunteers_VolunteerId",
-                table: "Dreams",
-                column: "VolunteerId",
-                principalTable: "Volunteers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Dreams_Volunteers_VolunteerId",
-                table: "Dreams");
-
             migrationBuilder.DropTable(
                 name: "Volunteers");
 
@@ -103,14 +93,6 @@ namespace FMM.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserType");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Dreams_VolunteerId",
-                table: "Dreams");
-
-            migrationBuilder.DropColumn(
-                name: "VolunteerId",
-                table: "Dreams");
         }
     }
 }

@@ -29,7 +29,7 @@ namespace FMM.Features.Volunteer.Queries
             public async Task<VolunteerResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
                 var volunteer = await _dbContext.Volunteers.Include(x => x.Department)
-                                                            .Include(x => x.Dreams)
+                                                            .Include(x => x.Dream)
                                                             .Include(x => x.UserType)
                                                             .FirstAsync(x => x.Id == query.Id);
                 return _mapper.Map<VolunteerResponse>(volunteer);

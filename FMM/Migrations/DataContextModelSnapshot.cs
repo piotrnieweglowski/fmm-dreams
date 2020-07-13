@@ -33,6 +33,20 @@ namespace FMM.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("FMM.Persistent.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Department");
+                });
+
             modelBuilder.Entity("FMM.Persistent.Dream", b =>
                 {
                     b.Property<Guid>("Id")
@@ -123,6 +137,58 @@ namespace FMM.Migrations
                     b.ToTable("Task");
                 });
 
+            modelBuilder.Entity("FMM.Persistent.UserType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserType");
+                });
+
+            modelBuilder.Entity("FMM.Persistent.Volunteer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DreamId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("UserTypeId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("DreamId");
+
+                    b.HasIndex("UserTypeId");
+
+                    b.ToTable("Volunteers");
+                });
+
             modelBuilder.Entity("FMM.Persistent.Dreamer", b =>
                 {
                     b.HasOne("FMM.Persistent.Dream", "Dream")
@@ -135,6 +201,21 @@ namespace FMM.Migrations
                     b.HasOne("FMM.Persistent.Step", null)
                         .WithMany("Tasks")
                         .HasForeignKey("StepId");
+                });
+
+            modelBuilder.Entity("FMM.Persistent.Volunteer", b =>
+                {
+                    b.HasOne("FMM.Persistent.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("FMM.Persistent.Dream", "Dream")
+                        .WithMany("Volunteers")
+                        .HasForeignKey("DreamId");
+
+                    b.HasOne("FMM.Persistent.UserType", "UserType")
+                        .WithMany()
+                        .HasForeignKey("UserTypeId");
                 });
 #pragma warning restore 612, 618
         }
