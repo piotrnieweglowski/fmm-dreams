@@ -9,5 +9,6 @@ namespace FMM.Persistent
     {
         public Guid Id { get; set; }
         public string City { get; set; }
+        public IList<Volunteer> Volunteers { get; set; }
     }
 }

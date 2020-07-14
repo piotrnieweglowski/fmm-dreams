@@ -9,14 +9,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FMM.Features.Volunteer.Commands
+namespace FMM.Features.Department.Commands
 {
     public class UpdateCommand : IRequest
     {
         public Guid Id { get; }
-        public VolunteerRequest Dto { get; }
-        
-        public UpdateCommand(Guid id, VolunteerRequest dto)
+        public DepartmentRequest Dto { get; }
+
+        public UpdateCommand(Guid id, DepartmentRequest dto)
         {
             Id = id;
             Dto = dto;
@@ -32,8 +32,8 @@ namespace FMM.Features.Volunteer.Commands
             }
             public async Task<Unit> Handle(UpdateCommand command, CancellationToken cancellationToken)
             {
-                var toUpdate = await _dbContext.Volunteers.FirstAsync(x => x.Id == command.Id );
-                _mapper.Map<VolunteerRequest, Persistent.Volunteer>(command.Dto, toUpdate);
+                var toUpdate = await _dbContext.Departments.FirstAsync(x => x.Id == command.Id);
+                _mapper.Map<DepartmentRequest, Persistent.Department>(command.Dto, toUpdate);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
@@ -42,12 +42,7 @@ namespace FMM.Features.Volunteer.Commands
                 public CreateCommandValidator()
                 {
                     RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
-                    RuleFor(x => x.Dto.Department).NotEmpty();
-                    RuleFor(x => x.Dto.Email).EmailAddress();
-                    RuleFor(x => x.Dto.FirstName).NotEmpty().Length(1, 100);
-                    RuleFor(x => x.Dto.LastName).NotEmpty().Length(1, 100);
-                    RuleFor(x => x.Dto.Phone).Length(1, 16);
-                    RuleFor(x => x.Dto.UserType).NotEmpty().NotNull();
+                    RuleFor(x => x.Dto.City).NotEmpty();
                 }
             }
         }

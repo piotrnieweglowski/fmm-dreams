@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FMM.Features.Volunteer.Commands
+namespace FMM.Features.Department.Commands
 {
     public class DeleteCommand : IRequest
     {
@@ -30,8 +30,8 @@ namespace FMM.Features.Volunteer.Commands
             }
             public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
-                var toRemove = await _dbContext.Volunteers.FirstAsync(x => x.Id == command.Id );
-                _dbContext.Volunteers.Remove(toRemove);
+                var toRemove = await _dbContext.Departments.FirstAsync(x => x.Id == command.Id);
+                _dbContext.Departments.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }

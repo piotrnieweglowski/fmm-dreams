@@ -3,22 +3,23 @@ using FluentValidation;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FMM.Features.Volunteer.Queries
+namespace FMM.Features.Department.Queries
 {
-    public class GetQuery : IRequest<VolunteerResponse>
+    public class GetQuery : IRequest<DepartmentResponse>
     {
         public Guid Id { get; set; }
         public GetQuery(Guid id)
         {
             Id = id;
         }
-        public class Handler : IRequestHandler<GetQuery, VolunteerResponse>
+        public class Handler : IRequestHandler<GetQuery, DepartmentResponse>
         {
             DataContext _dbContext;
             IMapper _mapper;
@@ -27,13 +28,12 @@ namespace FMM.Features.Volunteer.Queries
                 _dbContext = dbContext;
                 _mapper = mapper;
             }
-            public async Task<VolunteerResponse> Handle(GetQuery query, CancellationToken cancellationToken)
+            public async Task<DepartmentResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
-                var volunteer = await _dbContext.Volunteers.Include(x => x.Department)
-                                                            .Include(x => x.Dream)
-                                                            .Include(x => x.UserType)
-                                                            .FirstAsync(x => x.Id == query.Id);
-                return _mapper.Map<VolunteerResponse>(volunteer);
+                var Department = await _dbContext.Departments
+                    .Include(x => x.Volunteers)
+                    .FirstAsync(x => x.Id == query.Id);
+                return _mapper.Map<DepartmentResponse>(Department);
             }
             public class GetQueryValidator : AbstractValidator<GetQuery>
             {

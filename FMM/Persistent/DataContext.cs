@@ -13,5 +13,6 @@ namespace FMM.Persistent
         public DbSet<Step> Steps { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Volunteer> Volunteers { get; set; }
+        public DbSet<Department> Departments { get; set; }
     }
 }
