@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using FMM.Common;
 using Hellang.Middleware.ProblemDetails;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace FMM
 {
@@ -33,7 +34,7 @@ namespace FMM
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddProblemDetails(x =>
             {
-                x.IncludeExceptionDetails = (ctx, ex) => false;
+                x.IncludeExceptionDetails = (ctx, ex) => true;
                 x.Map<InvalidValidationException>(ex => new InvalidValidationProblemDetails(ex));
                 x.Map<NotFoundException>(ex => new NotFoundProblemDetails(ex));
                 x.Map<DbUpdateException>(ex => new DuplicateGuidDbProblemDetails(ex));
@@ -42,6 +43,16 @@ namespace FMM
             services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DbConnection"))
             );
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["Auth0:Domain"];
+                options.Audience = Configuration["Auth0:Audience"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +65,7 @@ namespace FMM
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseProblemDetails();
 
