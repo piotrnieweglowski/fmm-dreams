@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,7 +53,7 @@ namespace FMM.Features.Dreamer.Commands
                     RuleFor(x => x.Dto.PhotoAsBase64).Matches(@"^[a-zA-Z0-9\+\/]*={0,2}$");
                     RuleFor(x => x.Dto.Sex).Matches(@"[fm]").NotEmpty();
                     RuleFor(x => x.Dto.Url).Length(1, 150);
-                    RuleFor(x => x.Dto.YearOfBirth).NotEmpty().InclusiveBetween(1900, 2020);
+                    RuleFor(x => x.Dto.YearOfBirth).NotEmpty().InclusiveBetween(1900, DateTime.Now.Year);
                 }
             }
         }
