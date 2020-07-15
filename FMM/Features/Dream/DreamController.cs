@@ -4,10 +4,12 @@ using FMM.Features.Dream.Commands;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using FMM.Features.Dream.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FMM.Features.Dream
 {
     [ApiController]
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     public class DreamController : ControllerBase
     {

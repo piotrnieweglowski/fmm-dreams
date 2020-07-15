@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,13 @@ namespace FMM.Features.Dreamer.Queries
             {
                 var dreamer = await _dbContext.Dreamers.Include(x => x.Dream).FirstAsync(x => x.Id == query.Id);
                 return _mapper.Map<DreamerResponse>(dreamer);
+            }
+            public class GetQueryValidator : AbstractValidator<GetQuery>
+            {
+                public GetQueryValidator()
+                {
+                    RuleFor(x => x.Id).NotNull().NotEmpty();
+                }
             }
         }
     }
