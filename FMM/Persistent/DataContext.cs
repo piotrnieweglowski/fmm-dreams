@@ -12,5 +12,8 @@ namespace FMM.Persistent
         public DbSet<Dreamer> Dreamers { get; set; }
         public DbSet<Step> Steps { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Volunteer> Volunteers { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<UserType> UserTypes { get; set; }
     }
 }

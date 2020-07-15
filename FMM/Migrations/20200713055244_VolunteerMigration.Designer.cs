@@ -3,15 +3,17 @@ using System;
 using FMM.Persistent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FMM.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200713055244_VolunteerMigration")]
+    partial class VolunteerMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +46,7 @@ namespace FMM.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Department");
                 });
 
             modelBuilder.Entity("FMM.Persistent.Dream", b =>
@@ -148,7 +150,7 @@ namespace FMM.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserTypes");
+                    b.ToTable("UserType");
                 });
 
             modelBuilder.Entity("FMM.Persistent.Volunteer", b =>
@@ -206,7 +208,7 @@ namespace FMM.Migrations
             modelBuilder.Entity("FMM.Persistent.Volunteer", b =>
                 {
                     b.HasOne("FMM.Persistent.Department", "Department")
-                        .WithMany("Volunteers")
+                        .WithMany()
                         .HasForeignKey("DepartmentId");
 
                     b.HasOne("FMM.Persistent.Dream", "Dream")
