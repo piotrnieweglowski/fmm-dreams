@@ -20,7 +20,7 @@ namespace FMM.Features.Volunteer.Commands
     }
     public class Dream
     {
-        public Guid Id;
+        public Guid Id { get; set; }
     }
     public class Department
     {

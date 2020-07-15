@@ -9,15 +9,15 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FMM.Features.Volunteer.Queries
+namespace FMM.Features.UserType.Queries
 {
-    public class GetAllQuery : IRequest<List<VolunteerResponse>>
+    public class GetAllQuery : IRequest<List<UserTypeResponse>>
     {
         public GetAllQuery()
         {
 
         }
-        public class Handler : IRequestHandler<GetAllQuery, List<VolunteerResponse>>
+        public class Handler : IRequestHandler<GetAllQuery, List<UserTypeResponse>>
         {
             DataContext _dbContext;
             IMapper _mapper;
@@ -26,10 +26,9 @@ namespace FMM.Features.Volunteer.Queries
                 _dbContext = dbContext;
                 _mapper = mapper;
             }
-            public async Task<List<VolunteerResponse>> Handle(GetAllQuery query, CancellationToken cancellationToken)
+            public async Task<List<UserTypeResponse>> Handle(GetAllQuery query, CancellationToken cancellationToken)
             {
-                return await _dbContext.Volunteers.Include(x => x.Dream)
-                                .ProjectTo<VolunteerResponse>(_mapper.ConfigurationProvider)
+                return await _dbContext.UserTypes.ProjectTo<UserTypeResponse>(_mapper.ConfigurationProvider)
                                 .ToListAsync(cancellationToken);
             }
         }

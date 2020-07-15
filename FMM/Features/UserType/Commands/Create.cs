@@ -10,13 +10,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FMM.Features.Department.Commands
+namespace FMM.Features.UserType.Commands
 {
     public class CreateCommand : IRequest
     {
-        public DepartmentRequest Dto { get; }
+        public UserTypeRequest Dto { get; }
 
-        public CreateCommand(DepartmentRequest dto)
+        public CreateCommand(UserTypeRequest dto)
         {
             Dto = dto;
         }
@@ -32,8 +32,8 @@ namespace FMM.Features.Department.Commands
             }
             public async Task<Unit> Handle(CreateCommand command, CancellationToken cancellationToken)
             {
-                var department = _mapper.Map<Persistent.Department>(command.Dto);
-                await _dbcontext.Departments.AddAsync(department);
+                var UserType = _mapper.Map<Persistent.UserType>(command.Dto);
+                await _dbcontext.UserTypes.AddAsync(UserType);
                 await _dbcontext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
@@ -43,7 +43,7 @@ namespace FMM.Features.Department.Commands
             public CreateCommandValidator()
             {
                 RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
-                RuleFor(x => x.Dto.City).NotEmpty();
+                RuleFor(x => x.Dto.Description).NotEmpty().Length(1, 250);
             }
         }
     }

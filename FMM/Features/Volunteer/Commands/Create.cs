@@ -22,19 +22,34 @@ namespace FMM.Features.Volunteer.Commands
         }
         public class Handler : IRequestHandler<CreateCommand>
         {
-            DataContext _dbcontext;
+            DataContext _dbContext;
             IMapper _mapper;
             
             public Handler (DataContext dbcontext, IMapper mapper)
             {
-                _dbcontext = dbcontext;
+                _dbContext = dbcontext;
                 _mapper = mapper;
             }
             public async Task<Unit> Handle(CreateCommand command, CancellationToken cancellationToken)
             {
                 var volunteer = _mapper.Map<Persistent.Volunteer>(command.Dto);
-                await _dbcontext.Volunteers.AddAsync(volunteer);
-                await _dbcontext.SaveChangesAsync(cancellationToken);
+                var dreamId = command.Dto.Dream?.Id;
+                if (dreamId.HasValue)
+                {
+                    volunteer.Dream = _dbContext.Dreams.First(x => x.Id == dreamId);
+                }
+                var departmentId = command.Dto.Department?.Id;
+                if (departmentId.HasValue)
+                {
+                    volunteer.Department = _dbContext.Departments.First(x => x.Id == departmentId);
+                }
+                var userTypeId = command.Dto.UserType?.Id;
+                if (userTypeId.HasValue)
+                {
+                    volunteer.UserType = _dbContext.UserTypes.First(x => x.Id == userTypeId);
+                }
+                await _dbContext.Volunteers.AddAsync(volunteer);
+                await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
         }
