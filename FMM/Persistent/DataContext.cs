@@ -15,5 +15,6 @@ namespace FMM.Persistent
         public DbSet<Volunteer> Volunteers { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<Sponsor> Sponsors { get; set; }
     }
 }

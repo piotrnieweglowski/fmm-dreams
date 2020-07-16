@@ -7,15 +7,16 @@ using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace FMM.Features.Step.Queries
+namespace FMM.Features.Sponsor.Queries
 {
-    public class GetAllQuery : IRequest<List<StepResponse>>
+    public class GetAllQuery : IRequest<List<SponsorResponse>>
     {
         public GetAllQuery()
         {
+
         }
 
-        public class Handler : IRequestHandler<GetAllQuery, List<StepResponse>>
+        public class Handler : IRequestHandler<GetAllQuery, List<SponsorResponse>>
         {
             DataContext _dbContext;
             IMapper _mapper;
@@ -26,12 +27,13 @@ namespace FMM.Features.Step.Queries
                 _mapper = mapper;
             }
 
-            public async Task<List<StepResponse>> Handle(GetAllQuery query, CancellationToken cancellationToken)
+            public async Task<List<SponsorResponse>> Handle(GetAllQuery query, CancellationToken cancellationToken)
             {
-                return await _dbContext.Steps
-                    .ProjectTo<StepResponse>(_mapper.ConfigurationProvider)
+                return await _dbContext.Sponsors
+                    .ProjectTo<SponsorResponse>(_mapper.ConfigurationProvider)
                     .ToListAsync(cancellationToken);
             }
         }
+
     }
 }
