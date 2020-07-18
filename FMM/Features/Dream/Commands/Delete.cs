@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using FMM.Common;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,11 @@ namespace FMM.Features.Dream.Commands
 
             public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
-                var toRemove = await _dbContext.Dreams.FirstAsync(x => x.Id == command.Id);
+                var toRemove = await _dbContext.Dreams.FirstOrDefaultAsync(x => x.Id == command.Id);
+                if (toRemove == null)
+                {
+                    throw new NotFoundException("Dream", "Not found");
+                }
                 _dbContext.Dreams.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

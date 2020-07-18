@@ -5,6 +5,7 @@ using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using FMM.Common;
 
 namespace FMM.Features.Category.Commands
 {
@@ -28,7 +29,11 @@ namespace FMM.Features.Category.Commands
 
             public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
-                var toRemove = await _dbContext.Categories.FirstAsync(x => x.Id == command.Id);
+                var toRemove = await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == command.Id);
+                if (toRemove == null)
+                {
+                    throw new NotFoundException("Category", "Not found");
+                }
                 _dbContext.Categories.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
