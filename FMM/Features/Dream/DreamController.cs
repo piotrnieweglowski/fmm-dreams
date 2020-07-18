@@ -5,11 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using FMM.Features.Dream.Queries;
 using Microsoft.AspNetCore.Authorization;
+using FMM.Common;
 
 namespace FMM.Features.Dream
 {
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     public class DreamController : ControllerBase
     {
@@ -21,9 +22,9 @@ namespace FMM.Features.Dream
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAll([FromQuery] DreamFilter filter, [FromQuery] PagingOptions pagingOptions)
         {
-            return Ok(await _mediator.Send(new GetAllQuery()));
+            return Ok(await _mediator.Send(new GetAllQuery(filter, pagingOptions)));
         }
 
         [HttpGet("{id}")]

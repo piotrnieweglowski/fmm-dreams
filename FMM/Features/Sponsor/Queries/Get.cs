@@ -3,10 +3,10 @@ using FMM.Common;
 using FMM.Persistent;
 using MediatR;
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 
 namespace FMM.Features.Sponsor.Queries
 {
@@ -31,7 +31,7 @@ namespace FMM.Features.Sponsor.Queries
 
             public async Task<SponsorResponse> Handle(GetQuery query, CancellationToken cancellationToken)
             {
-                var sponsor = _dbContext.Sponsors.FirstOrDefault(x => x.Id == query.Id);
+                var sponsor = await _dbContext.Sponsors.FirstOrDefaultAsync(x => x.Id == query.Id);
                 if (sponsor == null)
                 {
                     throw new NotFoundException("Sponsor", "Not Found");

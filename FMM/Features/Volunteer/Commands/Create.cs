@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using FluentValidation.Validators;
 using FMM.Persistent;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,7 +32,7 @@ namespace FMM.Features.Volunteer.Commands
                 var dreamId = command.Dto.Dream?.Id;
                 if (dreamId.HasValue)
                 {
-                    volunteer.Dream = _dbContext.Dreams.First(x => x.Id == dreamId);
+                    volunteer.Dreams.Add(new DreamVolunteer { DreamId = dreamId.Value, VolunteerId = volunteer.Id });
                 }
                 var departmentId = command.Dto.Department?.Id;
                 if (departmentId.HasValue)

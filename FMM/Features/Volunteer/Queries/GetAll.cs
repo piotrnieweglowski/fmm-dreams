@@ -28,7 +28,7 @@ namespace FMM.Features.Volunteer.Queries
             }
             public async Task<List<VolunteerResponse>> Handle(GetAllQuery query, CancellationToken cancellationToken)
             {
-                return await _dbContext.Volunteers.Include(x => x.Dream)
+                return await _dbContext.Volunteers.Include(x => x.Dreams)
                                 .ProjectTo<VolunteerResponse>(_mapper.ConfigurationProvider)
                                 .ToListAsync(cancellationToken);
             }
