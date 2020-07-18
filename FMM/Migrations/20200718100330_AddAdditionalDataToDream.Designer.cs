@@ -3,15 +3,17 @@ using System;
 using FMM.Persistent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FMM.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200718100330_AddAdditionalDataToDream")]
+    partial class AddAdditionalDataToDream
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +64,6 @@ namespace FMM.Migrations
                     b.Property<Guid?>("DreamerId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("SponsorId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
@@ -72,8 +71,6 @@ namespace FMM.Migrations
 
                     b.HasIndex("DreamerId")
                         .IsUnique();
-
-                    b.HasIndex("SponsorId");
 
                     b.ToTable("Dreams");
                 });
@@ -97,27 +94,6 @@ namespace FMM.Migrations
                     b.HasIndex("DreamId");
 
                     b.ToTable("DreamCategory");
-                });
-
-            modelBuilder.Entity("FMM.Persistent.DreamVolunteer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("DreamId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("VolunteerId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DreamId");
-
-                    b.HasIndex("VolunteerId");
-
-                    b.ToTable("DreamVolunteer");
                 });
 
             modelBuilder.Entity("FMM.Persistent.Dreamer", b =>
@@ -147,29 +123,6 @@ namespace FMM.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Dreamers");
-                });
-
-            modelBuilder.Entity("FMM.Persistent.Sponsor", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("AdditionalInfo")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sponsors");
                 });
 
             modelBuilder.Entity("FMM.Persistent.Step", b =>
@@ -234,6 +187,9 @@ namespace FMM.Migrations
                     b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("DreamId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
@@ -253,6 +209,8 @@ namespace FMM.Migrations
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("DreamId");
+
                     b.HasIndex("UserTypeId");
 
                     b.ToTable("Volunteers");
@@ -263,10 +221,6 @@ namespace FMM.Migrations
                     b.HasOne("FMM.Persistent.Dreamer", "Dreamer")
                         .WithOne("Dream")
                         .HasForeignKey("FMM.Persistent.Dream", "DreamerId");
-
-                    b.HasOne("FMM.Persistent.Sponsor", "Sponsor")
-                        .WithMany("Dreams")
-                        .HasForeignKey("SponsorId");
                 });
 
             modelBuilder.Entity("FMM.Persistent.DreamCategory", b =>
@@ -284,21 +238,6 @@ namespace FMM.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FMM.Persistent.DreamVolunteer", b =>
-                {
-                    b.HasOne("FMM.Persistent.Dream", "Dream")
-                        .WithMany("Volunteers")
-                        .HasForeignKey("DreamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FMM.Persistent.Volunteer", "Volunteer")
-                        .WithMany("Dreams")
-                        .HasForeignKey("VolunteerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("FMM.Persistent.Task", b =>
                 {
                     b.HasOne("FMM.Persistent.Step", null)
@@ -311,6 +250,10 @@ namespace FMM.Migrations
                     b.HasOne("FMM.Persistent.Department", "Department")
                         .WithMany("Volunteers")
                         .HasForeignKey("DepartmentId");
+
+                    b.HasOne("FMM.Persistent.Dream", "Dream")
+                        .WithMany("Volunteers")
+                        .HasForeignKey("DreamId");
 
                     b.HasOne("FMM.Persistent.UserType", "UserType")
                         .WithMany()

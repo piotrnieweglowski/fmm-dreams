@@ -14,6 +14,6 @@ namespace FMM.Persistent
         public string Phone { get; set; }
         public string Email { get; set; }
         public UserType UserType { get; set; }
-        public Dream Dream { get; set; }
+        public IList<DreamVolunteer> Dreams { get; set; }
     }
 }
