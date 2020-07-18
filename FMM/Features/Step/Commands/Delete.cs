@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using FMM.Persistent;
 using FluentValidation;
+using FMM.Common;
 
 namespace FMM.Features.Step.Commands
 {
@@ -28,7 +29,11 @@ namespace FMM.Features.Step.Commands
 
             public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
-                var toRemove = await _dbContext.Steps.FirstAsync(x => x.Id == command.Id);
+                var toRemove = await _dbContext.Steps.FirstOrDefaultAsync(x => x.Id == command.Id);
+                if (toRemove == null)
+                {
+                    throw new NotFoundException("Sponsor", "Not found");
+                }
                 _dbContext.Steps.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

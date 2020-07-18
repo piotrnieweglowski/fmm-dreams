@@ -37,7 +37,7 @@ namespace FMM.Features.Sponsor
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult> Put(Guid id, SponsorRequest dto)
         {
             await _mediator.Send(new UpdateCommand(id, dto));

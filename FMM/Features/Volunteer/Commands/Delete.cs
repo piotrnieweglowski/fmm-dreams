@@ -1,11 +1,9 @@
 ﻿using FluentValidation;
+using FMM.Common;
 using FMM.Persistent;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,7 +28,11 @@ namespace FMM.Features.Volunteer.Commands
             }
             public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
-                var toRemove = await _dbContext.Volunteers.FirstAsync(x => x.Id == command.Id );
+                var toRemove = await _dbContext.Volunteers.FirstOrDefaultAsync(x => x.Id == command.Id);
+                if (toRemove == null)
+                {
+                    throw new NotFoundException("Sponsor", "Not found");
+                }
                 _dbContext.Volunteers.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;

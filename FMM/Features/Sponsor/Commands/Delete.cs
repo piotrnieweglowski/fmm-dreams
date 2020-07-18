@@ -5,6 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using FMM.Common;
 
 namespace FMM.Features.Sponsor.Commands
 {
@@ -28,7 +29,11 @@ namespace FMM.Features.Sponsor.Commands
 
             public async Task<Unit> Handle(DeleteCommand command, CancellationToken cancellationToken)
             {
-                var toRemove = await _dbContext.Sponsors.FirstAsync(x => x.Id == command.Id);
+                var toRemove = await _dbContext.Sponsors.FirstOrDefaultAsync(x => x.Id == command.Id);
+                if (toRemove == null)
+                {
+                    throw new NotFoundException("Sponsor", "Not found");
+                }
                 _dbContext.Sponsors.Remove(toRemove);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
