@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using FMM.Features.Volunteer.Commands;
 using FMM.Features.Volunteer.Queries;
+using FMM.Common;
 
 namespace FMM.Features.Volunteer
 {
@@ -19,9 +20,9 @@ namespace FMM.Features.Volunteer
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAll([FromQuery] VolunteerFilter filter, [FromQuery] PagingOptions pagingOptions)
         {
-            return Ok(await _mediator.Send(new GetAllQuery()));
+            return Ok(await _mediator.Send(new GetAllQuery(filter, pagingOptions)));
         }
 
 
