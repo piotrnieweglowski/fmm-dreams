@@ -47,9 +47,12 @@ namespace FMM.Features.Sponsor.Commands
                 RuleFor(x => x.Dto.Id).NotNull().NotEmpty();
                 RuleFor(x => x.Dto.Id).Equal(x => x.Id);
                 RuleFor(x => x.Dto.Name).NotNull().NotEmpty().MaximumLength(100);
-                RuleFor(x => x.Dto.PhoneNumber).NotNull();
-                RuleFor(x => x.Dto.EmailAddress).NotNull();
-                RuleFor(x => x.Dto.AdditionalInfo).NotNull();
+                RuleFor(x => x.Dto.PhoneNumber).NotNull()
+                    .Matches("^\\d{9}$").When(x => !String.IsNullOrEmpty(x.Dto.PhoneNumber));
+                RuleFor(x => x.Dto.EmailAddress).NotNull()
+                    .EmailAddress().When(x => !String.IsNullOrEmpty(x.Dto.EmailAddress));
+                RuleFor(x => x.Dto.AdditionalInfo).NotNull()
+                    .MaximumLength(500).When(x => !String.IsNullOrEmpty(x.Dto.AdditionalInfo));
             }
         }
     }
