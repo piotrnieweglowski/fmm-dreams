@@ -22,7 +22,7 @@ resource "azurerm_postgresql_server" "fmm-test" {
   auto_grow_enabled            = false
 
   administrator_login          = "turelit"
-  administrator_login_password = "#######"
+  administrator_login_password = "k-gZYGV2JJ_*"
   version                      = "9.5"
   ssl_enforcement_enabled      = true
 }
@@ -33,4 +33,8 @@ resource "azurerm_postgresql_database" "fmm-test-turel" {
   server_name         = "fmm-postgresql-server-1"
   charset             = "UTF8"
   collation           = "English_United States.1252"
+    timeouts {
+    create = "20m"
+    delete = "1h"
+  }
 }
