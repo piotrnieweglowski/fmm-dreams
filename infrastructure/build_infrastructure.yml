@@ -5,11 +5,12 @@ variables:
   tf_version: "0.12.28"
   tf_state_rg: "fmm-tfstate-rg"
   tz_state_location: "westeurope"
-  tf_state_sa_name: "fmm-tfstate-sa"
+  tf_state_sa_name: "fmmtfstatesa"
   tf_state_container_name: "fmm-tfstate"
   tf_state_tags: ("env=dev" "deployedBy=turelit")
   tf_environment: "dev"
   SUBSCRIPTION_NAME: "Azure-1"
+  db_pass: ${{ parameters.db_pass }}
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -57,5 +58,6 @@ steps:
   displayName: "Run > terraform apply"
   inputs:
     command: "apply"
+    commandOptions: -var db_pass='$(db_pass)'
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'

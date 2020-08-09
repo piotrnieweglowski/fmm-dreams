@@ -22,7 +22,7 @@ resource "azurerm_postgresql_server" "fmm-test" {
   auto_grow_enabled            = false
 
   administrator_login          = "turelit"
-  administrator_login_password = "k-gZYGV2JJ_*"
+  administrator_login_password = var.db_pass
   version                      = "9.5"
   ssl_enforcement_enabled      = true
 }
