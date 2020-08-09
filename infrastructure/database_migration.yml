@@ -1,7 +1,14 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-  parameters:
+parameters:
 -  name: db_pass
    type: string
    displayName: Database password
+steps:   
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    projects: '''FMM/FMM.sln'''
+    custom: 'ef migrations script'
+    arguments: '--output $(build.artifactstagingdirectory)\migrations.sql -i'
