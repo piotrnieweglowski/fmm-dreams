@@ -9,7 +9,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'export PATH="$PATH:$HOME/.dotnet/tools/"'
+    script: '/usr/bin/dotnet tool install --global dotnet-ef --version 3.0.0'
 - task: Bash@3
   inputs:
     targetType: 'inline'
