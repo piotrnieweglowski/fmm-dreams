@@ -14,6 +14,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'custom'
-    projects: 'web/FMM/FMM.csproj'
+    projects: 'FMM.csproj'
     custom: 'ef'
     arguments: 'migrations script --output $(build.artifactstagingdirectory)/migrations.sql -i'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/web/FMM/'
