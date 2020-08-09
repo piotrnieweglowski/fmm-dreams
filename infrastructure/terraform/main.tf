@@ -4,15 +4,15 @@ provider "azurerm"{
     features {}
 }
 
-resource "azurerm_resource_group" "rg_fmm" {
+resource "azurerm_resource_group" "fmm_resource_group" {
     name     = "fmmResourceGroup"
     location = "westeurope"
 }
 
-resource "azurerm_postgresql_server" "fmm-test" {
-  name                = "fmm-postgresql-server-1"
+resource "azurerm_postgresql_server" "fmm_database_server" {
+  name                = "fmm_postgresql_server_1"
   location            = "westeurope"
-  resource_group_name = "fmmResourceGroup"
+  resource_group_name = azurerm_resource_group.fmm_resource_group.name
 
   sku_name = "B_Gen5_1"
 
@@ -24,13 +24,13 @@ resource "azurerm_postgresql_server" "fmm-test" {
   administrator_login          = "turelit"
   administrator_login_password = var.db_pass
   version                      = "9.5"
-  ssl_enforcement_enabled      = true
+  ssl_enforcement_enabled      = false
 }
 
-resource "azurerm_postgresql_database" "fmm-test-turel" {
-  name                = "exampledb"
-  resource_group_name = "fmmResourceGroup"
-  server_name         = "fmm-postgresql-server-1"
+resource "azurerm_postgresql_database" "fmm_dreams_database" {
+  name                = "fmm_dreams"
+  resource_group_name = azurerm_resource_group.fmm_resource_group.name
+  server_name         = azurerm_postgresql_server.fmm_database_server.name
   charset             = "UTF8"
   collation           = "English_United States.1252"
     timeouts {
