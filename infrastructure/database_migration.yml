@@ -6,6 +6,11 @@ parameters:
    type: string
    displayName: Database password
 steps:   
+- task: UseDotNet@2
+  inputs: 
+    packageType: 'sdk'
+    version: '2.2.x'
+  displayName: Specify dotnet core 2.2.x sdk
 - task: DotNetCoreCLI@2
   displayName: 'Initialize EntityFrameworkCore'
   inputs:
