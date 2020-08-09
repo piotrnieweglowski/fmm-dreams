@@ -1,6 +1,12 @@
 trigger:
 - master
 
+parameters:
+  name: db_pass
+  type: string
+  displayName: Database password
+  
+
 variables:
   tf_version: "0.12.28"
   tf_state_rg: "fmm-tfstate-rg"
