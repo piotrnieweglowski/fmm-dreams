@@ -13,6 +13,6 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'custom'
-    projects: 'web/FMM.sln'
+    projects: 'web/FMM/FMM.csproj'
     custom: 'ef migrations script'
     arguments: '--output $(build.artifactstagingdirectory)/migrations.sql -i'
