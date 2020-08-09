@@ -13,6 +13,10 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
+    script: 'export PATH="$PATH:$HOME/.dotnet/tools/"'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
     script: 'dotnet ef'
 - task: DotNetCoreCLI@2
   inputs:
