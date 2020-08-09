@@ -2,9 +2,9 @@ trigger:
 - master
 
 parameters:
-  name: db_pass
-  type: string
-  displayName: Database password
+-  name: db_pass
+   type: string
+   displayName: Database password
   
 
 variables:
