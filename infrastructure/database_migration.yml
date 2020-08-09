@@ -15,4 +15,4 @@ steps:
     command: 'custom'
     projects: 'web/FMM.sln'
     custom: 'ef migrations script'
-    arguments: '--output $(build.artifactstagingdirectory)\migrations.sql -i'
+    arguments: '--output $(build.artifactstagingdirectory)/migrations.sql -i'
