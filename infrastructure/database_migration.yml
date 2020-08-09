@@ -6,21 +6,15 @@ parameters:
    type: string
    displayName: Database password
 steps:   
-- task: Bash@3
+- task: DotNetCoreCLI@2
+  displayName: 'Initialize EntityFrameworkCore'
   inputs:
-    targetType: 'inline'
-    script: '/usr/bin/dotnet tool install --global dotnet-ef --version 3.0.0'
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'export PATH="$PATH:$HOME/.dotnet/tools/"'
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'dotnet ef'
+    command: custom
+    custom: tool
+    arguments: 'install --global dotnet-ef'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'custom'
     projects: 'web/FMM/FMM.csproj'
-    custom: 'ef migrations script'
-    arguments: '--output $(build.artifactstagingdirectory)/migrations.sql -i'
+    custom: 'ef'
+    arguments: 'migrations script --output $(build.artifactstagingdirectory)/migrations.sql -i'
