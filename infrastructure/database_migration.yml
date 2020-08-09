@@ -12,12 +12,6 @@ steps:
     version: '2.2.x'
   displayName: Specify dotnet core 2.2.x sdk
 - task: DotNetCoreCLI@2
-  displayName: 'Initialize EntityFrameworkCore'
-  inputs:
-    command: custom
-    custom: tool
-    arguments: 'install --global dotnet-ef'
-- task: DotNetCoreCLI@2
   inputs:
     command: 'custom'
     projects: 'web/FMM/FMM.csproj'
