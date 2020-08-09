@@ -7,7 +7,6 @@ variables:
   tf_state_tags: ("env=dev" "deployedBy=turelit")
   tf_environment: "dev"
   SUBSCRIPTION_NAME: "Azure-1"
-  db_pass: ${{ parameters.db_pass }}
 
 pool:
   vmImage: 'ubuntu-latest'
