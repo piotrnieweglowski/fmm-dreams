@@ -27,8 +27,11 @@ namespace fmmApp.Models.Navigation
         /// <summary>
         /// Gets or sets the description of an item.
         /// </summary>
-        [DataMember(Name = "itemDescription")]
-        public string ItemDescription { get; set; }
+        [DataMember(Name = "dream")]
+        public string Dream { get; set; }
+
+        [DataMember(Name = "city")]
+        public string City { get; set; }
 
         /// <summary>
         /// Gets or sets the image of an item.
@@ -50,8 +53,8 @@ namespace fmmApp.Models.Navigation
         /// <summary>
         /// Gets or sets the average rating of an item.
         /// </summary>
-        [DataMember(Name = "itemRating")]
-        public double ItemRating { get; set; }
+        [DataMember(Name = "dreamerAge")]
+        public double DreamerAge { get; set; }
 
         #endregion
     }

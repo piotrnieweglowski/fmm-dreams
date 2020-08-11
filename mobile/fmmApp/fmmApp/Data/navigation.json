@@ -51,58 +51,22 @@
   ],
   "navigationList": [
     {
-      "itemName": "Hamburger",
-      "name": "Burger King",
-      "description": "Burger, Pizza",
-      "itemDescription": "Classic hamburger with Angus beef grilled to perfection",
-      "itemImage": "Recipe19.png",
-      "offer": "40% OFF - Use code OFF40",
-      "itemRating": 4.5
+      "itemName": "Jan Kowalski",
+      "name": "Jan Kowalski",
+      "description": "Marzyciel",
+      "itemImage": "cdn1.vectorstock.com/i/1000x1000/78/40/person-gray-photo-placeholder-man-vector-23907840.jpg",
+      "dream": "Spotkanie z Kubica",
+      "city": "Warszawa",
+      "dreamerAge": 13
     },
     {
-      "itemName": "Black Bean Burger",
-      "itemDescription": "Our signature black bean burger on a whole-grain bun",
-      "itemImage": "Recipe8.png",
-      "name": "McDonalds",
-      "description": "Burger, Fast Food",
-      "offer": "60% OFF - Use code OFF60",
-      "itemRating": 4.4
-    },
-    {
-      "itemName": "Macarons",
-      "itemDescription": "Eight colorful flavors of macarons, fresh daily",
-      "itemImage": "Recipe3.png",
-      "name": "Macrons",
-      "description": "Cafe, Beverages",
-      "offer": "50% OFF - Use code OFF50",
-      "itemRating": 4.2
-    },
-    {
-      "itemName": "Egg on Toast",
-      "itemDescription": "A sunny-side up egg on toast, just like grandma used to make",
-      "itemImage": "Recipe9.png",
-      "name": "Kings Kitchen",
-      "description": "North Indian, Chinese, Sushi",
-      "offer": "40% OFF - Use code OFF40",
-      "itemRating": 4.5
-    },
-    {
-      "itemName": "Chocolate Caramel Cake",
-      "itemDescription": "Rich dark chocolate cake layered with caramel icing",
-      "itemImage": "Recipe13.png",
-      "name": "Chai Wale",
-      "description": "Cafe, Beverages, Fast Food",
-      "offer": "50% OFF - Use code OFF50",
-      "itemRating": 4.6
-    },
-    {
-      "itemName": "Red Velvet Cake",
-      "itemDescription": "Classic red velvet cake with rich, cream cheese frosting and dark chocolate shavings",
-      "itemImage": "Recipe4.png",
-      "name": "Krispy Kreme",
-      "description": "Desserts, Beverages",
-      "offer": "60% OFF - Use code OFF60",
-      "itemRating": 4.2
+      "itemName": "Anna Nowak",
+      "dream": "Koncert Taco",
+      "name": "Anna Nowak",
+      "itemImage": "t3.ftcdn.net/jpg/02/33/46/24/240_F_233462402_Fx1yke4ng4GA8TJikJZoiATrkncvW6Ib.jpg",
+      "description": "Marzyciel",
+      "city": "Lipinki Luzyckie",
+      "dreamerAge": 12
     }
   ],
   "photos": [

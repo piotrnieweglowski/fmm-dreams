@@ -54,8 +54,16 @@
                 FontSize="12"
                 LineHeight="{OnPlatform Android=1.25,
                                         Default=-1}"
-                Text="{Binding ItemDescription}"
+                Text="{Binding Dream}"
                 TextColor="{DynamicResource Gray-700}" />
+
+            <Label
+                FontFamily="{StaticResource Montserrat-SemiBold}"
+                FontSize="16"
+                LineHeight="{OnPlatform Android=1.5,
+                                        Default=-1}"
+                Text="{Binding City}"
+                TextColor="{DynamicResource Gray-900}" />
 
             <!--  Average rating from the overall rating  -->
             <StackLayout
@@ -72,7 +80,7 @@
                     FontSize="12"
                     LineHeight="{OnPlatform Android=1.5,
                                             Default=-1}"
-                    Text="{Binding ItemRating}"
+                    Text="{Binding DreamerAge}"
                     TextColor="{DynamicResource Gray-700}"
                     VerticalOptions="Center">
                     <Label.Margin>
