@@ -1,17 +1,19 @@
 ﻿using fmmApp.DataService;
-using Syncfusion.XForms.Backdrop;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
-namespace fmmApp.Views.Navigation
+namespace fmmApp.Views
 {
-    [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NavigationListCardPage : ContentPage
+    public partial class MasterDetail : ContentPage
     {
-        public NavigationListCardPage()
+        public MasterDetail()
         {
             InitializeComponent();
             this.BindingContext = NavigationDataService.Instance.NavigationViewModel;

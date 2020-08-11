@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<backdrop:SfBackdropPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:backdrop="clr-namespace:Syncfusion.XForms.Backdrop;assembly=Syncfusion.SfBackdrop.XForms" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:controls="clr-namespace:fmmApp.Controls" xmlns:template="clr-namespace:fmmApp.Views.Templates"
+                         mc:Ignorable="d"
+             x:Class="fmmApp.Views.BackdropPage"
+                         IsBackLayerRevealed="True">
+
+    <backdrop:SfBackdropPage.BackLayer>
+        <backdrop:BackdropBackLayer BackgroundColor="#0097C5">
+            <StackLayout Grid.Row="1" Spacing="0">
+                <controls:TitleView Title="Marzyciele" Grid.Row="0" />
+                <syncfusion:SfListView
+                    Padding="15,0,10,0"
+                    AutoFitMode="Height"
+                    IsScrollBarVisible="false"
+                    ItemSpacing="0,27,0,0"
+                    ItemsSource="{Binding NavigationList}"
+                    SelectionBackgroundColor="Transparent"
+                    TapCommand="{Binding ItemTappedCommand}"
+                    VerticalOptions="FillAndExpand">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--  View of each card item  -->
+                                <controls:CustomShadowFrame
+                                    Margin="0,2,5,5"
+                                    Padding="0"
+                                    BackgroundColor="{DynamicResource Gray-White}"
+                                    BorderColor="{DynamicResource Gray-White}"
+                                    BorderWidth="1"
+                                    CornerRadius="4"
+                                    HasShadow="True"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    <template:NavigationListTemplate />
+                                </controls:CustomShadowFrame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </StackLayout>
+        </backdrop:BackdropBackLayer>
+    </backdrop:SfBackdropPage.BackLayer>
+    <backdrop:SfBackdropPage.FrontLayer>
+        <backdrop:BackdropFrontLayer>
+            <StackLayout HeightRequest="300" BackgroundColor="#0097C5">
+                <syncfusion:SfListView BackgroundColor="Transparent" AutoFitMode="DynamicHeight">
+                    <syncfusion:SfListView.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Ustawienia</x:String>
+                            <x:String>Region</x:String>
+                            <x:String>Dodaj Marzyciela</x:String>
+                            <x:String>Dodaj Marzenie</x:String>
+                        </x:Array>
+                    </syncfusion:SfListView.ItemsSource>
+                </syncfusion:SfListView>
+                </StackLayout>
+        </backdrop:BackdropFrontLayer>
+    </backdrop:SfBackdropPage.FrontLayer>
+</backdrop:SfBackdropPage>

@@ -27,7 +27,7 @@
             </Grid.RowDefinitions>
 
             <!--  Title View  -->
-            <controls:TitleView Title="Marzenia" Grid.Row="0" />
+            <controls:TitleView Title="Marzyciele" Grid.Row="0" />
 
             <StackLayout Grid.Row="1" Spacing="0">
 
