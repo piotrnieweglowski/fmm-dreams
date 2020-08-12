@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="fmmApp.Views.Forms.EditSponsorPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:control="clr-namespace:fmmApp.Controls"
+    xmlns:behaviours="clr-namespace:fmmApp.Behaviors"
+    xmlns:converter="clr-namespace:fmmApp.Converters"
+    Title="Edit Sposnor"
+    BackgroundColor="{DynamicResource Gray-White}"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="16" Spacing="16">
+
+                <Label  Margin="16,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
+                            HorizontalOptions="CenterAndExpand" TextColor="{DynamicResource Gray-900}"
+                            LineHeight="1.25"  Text="Edit Sponsor"  VerticalOptions="Center" VerticalTextAlignment="Center" />
+                
+                <!--  First name entry with border  -->
+                <border:SfBorder BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="NameEntry"
+                        Placeholder="Name"
+                        Style="{StaticResource EntryTextStyle}" />
+                </border:SfBorder>
+
+                <!--  Last name entry with border  -->
+                <border:SfBorder
+                    Grid.Column="2"
+                    BorderColor="{Binding Source={x:Reference EmailAddressEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="EmailAddressEntry"
+                        Placeholder="Email Address"
+                        Style="{StaticResource EntryTextStyle}" />
+                </border:SfBorder>
+
+                <!--  Phone number entry with border  -->
+                <border:SfBorder
+                    Grid.Column="2"
+                    BorderColor="{Binding Source={x:Reference PhoneNoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="PhoneNoEntry"
+                        Keyboard="Telephone" 
+                        Placeholder="Phone Number : e.g. XXXX-XXXXXX"
+                        Style="{StaticResource EntryTextStyle}" >
+                        <control:BorderlessEntry.Behaviors>
+                            <behaviours:EntryMaskedBehavior Mask="(+91)XXXXX-XXXXX" Prefix="(+91)"/>
+                        </control:BorderlessEntry.Behaviors>
+                    </control:BorderlessEntry>
+                </border:SfBorder>
+
+                <border:SfBorder
+                    Grid.Column="2"
+                    BorderColor="{Binding Source={x:Reference AdditionalInfoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                    Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry
+                        x:Name="AdditionalInfoEntry"
+                        Placeholder="Additional Info"
+                        Style="{StaticResource EntryTextStyle}" />
+                </border:SfBorder>
+
+                <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                        <buttons:SfButton
+                    Margin="0,16,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SfButtonStyle}"
+                    Text="CANCEL"
+                    Clicked="CancelButton_Clicked"
+                    WidthRequest="175" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                        <buttons:SfButton
+                    Margin="0,16,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SfButtonStyle}"
+                    Text="ADD SPONSOR"
+                    Clicked="AddButton_Clicked"
+                    WidthRequest="175" />
+                    </StackLayout>
+                </StackLayout>
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

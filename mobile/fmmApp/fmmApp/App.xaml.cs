@@ -4,6 +4,8 @@ using Xamarin.Forms.Xaml;
 using fmmApp.Services;
 using fmmApp.Views;
 using fmmApp.Views.Navigation;
+using fmmApp.Views.Forms;
+using fmmApp.Views.SponsorDetail;
 
 namespace fmmApp
 {
@@ -16,8 +18,7 @@ namespace fmmApp
         {
             InitializeComponent();
             Startup.Init();
-
-            MainPage = new Master();
+            MainPage = new VolunteerListPage();
         }
 
         protected override void OnStart()
