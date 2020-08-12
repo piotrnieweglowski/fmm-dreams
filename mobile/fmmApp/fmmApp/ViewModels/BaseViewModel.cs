@@ -10,7 +10,7 @@ using fmmApp.Services;
 
 namespace fmmApp.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : ExtendedBindableObject, INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 

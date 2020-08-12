@@ -25,15 +25,43 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.2.0.46" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfBackdrop" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.2.0.46" />
-    <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.2.0.46" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="18.2.0.46" />
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Forms\AddVolunteerPage.xaml.cs">
+      <DependentUpon>AddVolunteerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Forms\EditSponsorPage.xaml.cs">
+      <DependentUpon>EditSponsorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Forms\AddSponsorPage.xaml.cs">
+      <DependentUpon>AddSponsorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Navigation\VolunteerListPage.xaml.cs">
+      <DependentUpon>VolunteerListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Navigation\SponsorsListPage.xaml.cs">
+      <DependentUpon>SponsorsListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SponsorDetail\SponsorDetailPage.xaml.cs">
+      <DependentUpon>SponsorDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VolunteerDetail\VolunteerDetailPage.xaml.cs">
+      <DependentUpon>VolunteerDetailPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -51,11 +79,40 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MasterMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Update="Views\VolunteerDetail\VolunteerDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\VolunteerDetail\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\AddVolunteerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\EditSponsorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\AddSponsorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Navigation\VolunteerListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Navigation\SponsorsListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Navigation\NavigationListCardPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Navigation\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SponsorDetail\SponsorDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SponsorDetail\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\NavigationListTemplate.xaml">
