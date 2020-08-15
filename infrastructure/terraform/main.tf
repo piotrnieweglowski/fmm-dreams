@@ -38,3 +38,11 @@ resource "azurerm_postgresql_database" "fmm-dreams-database" {
     delete = "1h"
   }
 }
+resource "azurerm_container_registry" "fmm-container-registry" {
+  name                     = "fmmContainerRegistry"
+  resource_group_name      = azurerm_resource_group.fmm-resource-group.name
+  location                 = "westeurope"
+  sku                      = "Premium"
+  admin_enabled            = false
+  georeplication_locations = ["East US", "West Europe"]
+}
