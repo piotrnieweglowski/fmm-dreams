@@ -1,19 +1,10 @@
-# Docker
-# Build and push an image to Azure Container Registry
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
-resources:
-- repo: self
-
 variables:
-  # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'f5b95281-4835-4706-a430-866c5d34ad4f'
   imageRepository: 'fmmapi'
   containerRegistry: 'fmmcontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/web/FMM/Dockerfile'
   tag: '$(Build.BuildId)'
   
-  # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
 stages:
