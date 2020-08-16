@@ -10,4 +10,9 @@ module "web-app-container" {
   name  = "fmm"
   container_type = "docker"
   container_image = "fmmContainerRegistry/fmmapi"
+  plan = {
+    sku_size  = "Free"
+  }
+  docker_registry_url = "fmmcontainerregistry.azurecr.io"
+  
 }
