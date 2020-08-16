@@ -44,7 +44,6 @@ resource "azurerm_container_registry" "fmm-container-registry" {
   location                 = "westeurope"
   sku                      = "Basic"
   admin_enabled            = true
-  georeplication_locations = ["West Europe"]
 }
 resource "azurerm_postgresql_firewall_rule" "turelit" {
   name                = "turelit-hq"
