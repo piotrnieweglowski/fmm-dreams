@@ -47,7 +47,7 @@ steps:
   displayName: "Run > terraform plan destroy"
   inputs:
     command: "plan"
-    commandOptions: -destroy -var db_pass="placeholder"
+    commandOptions: -destroy -var db_pass="placeholder" -target azurerm_resource_group.fmm-resource-group
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
 
@@ -55,5 +55,6 @@ steps:
   displayName: "Run > terraform destroy"
   inputs:
     command: "destroy"
+    commandOptions: -var db_pass="placeholder" -target azurerm_resource_group.fmm-resource-group
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
