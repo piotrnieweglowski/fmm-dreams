@@ -5,13 +5,7 @@ parameters:
 -  name: db_pass
    type: string
    displayName: Database password
--  name: terraform_command
-   type: string
-   displayName: Terraform command  
-   default: apply
-   values:
-   - apply
-   - destroy
+
 
 variables:
   tf_version: "0.12.28"
