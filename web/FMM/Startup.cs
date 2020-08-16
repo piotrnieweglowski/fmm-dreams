@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using FMM.Persistent;
 using FluentValidation;
@@ -40,9 +41,14 @@ namespace FMM
                 x.Map<DbUpdateException>(ex => new DuplicateGuidDbProblemDetails(ex));
             });
 
-            services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DbConnection"))
-            );
+            services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options => 
+            {
+                string connectionStringKey = "DbConnection";
+                var connectionString = !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable(connectionStringKey)) 
+                    ? Environment.GetEnvironmentVariable(connectionStringKey)
+                    : Configuration.GetConnectionString(connectionStringKey);
+                options.UseNpgsql(connectionString);
+            });
 
             services.AddAuthentication(options =>
             {
