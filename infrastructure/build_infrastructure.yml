@@ -5,7 +5,13 @@ parameters:
 -  name: db_pass
    type: string
    displayName: Database password
-  
+-  name: terraform_command
+   type: string
+   displayName: Terraform command  
+   default: apply
+   values:
+   - apply
+   - destroy
 
 variables:
   tf_version: "0.12.28"
@@ -64,7 +70,7 @@ steps:
 - task: TerraformTaskV1@0
   displayName: "Run > terraform apply"
   inputs:
-    command: "apply"
+    command: terraform_command
     commandOptions: -var db_pass=$(db_pass)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
