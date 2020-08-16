@@ -5,7 +5,8 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/web/FMM/Dockerfile'
   tag: '$(Build.BuildId)'
   
-  vmImageName: 'ubuntu-latest'
+pool:
+  vmImage: 'ubuntu-latest'  
 
 stages:
 - stage: Build
