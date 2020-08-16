@@ -63,6 +63,8 @@ resource "azurerm_app_service_plan" "fmm-api-app-service" {
   name                = "fmm"
   location            = "westeurope"
   resource_group_name = azurerm_resource_group.fmm-resource-group.name
+  kind = "Linux"
+  reserved = true
 
   sku {
     tier = "Free"
