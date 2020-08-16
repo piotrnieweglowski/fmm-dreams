@@ -52,3 +52,20 @@ resource "azurerm_postgresql_firewall_rule" "turelit" {
   start_ip_address    = "185.93.94.115"
   end_ip_address      = "185.93.94.115"
 }
+resource "azurerm_postgresql_firewall_rule" "azure-app-service" {
+  name                = "azure-app-service"
+  resource_group_name = azurerm_resource_group.fmm-resource-group.name
+  server_name         = azurerm_postgresql_server.fmm-database-server.name
+  start_ip_address    = "13.94.139.19"
+  end_ip_address      = "13.94.139.19"
+}
+resource "azurerm_app_service_plan" "fmm-api-app-service" {
+  name                = "fmm"
+  location            = "westeurope"
+  resource_group_name = azurerm_resource_group.fmm-resource-group.name
+
+  sku {
+    tier = "Free"
+    size = "F1"
+  }
+}
