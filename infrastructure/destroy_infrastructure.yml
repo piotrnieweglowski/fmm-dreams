@@ -47,7 +47,7 @@ steps:
   displayName: "Run > terraform plan destroy"
   inputs:
     command: "plan"
-    commandOptions: -destroy -var db_pass=$(db_pass)
+    commandOptions: -destroy -var db_pass="placeholder"
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
 
