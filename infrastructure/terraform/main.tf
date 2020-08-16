@@ -48,7 +48,7 @@ resource "azurerm_container_registry" "fmm-container-registry" {
 }
 resource "azurerm_postgresql_firewall_rule" "turelit" {
   name                = "turelit-hq"
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = azurerm_resource_group.fmm-resource-group.name
   server_name         = azurerm_postgresql_server.fmm-database-server.name
   start_ip_address    = "185.93.94.115"
   end_ip_address      = "185.93.94.115"
