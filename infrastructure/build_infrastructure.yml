@@ -70,7 +70,7 @@ steps:
 - task: TerraformTaskV1@0
   displayName: "Run > terraform apply"
   inputs:
-    command: "$(terraform_command)"
+    command: apply
     commandOptions: -var db_pass=$(db_pass)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
