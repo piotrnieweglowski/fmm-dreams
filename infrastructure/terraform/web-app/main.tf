@@ -3,6 +3,9 @@ provider "azurerm"{
     subscription_id = "ff581936-424c-495e-a9ed-0c247bdd4d78"
     features {}
 }
+module "container-registry"{
+  source = "./container-registry"
+}
 
 module "web-app-container" {
   source  = "./terraform-azurerm-web-app-container"
@@ -14,5 +17,6 @@ module "web-app-container" {
     sku_size  = "B1"
   }
   docker_registry_url = "fmmcontainerregistry.azurecr.io"
-  
+  docker_registry_username = module.container-registry.container-registry-user
+  docker_registry_password = module.container-registry.container-registry-pass
 }
