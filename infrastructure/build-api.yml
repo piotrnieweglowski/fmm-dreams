@@ -1,28 +1,20 @@
 variables:
-  dockerRegistryServiceConnection: 'ccc26b9b-89f7-443a-98f2-9b769bf56694'
+  dockerRegistryServiceConnection: '17199fd2-456c-4ee8-b38e-f73692240be2'
   imageRepository: 'fmmapi'
   containerRegistry: 'fmmcontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/web/FMM/Dockerfile'
   tag: '$(Build.BuildId)'
-  
-pool:
-  vmImage: 'ubuntu-latest'  
 
-stages:
-- stage: Build
-  displayName: Build and push stage
-  jobs:  
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Docker@2
+  displayName: Build and push an image to container registry
+  inputs:
+    command: buildAndPush
+    repository: $(imageRepository)
+    dockerfile: $(dockerfilePath)
+    containerRegistry: $(dockerRegistryServiceConnection)
+    tags: |
+      $(tag)
