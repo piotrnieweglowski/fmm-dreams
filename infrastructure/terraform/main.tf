@@ -38,13 +38,6 @@ resource "azurerm_postgresql_database" "fmm-dreams-database" {
     delete = "1h"
   }
 }
-resource "azurerm_container_registry" "fmm-container-registry" {
-  name                     = "fmmContainerRegistry"
-  resource_group_name      = azurerm_resource_group.fmm-resource-group.name
-  location                 = "westeurope"
-  sku                      = "Basic"
-  admin_enabled            = true
-}
 resource "azurerm_postgresql_firewall_rule" "turelit" {
   name                = "turelit-hq"
   resource_group_name = azurerm_resource_group.fmm-resource-group.name
