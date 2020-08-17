@@ -57,7 +57,7 @@ steps:
   displayName: "Run > terraform plan"
   inputs:
     command: "plan"
-    commandOptions: -var cr_user=$(cr_user) cr_pass=$(cr_pass) 
+    commandOptions: -var cr_user=$(cr_user) -var cr_pass=$(cr_pass) 
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/web-app/'
 
@@ -65,6 +65,6 @@ steps:
   displayName: "Run > terraform apply"
   inputs:
     command: apply
-    commandOptions: -var cr_user=$(cr_user) cr_pass=$(cr_pass) 
+    commandOptions: -var cr_user=$(cr_user) -var cr_pass=$(cr_pass) 
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/web-app/'
