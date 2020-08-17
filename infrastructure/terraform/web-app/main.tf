@@ -17,6 +17,6 @@ module "web-app-container" {
     sku_size  = "B1"
   }
   docker_registry_url = "fmmcontainerregistry.azurecr.io"
-  docker_registry_username = module.container-registry.container-registry-user
-  docker_registry_password = module.container-registry.container-registry-pass
+  docker_registry_username = "${data.azurerm_container_registry.fmm-container-registry.admin_username}"
+  docker_registry_password = "${data.azurerm_container_registry.fmm-container-registry.admin_password}"
 }
