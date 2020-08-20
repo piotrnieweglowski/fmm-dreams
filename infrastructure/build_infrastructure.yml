@@ -52,7 +52,7 @@ steps:
   displayName: "Run > terraform plan"
   inputs:
     command: "plan"
-    commandOptions: -var db_pass=$(db_pass)
+    commandOptions: -var db_pass=$(db-pass)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
 
@@ -60,6 +60,6 @@ steps:
   displayName: "Run > terraform apply"
   inputs:
     command: apply
-    commandOptions: -var db_pass=$(db_pass)
+    commandOptions: -var db_pass=$(db-pass)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
