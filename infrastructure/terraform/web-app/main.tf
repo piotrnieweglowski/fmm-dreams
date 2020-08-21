@@ -9,7 +9,7 @@ module "web-app-container" {
   resource_group_name = "DefaultResourceGroup-WEU"
   name  = "fmm"
   container_type = "docker"
-  container_image = "fmmapi"
+  container_image = "fmmapi:312"
   plan = {
     sku_size  = "B1"
   }
