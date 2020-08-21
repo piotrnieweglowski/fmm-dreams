@@ -9,11 +9,11 @@ module "web-app-container" {
   resource_group_name = "DefaultResourceGroup-WEU"
   name  = "fmm"
   container_type = "docker"
-  container_image = "fmmbase/fmmapi"
+  container_image = "fmmapi"
   plan = {
     sku_size  = "B1"
   }
-  docker_registry_url = "fmmbase.azurecr.io"
+  docker_registry_url = "http://fmmbase.azurecr.io"
   docker_registry_username = var.cr_user
   docker_registry_password = var.cr_pass
 
