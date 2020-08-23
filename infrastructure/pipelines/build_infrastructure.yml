@@ -31,6 +31,18 @@ steps:
   inputs:
     azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
     KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'cr-user'
+    RunAsPreJob: true
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'cr-pass'
+    RunAsPreJob: true
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
     SecretsFilter: 'db-pass'
     RunAsPreJob: true
 - task: AzureCLI@2
@@ -63,7 +75,7 @@ steps:
   displayName: "Run > terraform plan"
   inputs:
     command: "plan"
-    commandOptions: -var db_pass=$(db-pass) -target=module.$(resourceToDeploy)
+    commandOptions: -var db_pass=$(db-pass) -var cr_pass=$(cr-pass) -var cr_user=$(cr-user) -target=module.$(resourceToDeploy)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
 
@@ -71,6 +83,6 @@ steps:
   displayName: "Run > terraform apply"
   inputs:
     command: apply
-    commandOptions: -var db_pass=$(db-pass) -target=module.$(resourceToDeploy)
+    commandOptions: -var db_pass=$(db-pass) -var cr_pass=$(cr-pass) -var cr_user=$(cr-user) -target=module.$(resourceToDeploy)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
