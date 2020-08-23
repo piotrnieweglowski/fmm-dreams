@@ -53,12 +53,23 @@ steps:
   displayName: "Run > terraform init"
   inputs:
     command: "init"
+#    commandOptions: -backend-config="storage_account_name=$(tf_state_sa_name)" -backend-config="container_name=$(tf_state_container_name)" -backend-config="access_key=$(ACCOUNT_KEY)" -backend-config="key=$(dev.terraform.tstate)"
+    backendServiceArm: "$(SUBSCRIPTION_NAME)"
+    backendAzureRmResourceGroupName: "$(tf_state_rg)"
+    backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
+    backendAzureRmContainerName: $(tf_state_container_name)
+    backendAzureRmKey: "$(tf_environment).terraform.tstate"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
 
 - task: TerraformTaskV1@0
   displayName: "Run > terraform plan"
   inputs:
     command: "destroy"
+    backendServiceArm: "$(SUBSCRIPTION_NAME)"
+    backendAzureRmResourceGroupName: "$(tf_state_rg)"
+    backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
+    backendAzureRmContainerName: $(tf_state_container_name)
+    backendAzureRmKey: "$(tf_environment).terraform.tstate"
     commandOptions: -var db_pass=$(db-pass) -var cr_pass=$(cr-pass) -var cr_user=$(cr-user)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
@@ -67,6 +78,11 @@ steps:
   displayName: "Run > terraform apply"
   inputs:
     command: "destroy"
+    backendServiceArm: "$(SUBSCRIPTION_NAME)"
+    backendAzureRmResourceGroupName: "$(tf_state_rg)"
+    backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
+    backendAzureRmContainerName: $(tf_state_container_name)
+    backendAzureRmKey: "$(tf_environment).terraform.tstate"
     commandOptions: -var db_pass=$(db-pass) -var cr_pass=$(cr-pass) -var cr_user=$(cr-user)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
