@@ -38,6 +38,6 @@ resource "azurerm_postgresql_firewall_rule" "azure-app-service" {
   name                = "azure-app-service"
   resource_group_name = var.rg_name
   server_name         = azurerm_postgresql_server.fmm-database-server.name
-  start_ip_address    = "51.0.0.0"
-  end_ip_address      = "52.255.255.255"
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "255.255.255.255"
 }
