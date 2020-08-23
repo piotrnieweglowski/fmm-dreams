@@ -3,7 +3,7 @@ variables:
   imageRepository: 'fmmapi'
   containerRegistry: 'fmmbase.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/web/FMM/Dockerfile'
-  tag: '$(Build.BuildId)'
+  tag: 'dev'
 
 pool:
   vmImage: 'ubuntu-latest'
