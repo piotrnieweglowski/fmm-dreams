@@ -17,7 +17,7 @@ module "web-app-container" {
 }
 
 resource "azurerm_role_assignment" "fmm-web-app" {
-  scope                = data.azurerm_subscription.primary.id
+  scope                = "/subscriptions/ff581936-424c-495e-a9ed-0c247bdd4d78"
   role_definition_name = "Contributor"
   principal_id         = module.web-app-container.id
 }
