@@ -15,3 +15,9 @@ module "web-app-container" {
     DbConnection = "Server=fmm-postgresql-server-1.postgres.database.azure.com;Database=fmm-dreams;Port=5432;User Id=turelit@fmm-postgresql-server-1;Password=${var.db_pass};Ssl Mode=Require;"
   }
 }
+
+resource "azurerm_role_assignment" "fmm-web-app" {
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "Contributor"
+  principal_id         = module.web-app-container.id
+}
