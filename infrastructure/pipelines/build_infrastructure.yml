@@ -64,7 +64,7 @@ steps:
   displayName: "Run > terraform init"
   inputs:
     command: "init"
-    commandOptions: -backend-config="storage_account_name=$(tf_state_sa_name)" -backend-config="container_name=$(tf_state_container_name)" -backend-config="access_key=$(ACCOUNT_KEY)" -backend-config="key=$($(tf_environment).terraform.tstate)"
+    commandOptions: -backend-config="storage_account_name=$(tf_state_sa_name)" -backend-config="container_name=$(tf_state_container_name)" -backend-config="access_key=$(ACCOUNT_KEY)" -backend-config="key=$(dev.terraform.tstate)"
     backendServiceArm: "$(SUBSCRIPTION_NAME)"
     backendAzureRmResourceGroupName: "$(tf_state_rg)"
     backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
