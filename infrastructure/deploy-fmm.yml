@@ -1,11 +1,3 @@
-parameters:
--  name: cr_user
-   type: string
-   displayName: Container registry user
--  name: cr_pass
-   type: string
-   displayName: Container registry pass
-
 variables:
   tf_version: "0.12.28"
   tf_state_rg: "fmm-tfstate-rg"
@@ -15,13 +7,23 @@ variables:
   tf_state_tags: ("env=dev" "deployedBy=turelit")
   tf_environment: "dev"
   SUBSCRIPTION_NAME: "Azure-1"
-  cr_user: ${{ parameters.cr_user }}
-  cr_pass: ${{ parameters.cr_pass }}
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'dev_cr_user'
+    SecretsFilter: 'cr_user'
+    RunAsPreJob: true
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'dev_cr_pass'
+    SecretsFilter: 'cr_pass'
+    RunAsPreJob: true
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
   displayName: "Install Terraform $(tf_version)"
   inputs:
