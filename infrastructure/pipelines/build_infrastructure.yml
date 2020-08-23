@@ -75,6 +75,11 @@ steps:
   displayName: "Run > terraform plan"
   inputs:
     command: "plan"
+    backendServiceArm: "$(SUBSCRIPTION_NAME)"
+    backendAzureRmResourceGroupName: "$(tf_state_rg)"
+    backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
+    backendAzureRmContainerName: $(tf_state_container_name)
+    backendAzureRmKey: "$(tf_environment).terraform.tstate"
     commandOptions: -var db_pass=$(db-pass) -var cr_pass=$(cr-pass) -var cr_user=$(cr-user) -target=module.$(resourceToDeploy)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
@@ -83,6 +88,11 @@ steps:
   displayName: "Run > terraform apply"
   inputs:
     command: apply
+    backendServiceArm: "$(SUBSCRIPTION_NAME)"
+    backendAzureRmResourceGroupName: "$(tf_state_rg)"
+    backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
+    backendAzureRmContainerName: $(tf_state_container_name)
+    backendAzureRmKey: "$(tf_environment).terraform.tstate"
     commandOptions: -var db_pass=$(db-pass) -var cr_pass=$(cr-pass) -var cr_user=$(cr-user) -target=module.$(resourceToDeploy)
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
