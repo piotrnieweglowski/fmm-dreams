@@ -1,3 +1,9 @@
+terraform{
+  backend "azurerm"{
+    
+  }
+}
+
 provider "azurerm"{
     version = "2.19.0"
     subscription_id = "ff581936-424c-495e-a9ed-0c247bdd4d78"
