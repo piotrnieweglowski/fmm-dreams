@@ -11,3 +11,21 @@ resource "azurerm_container_registry" "fmm-container-registry" {
   sku                      = "Basic"
   admin_enabled            = true
 }
+resource "azurerm_key_vault_secret" "cr-user" {
+  name         = "cr-user"
+  value        = azurerm_container_registry.fmm-container-registry.admin_username
+  key_vault_id = "21f9aca0-dde5-4dd5-a267-50fd39dda9b1"
+
+  tags = {
+    environment = "dev"
+  }
+}
+resource "azurerm_key_vault_secret" "cr-pass" {
+  name         = "cr-pass"
+  value        = azurerm_container_registry.fmm-container-registry.admin_password
+  key_vault_id = "21f9aca0-dde5-4dd5-a267-50fd39dda9b1"
+
+  tags = {
+    environment = "dev"
+  }
+}
