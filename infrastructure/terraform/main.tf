@@ -9,46 +9,22 @@ resource "azurerm_resource_group" "fmm-resource-group" {
     location = "westeurope"
 }
 
-resource "azurerm_postgresql_server" "fmm-database-server" {
-  name                = "fmm-postgresql-server-1"
-  location            = "westeurope"
-  resource_group_name = azurerm_resource_group.fmm-resource-group.name
-
-  sku_name = "B_Gen5_1"
-
-  storage_mb                   = 5120
-  backup_retention_days        = 7
-  geo_redundant_backup_enabled = false
-  auto_grow_enabled            = false
-
-  administrator_login          = "turelit"
-  administrator_login_password = var.db_pass
-  version                      = "9.5"
-  ssl_enforcement_enabled      = false
+module "database" {
+  source  = "./database"
+  db_pass = var.db_pass
+  rg_name = azurerm_resource_group.fmm-resource-group.name
 }
 
-resource "azurerm_postgresql_database" "fmm-dreams-database" {
-  name                = "fmm-dreams"
-  resource_group_name = azurerm_resource_group.fmm-resource-group.name
-  server_name         = azurerm_postgresql_server.fmm-database-server.name
-  charset             = "UTF8"
-  collation           = "English_United States.1252"
-    timeouts {
-    create = "20m"
-    delete = "1h"
-  }
+module "web-app" {
+  source = "./web-app"
+  containerTag = "dev"
+  db_pass = var.db_pass
+  cr_user = var.cr_user
+  cr_pass = var.cr_pass
+  rg_name = azurerm_resource_group.fmm-resource-group.name
 }
-resource "azurerm_postgresql_firewall_rule" "turelit" {
-  name                = "turelit-hq"
-  resource_group_name = azurerm_resource_group.fmm-resource-group.name
-  server_name         = azurerm_postgresql_server.fmm-database-server.name
-  start_ip_address    = "185.93.94.115"
-  end_ip_address      = "185.93.94.115"
-}
-resource "azurerm_postgresql_firewall_rule" "azure-app-service" {
-  name                = "azure-app-service"
-  resource_group_name = azurerm_resource_group.fmm-resource-group.name
-  server_name         = azurerm_postgresql_server.fmm-database-server.name
-  start_ip_address    = "51.0.0.0"
-  end_ip_address      = "52.255.255.255"
+
+module "container-registry" {
+  source = "./container-registry"
+  rg_name = azurerm_resource_group.fmm-resource-group.name
 }
