@@ -1,5 +1,5 @@
 variables:
-  dockerRegistryServiceConnection: '73fedd2f-1033-4e58-b336-fb1d53fb6637'
+  dockerRegistryServiceConnection: 'fmmCR'
   imageRepository: 'fmmapi'
   containerRegistry: 'fmmbase.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/web/FMM/Dockerfile'
