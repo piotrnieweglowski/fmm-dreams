@@ -7,7 +7,7 @@ module "web-app-container" {
   plan = {
     sku_size  = "B1"
   }
-  docker_registry_url = "http://fmmbase.azurecr.io"
+  docker_registry_url = "http://fmmcontainerregistry.azurecr.io"
   docker_registry_username = var.cr_user
   docker_registry_password = var.cr_pass
 
