@@ -3,7 +3,7 @@ module "web-app-container" {
   resource_group_name = var.rg_name
   name  = "fmm"
   container_type = "docker"
-  container_image = "fmmContainerRegistry/fmmapi:${var.containerTag}"
+  container_image = "fmmcontainerregistry/fmmapi:${var.containerTag}"
   plan = {
     sku_size  = "B1"
   }
