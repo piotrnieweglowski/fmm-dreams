@@ -5,7 +5,6 @@ parameters:
   default: database
   values:
   - database
-  - container-registry
   - web-app
 
 variables:
