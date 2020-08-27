@@ -68,3 +68,12 @@ steps:
     commandOptions: out.plan
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
+- task: AzureCLI@2
+  displayName: "Create Service Connection for build pipeline"
+  inputs:
+    azureSubscription: "$(SUBSCRIPTION_NAME)"
+    addSpnToEnvironment: true
+    scriptType: "bash"
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      az devops service-endpoint create --organization https://dev.azure.com/turelit/ --project fundacjaMamMarzenie --service-endpoint-configuration $(System.DefaultWorkingDirectory)/infrastructure/pipelines/sc_template.json
