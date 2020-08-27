@@ -1,0 +1,32 @@
+{
+    "authorization": {
+        "scheme": "ServicePrincipal",
+        "parameters": {
+            "tenantid": "21f9aca0-dde5-4dd5-a267-50fd39dda9b1",
+            "loginServer": "fmmcontainerregistry.azurecr.io",
+            "role": "8311e382-0749-4cb8-b61a-304f252e45ec",
+            "scope": "/subscriptions/ff581936-424c-495e-a9ed-0c247bdd4d78/resourceGroups/fmmResourceGroup/providers/Microsoft.ContainerRegistry/registries/fmmContainerRegistry",
+            "servicePrincipalId": "<placeholder>"
+        }
+    },
+    "data": {
+        "appObjectId": "",
+        "azureSpnPermissions": "",
+        "azureSpnRoleAssignmentId": "",
+        "registryId": "/subscriptions/ff581936-424c-495e-a9ed-0c247bdd4d78/resourceGroups/fmmResourceGroup/providers/Microsoft.ContainerRegistry/registries/fmmContainerRegistry",
+        "registrytype": "ACR",
+        "spnObjectId": "",
+        "subscriptionId": "ff581936-424c-495e-a9ed-0c247bdd4d78",
+        "subscriptionName": "Azure subscription 1"
+    },
+    "description": "",
+    "groupScopeId": null,
+    "name": "fmmContainerRegistry",
+    "operationStatus": null,
+    "readersGroup": null,
+    "serviceEndpointProjectReferences": null,
+    "type": "dockerregistry",
+    "url": "https://fmmContainerRegistry.azurecr.io",
+    "isShared": false,
+    "owner": "library"
+}
