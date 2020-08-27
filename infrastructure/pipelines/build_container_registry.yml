@@ -12,6 +12,12 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'cr-create'
+    RunAsPreJob: true
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
   displayName: "Install Terraform $(tf_version)"
   inputs:
@@ -86,7 +92,7 @@ steps:
 - script: az extension add -n azure-devops
   displayName: 'Install Azure DevOps Extension'
 
-- script: echo ${AZURE_DEVOPS_CLI_PAT} | az devops login
+- script: az devops login $cr-create
   env:
     AZURE_DEVOPS_CLI_PAT: $(System.AccessToken)
   displayName: 'Login Azure DevOps Extension'
