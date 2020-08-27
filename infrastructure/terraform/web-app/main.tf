@@ -13,7 +13,7 @@ resource "azurerm_app_service" "fmm-app-service" {
   name                = "fmm-app-service"
   location            = "westeurope"
   resource_group_name = var.rg_name
-  app_service_plan_id = azurerm_app_service_plan.fmm-web-app.id
+  app_service_plan_id = azurerm_app_service_plan.fmm-app-service-plan.id
 
   site_config {
     linux_fx_version = "DOCKER|fmmContainerRegistry.azurecr.io/fmmapi:${var.containerTag}"
