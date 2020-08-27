@@ -68,12 +68,33 @@ steps:
     commandOptions: out.plan
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
-- task: AzureCLI@2
-  displayName: "Create Service Connection for build pipeline"
+
+- task: UsePythonVersion@0
   inputs:
-    azureSubscription: "$(SUBSCRIPTION_NAME)"
-    addSpnToEnvironment: true
-    scriptType: "bash"
-    scriptLocation: "inlineScript"
-    inlineScript: |
-      az devops service-endpoint create --organization https://dev.azure.com/turelit/ --project fundacjaMamMarzenie --service-endpoint-configuration $(System.DefaultWorkingDirectory)/infrastructure/pipelines/sc_template.json
+    versionSpec: '3.x'
+    architecture: 'x64'
+
+- script: python -m pip install --upgrade pip
+  displayName: 'Upgrade pip'
+
+- script: pip install --pre azure-cli --extra-index-url https://azurecliprod.blob.core.windows.net/edge
+  displayName: 'upgrade azure cli'
+
+- script: az --version
+  displayName: 'Show Azure CLI version'
+
+- script: az extension add -n azure-devops
+  displayName: 'Install Azure DevOps Extension'
+
+- script: echo ${AZURE_DEVOPS_CLI_PAT} | az devops login
+  env:
+    AZURE_DEVOPS_CLI_PAT: $(System.AccessToken)
+  displayName: 'Login Azure DevOps Extension'
+
+- script: az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
+  displayName: 'Set default Azure DevOps organization and project'
+
+- script: |
+    az devops service-endpoint create --service-endpoint-configuration $(System.DefaultWorkingDirectory)/infrastructure/pipelines/sc_template.json
+    git pr list
+  displayName: 'Create service connection'
