@@ -22,6 +22,7 @@ resource "azurerm_app_service" "fmm-app-service" {
   }
 
   app_settings = {
+    DOCKER_REGISTRY_SERVER_URL = "fmmContainerRegistry.azurecr.io"
     DOCKER_REGISTRY_SERVER_USERNAME = var.cr_user
     DOCKER_REGISTRY_SERVER_PASSWORD = var.cr_pass
   }
