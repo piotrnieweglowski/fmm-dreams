@@ -1,23 +1,29 @@
-module "web-app-container" {
-  source  = "./terraform-azurerm-web-app-container"
+resource "azurerm_app_service_plan" "fmm-app-service-plan" {
+  name                = "fmm-appserviceplan"
+  location            = "westeurope"
   resource_group_name = var.rg_name
-  name  = "fmm"
-  container_type = "docker"
-  container_image = "fmmcontainerregistry/fmmapi:${var.containerTag}"
-  plan = {
-    sku_size  = "B1"
-  }
-  docker_registry_url = "http://fmmcontainerregistry.azurecr.io"
-  docker_registry_username = var.cr_user
-  docker_registry_password = var.cr_pass
 
-  app_settings = {
-    DbConnection = "Server=fmm-postgresql-server-1.postgres.database.azure.com;Database=fmm-dreams;Port=5432;User Id=turelit@fmm-postgresql-server-1;Password=${var.db_pass};Ssl Mode=Require;"
+  sku {
+    tier = "Basic"
+    size = "B1"
   }
 }
 
-resource "azurerm_role_assignment" "fmm-web-app" {
-  scope                = "/subscriptions/ff581936-424c-495e-a9ed-0c247bdd4d78"
-  role_definition_name = "Contributor"
-  principal_id         = module.web-app-container.identity["principal_id"]
+resource "azurerm_app_service" "fmm-app-service" {
+  name                = "fmm-app-service"
+  location            = "westeurope"
+  resource_group_name = var.rg_name
+  app_service_plan_id = azurerm_app_service_plan.fmm-web-app.id
+
+  site_config {
+    linux_fx_version = "DOCKER|fmmContainerRegistry.azurecr.io/fmmapi:${var.containerTag}"
+    DOCKER_REGISTRY_SERVER_USERNAME = var.cr_user
+    DOCKER_REGISTRY_SERVER_PASSWORD = var.cr_pass
+  }
+
+  connection_string {
+    name  = "DbConnection"
+    type  = "PostgreSQL"
+    value = "Server=fmm-postgresql-server-1.postgres.database.azure.com;Database=fmm-dreams;Port=5432;User Id=turelit@fmm-postgresql-server-1;Password=${var.db_pass};Ssl Mode=Require;"
+  }
 }
