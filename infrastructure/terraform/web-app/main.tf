@@ -2,6 +2,8 @@ resource "azurerm_app_service_plan" "fmm-app-service-plan" {
   name                = "fmm-appserviceplan"
   location            = "westeurope"
   resource_group_name = var.rg_name
+  reserved            = true
+  kind                = "Linux"
 
   sku {
     tier = "Basic"
