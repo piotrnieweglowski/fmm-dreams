@@ -17,9 +17,12 @@ resource "azurerm_app_service" "fmm-app-service" {
 
   site_config {
     linux_fx_version = "DOCKER|fmmContainerRegistry.azurecr.io/fmmapi:${var.containerTag}"
+  }
+   app_settings {
     DOCKER_REGISTRY_SERVER_USERNAME = var.cr_user
     DOCKER_REGISTRY_SERVER_PASSWORD = var.cr_pass
-  }
+   }
+     
 
   connection_string {
     name  = "DbConnection"
