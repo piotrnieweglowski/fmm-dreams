@@ -92,9 +92,9 @@ steps:
 - script: az extension add -n azure-devops
   displayName: 'Install Azure DevOps Extension'
 
-- script: echo ${cr-create} | az devops login
+- script: echo ${AZURE_DEVOPS_CLI_PAT} | az devops login
   env:
-    AZURE_DEVOPS_CLI_PAT: $(System.AccessToken)
+    AZURE_DEVOPS_CLI_PAT: $(cr-create)
   displayName: 'Login Azure DevOps Extension'
 
 - script: az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
