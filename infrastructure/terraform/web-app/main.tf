@@ -12,7 +12,7 @@ resource "azurerm_app_service_plan" "fmm-app-service-plan" {
 }
 
 resource "azurerm_app_service" "fmm-app-service" {
-  name                = "fmm-app-service"
+  name                = "fmm"
   location            = "westeurope"
   resource_group_name = var.rg_name
   app_service_plan_id = azurerm_app_service_plan.fmm-app-service-plan.id
