@@ -18,6 +18,16 @@ resource "azurerm_app_service" "fmm-app-service" {
   app_service_plan_id = azurerm_app_service_plan.fmm-app-service-plan.id
 
   site_config {
+    default_documents = ["Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"]
+    use_32_bit_worker_process = true                    
     linux_fx_version = "DOCKER|fmmContainerRegistry.azurecr.io/fmmapi:${var.containerTag}"
   }
 
