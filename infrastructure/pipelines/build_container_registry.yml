@@ -97,18 +97,6 @@ steps:
     AZURE_DEVOPS_CLI_PAT: $(cr-create)
   displayName: 'Login Azure DevOps Extension'
 
-- task: AzurePowerShell@5
-  displayName: 'Removing old service connection if exists'
-  inputs:
-    azureSubscription: "$(SUBSCRIPTION_NAME)"
-    ScriptType: InlineScript
-    Inline: |
-      az extension add -n azure-devops
-      echo $(cr-create) | az devops login
-      if (az devops service-endpoint list | ConvertFrom-Json | Where-Object { $_.name -eq "fmmContainerRegistry" })
-      {az devops service-endpoint delete --yes --id (az devops service-endpoint list | ConvertFrom-Json | Where-Object { $_.name -eq "fmmContainerRegistry" } | Select-Object -Property id).id}
-
-
 - script: az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
   displayName: 'Set default Azure DevOps organization and project'
 
