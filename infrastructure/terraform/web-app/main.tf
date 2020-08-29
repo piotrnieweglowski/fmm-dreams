@@ -39,7 +39,7 @@ resource "azurerm_app_service" "fmm-app-service" {
      
   connection_string {
     name  = "DbConnection"
-    type  = "PostgreSQL"
+    type  = "MySQL"
     value = "Server=fmm-postgresql-server-1.postgres.database.azure.com;Database=fmm-dreams;Port=5432;User Id=turelit@fmm-postgresql-server-1;Password=${var.db_pass};Ssl Mode=Require;"
   }
 }
