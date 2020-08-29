@@ -103,6 +103,8 @@ steps:
     azureSubscription: "$(SUBSCRIPTION_NAME)"
     ScriptType: InlineScript
     Inline: |
+      az extension add -n azure-devops
+      echo $(cr-create) | az devops login
       if (az devops service-endpoint list | ConvertFrom-Json | Where-Object { $_.name -eq "fmmContainerRegistry" })
       {az devops service-endpoint delete --yes --id (az devops service-endpoint list | ConvertFrom-Json | Where-Object { $_.name -eq "fmmContainerRegistry" } | Select-Object -Property id).id}
 
