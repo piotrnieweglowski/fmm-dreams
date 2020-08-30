@@ -5,62 +5,53 @@ using System.Collections.ObjectModel;
 using fmmApp.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace fmmApp.ViewModels
 {
     public class AddVolunteerViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        public ObservableCollection<Department> DepartmentList { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        List<Department> departmentList;
+        public List<Department> DepartmentList
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        private string _department;
-        public string Department
-        {
-            get { return _department; }
+            get { return departmentList; }
             set
             {
-                if (_department != value)
+                if (departmentList != value)
                 {
-                    _department = value;
+                    departmentList = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private Department _selectedDepartment { get; set; }
-        public Department SelectedCity
+        Department selectedDepartment;
+        public Department SelectedDepartment
         {
-            get { return _selectedDepartment; }
+            get { return selectedDepartment; }
             set
             {
-                if (_selectedDepartment != value)
+                if (selectedDepartment != value)
                 {
-                    _selectedDepartment = value;
-                    Department = "Selected City : " + _selectedDepartment.City;
+                    selectedDepartment = value;
+                    OnPropertyChanged();
                 }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
         public AddVolunteerViewModel()
         {
-            this.DepartmentList = new ObservableCollection<Department>()
-            {
-                new Department
-                {
-                    Key=1,
-                    City="Bydgoszcz"
-                },
-                 new Department
-                {
-                     Key=2,
-                    City="Wwa"
-                }
-            };
+           
         }
     }
 }

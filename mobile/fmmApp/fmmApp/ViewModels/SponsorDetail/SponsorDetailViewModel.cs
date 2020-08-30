@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms.Internals;
 using fmmApp.Views.Navigation;
 using fmmApp.Views.Forms;
+using fmmApp.Models.Forms;
 
 namespace fmmApp.ViewModels.SponsorDetail
 {
@@ -15,6 +16,7 @@ namespace fmmApp.ViewModels.SponsorDetail
     {
         #region Properties
         public ObservableCollection<Sponsor> SponsorDetails { get; set; }
+        public ObservableCollection<Dreamer> DreamerList { get; set; }
         #endregion
 
         #region Constructor
@@ -33,6 +35,21 @@ namespace fmmApp.ViewModels.SponsorDetail
                     ContactNumber = "(828) 228-2882",
                     AdditionalInfo="add info"
                 },
+            };
+            this.DreamerList = new ObservableCollection<Dreamer>()
+             {
+                new Dreamer
+                {
+                    FirstName  = "Jan",
+                    LastName = "Kowalski",
+                    Dream="My dream"
+                },
+                new Dreamer
+                {
+                    FirstName  = "Anna",
+                    LastName = "Nowak",
+                    Dream="My dream"
+                }
             };
         }
 

@@ -6,6 +6,7 @@ using fmmApp.Views;
 using fmmApp.Views.Navigation;
 using fmmApp.Views.Forms;
 using fmmApp.Views.SponsorDetail;
+using fmmApp.Views.Detail;
 
 namespace fmmApp
 {
@@ -18,7 +19,7 @@ namespace fmmApp
         {
             InitializeComponent();
             Startup.Init();
-            MainPage = new VolunteerListPage();
+            MainPage = new SponsorsListPage();
         }
 
         protected override void OnStart()

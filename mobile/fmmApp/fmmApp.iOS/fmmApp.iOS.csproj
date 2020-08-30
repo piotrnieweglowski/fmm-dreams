@@ -66,6 +66,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
+    <Compile Include="Renderers\CalenderDatePickerRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -159,10 +160,19 @@
     <PackageReference Include="Syncfusion.Xamarin.SfBadgeView">
       <Version>18.2.0.46</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar">
+      <Version>18.2.0.46</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
       <Version>18.2.0.46</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
+      <Version>18.2.0.46</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout.IOS">
+      <Version>18.2.0.55</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar">
       <Version>18.2.0.46</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRating">
@@ -180,5 +190,17 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\link16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cloud16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\at16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\info16.png" />
   </ItemGroup>
 </Project>

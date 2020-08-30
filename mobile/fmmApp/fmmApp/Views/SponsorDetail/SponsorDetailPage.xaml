@@ -94,6 +94,14 @@
                                                    Text="{StaticResource Delete}" Command="{Binding Path=BindingContext.DeleteCommand,Source={x:Reference sponsorDetail}}"
                                                    CommandParameter="{x:Reference DeleteButton}"/>
 
+                                <Image
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="0,0"
+                                    HorizontalOptions="StartAndExpand"
+                                    Source="at16.png"
+                                    VerticalOptions="Start"/>
+                                
                                 <Label Style="{StaticResource CommonLabelStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="{StaticResource Montserrat-Medium}" 
                                        VerticalOptions="Start">
                                     <Label.FormattedText>
@@ -119,12 +127,63 @@
                                     </Label.FormattedText>
                                 </Label>
 
-                                <!-- Delivery Address -->
+                                <!-- Additional Info -->
+                                <Image
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Margin="0,0"
+                                    HorizontalOptions="StartAndExpand"
+                                    Source="info16.png"
+                                    VerticalOptions="Start"/>
+
                                 <Label  Text="{Binding AdditionalInfo}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource CommonLabelStyle}" 
                                         FontFamily="{StaticResource Montserrat-Medium}" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand"
                                         VerticalOptions="Start"/>
-                                
-                                
+                            </Grid>
+                        </cards:SfCardView>
+                    </DataTemplate>
+                </ListView:SfListView.ItemTemplate>
+            </ListView:SfListView>
+            
+            <!--  ListView displaying dreams  -->
+            <ListView:SfListView x:Name="dreams" AutoFitMode="Height" IsScrollBarVisible="False" Padding="8" ItemSpacing="8" BackgroundColor="Transparent"
+                                 SelectionGesture="Tap" SelectionBackgroundColor="Transparent" SelectionMode="Single" AllowSwiping="True" 
+                                 ItemsSource="{Binding DreamerList}"
+                                 Grid.Row="2"
+                                 Grid.Column="0">
+                <ListView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <cards:SfCardView CornerRadius="4" HasShadow="True" WidthRequest="343" BackgroundColor="{DynamicResource Gray-White}" 
+                                          HorizontalOptions="Center" Padding="16,16,8,16">
+                            <Grid>
+                                <Label   Grid.Row="0"
+                                         Grid.Column="0"
+                                    LineBreakMode="NoWrap" HorizontalOptions="Start"
+                                        VerticalOptions="Start" LineHeight="{OnPlatform Default=-1, Android=1.5}" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding FirstName}" FontSize="16" TextColor="{DynamicResource Gray-900}" 
+                                                  FontFamily="{StaticResource Montserrat-SemiBold}"/>
+                                            <Span Text="  "/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label  Grid.Row="0"
+                                         Grid.Column="1" 
+                                    LineBreakMode="NoWrap" HorizontalOptions="Start"
+                                        VerticalOptions="Start" LineHeight="{OnPlatform Default=-1, Android=1.5}" >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding LastName}" FontSize="16" TextColor="{DynamicResource Gray-900}" 
+                                                  FontFamily="{StaticResource Montserrat-SemiBold}"/>
+                                            <Span Text="  "/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label  Text="{Binding Dream}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource CommonLabelStyle}" 
+                                        FontFamily="{StaticResource Montserrat-Medium}" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand"
+                                        VerticalOptions="Start"/>
 
                             </Grid>
                         </cards:SfCardView>
@@ -132,7 +191,6 @@
                 </ListView:SfListView.ItemTemplate>
             </ListView:SfListView>
 
-            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

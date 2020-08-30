@@ -1,3 +1,5 @@
+using Syncfusion.SfCalendar.XForms.iOS;
+using Syncfusion.XForms.iOS.ComboBox;
 using Syncfusion.XForms.iOS.Cards;
 using Syncfusion.SfRating.XForms.iOS;
 using Syncfusion.XForms.iOS.Core;
@@ -30,6 +32,8 @@ namespace fmmApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            SfComboBoxRenderer.Init();
+            SfCalendarRenderer.Init();
             SfCardViewRenderer.Init();
             SfRatingRenderer.Init();
             SfAvatarViewRenderer.Init();

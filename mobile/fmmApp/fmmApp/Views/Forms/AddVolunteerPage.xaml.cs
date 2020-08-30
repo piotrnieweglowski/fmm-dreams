@@ -1,5 +1,8 @@
-﻿using fmmApp.Views.Navigation;
+﻿using fmmApp.Models;
+using fmmApp.ViewModels;
+using fmmApp.Views.Navigation;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -16,6 +19,26 @@ namespace fmmApp.Views.Forms
         public AddVolunteerPage()
         {
             InitializeComponent();
+            this.BindingContext = new AddVolunteerViewModel
+            {
+                DepartmentList = GetDepartments()
+            };
+        }
+
+        private List<Department> GetDepartments()
+        {
+            var depOne = new Department
+            {
+                City = "Wwa"
+            };
+            var depTwo = new Department
+            {
+                City = "Krk"
+            };
+            var departmentList = new List<Department>();
+            departmentList.Add(depOne);
+            departmentList.Add(depTwo);
+            return departmentList;
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)

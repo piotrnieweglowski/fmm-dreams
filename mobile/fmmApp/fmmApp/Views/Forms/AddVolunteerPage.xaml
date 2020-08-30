@@ -30,7 +30,12 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="16" Spacing="16">
-
+                
+                <Label Margin="16,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
+                       HorizontalOptions="CenterAndExpand" TextColor="{DynamicResource Gray-900}"
+                       LineHeight="1.25" Text="Add New Volunteer" VerticalOptions="Center"
+                       VerticalTextAlignment="Center"/>
+                
                 <!--  First name entry with border  -->
                 <border:SfBorder
                         BorderColor="{Binding Source={x:Reference FirstNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
@@ -79,12 +84,14 @@
                     </control:BorderlessEntry>
                 </border:SfBorder>
 
-                <Picker x:Name="picker"
-                        Title="Select department"
-                        Style="{StaticResource EntryTextStyle}"
+                <Picker x:Name="DepartmentPicker"
+                        Title="Select Department"
+                        FontFamily="{StaticResource Montserrat-Regular}"
+                        FontSize="16"
+                        TextColor="{DynamicResource Gray-700}"
                         ItemsSource="{Binding DepartmentList}"
                         ItemDisplayBinding="{Binding City}"
-                        SelectedItem="{Binding SelectedCity}"/>
+                        SelectedItem="{Binding SelectedDepartment}"/>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
