@@ -27,9 +27,16 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.2.0.46" />
+<<<<<<< HEAD
     <PackageReference Include="Syncfusion.Xamarin.SfBackdrop" Version="18.2.0.46" />
+=======
+    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.2.0.46" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="18.2.0.46" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.2.0.46" />
+>>>>>>> Added Category Pages, Dream Pages, Dreamer Pages
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.2.0.46" />
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.2.0.46" />
@@ -41,6 +48,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\DreamerDetail\DreamerDetailPage.xaml.cs">
+      <DependentUpon>DreamerDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Forms\AddCategoryPage.xaml.cs">
+      <DependentUpon>AddCategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Forms\AddDreamPage.xaml.cs">
+      <DependentUpon>AddDreamPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Forms\EditDreamerPage.xaml.cs">
+      <DependentUpon>EditDreamerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Forms\AddDreamerPage.xaml.cs">
+      <DependentUpon>AddDreamerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Forms\AddVolunteerPage.xaml.cs">
       <DependentUpon>AddVolunteerPage.xaml</DependentUpon>
     </Compile>
@@ -49,6 +71,9 @@
     </Compile>
     <Compile Update="Views\Forms\AddSponsorPage.xaml.cs">
       <DependentUpon>AddSponsorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Navigation\CategoryListPage.xaml.cs">
+      <DependentUpon>CategoryListPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Navigation\VolunteerListPage.xaml.cs">
       <DependentUpon>VolunteerListPage.xaml</DependentUpon>
@@ -79,6 +104,24 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MasterMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <EmbeddedResource Update="Views\DreamerDetail\DreamerDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DreamerDetail\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\AddCategoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\AddDreamPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\EditDreamerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Navigation\CategoryListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\VolunteerDetail\VolunteerDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

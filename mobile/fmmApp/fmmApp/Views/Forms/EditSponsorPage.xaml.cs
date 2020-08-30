@@ -3,6 +3,8 @@ using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using System;
 using fmmApp.Views.SponsorDetail;
+using fmmApp.ViewModels;
+using fmmApp.Models.SponsorDetail;
 
 namespace fmmApp.Views.Forms
 {
@@ -13,9 +15,27 @@ namespace fmmApp.Views.Forms
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditSponsorPage : ContentPage
     {
+
+        EditSponsorViewModel viewModel;
+
+        public EditSponsorPage(EditSponsorViewModel viewModel)
+        {
+            InitializeComponent();
+            BindingContext = this.viewModel = viewModel;
+        }
+
         public EditSponsorPage()
         {
             InitializeComponent();
+            var sponsor = new Sponsor
+            {
+                Name = "sponsor name",
+                EmailAddress = "mail@mail.com",
+                ContactNumber="123456789",
+                AdditionalInfo="Additional Info"                
+            };
+            viewModel = new EditSponsorViewModel(sponsor);
+            BindingContext = viewModel;
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)

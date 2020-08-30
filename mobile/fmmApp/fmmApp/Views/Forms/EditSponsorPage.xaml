@@ -8,6 +8,7 @@
     xmlns:control="clr-namespace:fmmApp.Controls"
     xmlns:behaviours="clr-namespace:fmmApp.Behaviors"
     xmlns:converter="clr-namespace:fmmApp.Converters"
+    xmlns:viewModel="clr-namespace:fmmApp.ViewModels"
     Title="Edit Sposnor"
     BackgroundColor="{DynamicResource Gray-White}"
     NavigationPage.HasNavigationBar="False">
@@ -19,6 +20,11 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModel:EditSponsorViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="16" Spacing="16">
@@ -32,6 +38,7 @@
                     <control:BorderlessEntry
                         x:Name="NameEntry"
                         Placeholder="Name"
+                        Text="{Binding Name}"
                         Style="{StaticResource EntryTextStyle}" />
                 </border:SfBorder>
 
@@ -43,6 +50,7 @@
                     <control:BorderlessEntry
                         x:Name="EmailAddressEntry"
                         Placeholder="Email Address"
+                        Text="{Binding EmailAddress}"
                         Style="{StaticResource EntryTextStyle}" />
                 </border:SfBorder>
 
@@ -54,10 +62,11 @@
                     <control:BorderlessEntry
                         x:Name="PhoneNoEntry"
                         Keyboard="Telephone" 
-                        Placeholder="Phone Number : e.g. XXXX-XXXXXX"
+                        Placeholder="Phone Number : e.g. XXX-XXX-XXX"
+                        Text="{Binding PhoneNumber}"
                         Style="{StaticResource EntryTextStyle}" >
                         <control:BorderlessEntry.Behaviors>
-                            <behaviours:EntryMaskedBehavior Mask="(+91)XXXXX-XXXXX" Prefix="(+91)"/>
+                            <behaviours:EntryMaskedBehavior Mask="(+48)XXX-XXX-XXX" Prefix="(+48)"/>
                         </control:BorderlessEntry.Behaviors>
                     </control:BorderlessEntry>
                 </border:SfBorder>
@@ -69,6 +78,7 @@
                     <control:BorderlessEntry
                         x:Name="AdditionalInfoEntry"
                         Placeholder="Additional Info"
+                        Text="{Binding AdditionalInfo}"
                         Style="{StaticResource EntryTextStyle}" />
                 </border:SfBorder>
 
@@ -87,7 +97,7 @@
                     Margin="0,16,0,0"
                     HorizontalOptions="Center"
                     Style="{StaticResource SfButtonStyle}"
-                    Text="ADD SPONSOR"
+                    Text="SAVE CHANGES"
                     Clicked="AddButton_Clicked"
                     WidthRequest="175" />
                     </StackLayout>

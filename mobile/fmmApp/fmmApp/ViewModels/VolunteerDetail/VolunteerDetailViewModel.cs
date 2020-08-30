@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms.Internals;
 using fmmApp.Views.Navigation;
 using fmmApp.Models;
+using fmmApp.Models.Forms;
 
 namespace fmmApp.ViewModels.Detail
 {
@@ -16,7 +17,8 @@ namespace fmmApp.ViewModels.Detail
         #region Properties
         public ObservableCollection<Volunteer> VolunteerDetails { get; set; }
 
-        
+        public ObservableCollection<Dreamer> DreamerList { get; set; }
+
         #endregion
 
         #region Constructor
@@ -33,6 +35,21 @@ namespace fmmApp.ViewModels.Detail
                     Email = "mail@mail.com",
                     Department = "114 Ridge St NW, Hudson, NC 28638",
                     Phone = "(828) 228-2882"
+                }
+            };
+            this.DreamerList = new ObservableCollection<Dreamer>()
+            {
+                new Dreamer
+                {
+                    FirstName  = "Jan",
+                    LastName = "Kowalski",
+                    Dream="My dream"
+                },
+                new Dreamer
+                {
+                    FirstName  = "Anna",
+                    LastName = "Nowak",
+                    Dream="My dream"
                 }
             };
 

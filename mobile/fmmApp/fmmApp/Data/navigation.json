@@ -151,46 +151,31 @@
       "updatedDate": "2019-06-23"
     }
   ],
-  "songsPageList": [
+  "categoryPageList": [
     {
-      "songImage": "Songs_Image1.png",
-      "songname": "Santorini",
-      "composer": "Yanni"
+      "categoryname": "Santorini"
     },
     {
-      "songImage": "Songs_Image2.png",
-      "songname": "Orinoco flow",
-      "composer": "Enya"
+      "categoryname": "Orinoco flow"
     },
     {
-      "songImage": "Songs_Image3.png",
-      "songname": "Thanksgiving",
-      "composer": "George Winston"
+      "categoryname": "Thanksgiving"
     },
     {
-      "songImage": "Songs_Image4.png",
-      "songname": "The Voice Of Enigma ",
-      "composer": "Enigma"
+      "categoryname": "The Voice Of Enigma "
     },
     {
-      "songImage": "Songs_Image5.png",
-      "songname": "Steam Forest",
-      "composer": "Andreas Vollenweider"
+      "categoryname": "Steam Forest"
     },
     {
-      "songImage": "Songs_Image6.png",
-      "songname": "In The Morning Light",
-      "composer": "Yanni"
+      "categoryname": "In The Morning Light"
     },
     {
-      "songImage": "Songs_Image7.png",
-      "songname": "Children of the Sun",
-      "composer": "Dead Can Dance "
+      "categoryname": "Children of the Sun"
     },
     {
-      "songImage": "Songs_Image8.png",
-      "songname": "Winter into Spring",
-      "composer": "George Winston"
+      "categoryname": "Winter into Spring"
+
     }
 
   ],
