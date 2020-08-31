@@ -75,6 +75,32 @@ steps:
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
     workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
 
+- task: TerraformTaskV1@0
+  displayName: "Run > terraform plan"
+  inputs:
+    command: "plan"
+    backendServiceArm: "$(SUBSCRIPTION_NAME)"
+    backendAzureRmResourceGroupName: "$(tf_state_rg)"
+    backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
+    backendAzureRmContainerName: $(tf_state_container_name)
+    backendAzureRmKey: "$(tf_environment).terraform.tstate"
+    commandOptions: -var db_pass="placeholder" -var cr_pass="placeholder" -var cr_user="placeholder" -target=module.container-registry -out="out.plan"
+    environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
+
+- task: TerraformTaskV1@0
+  displayName: "Run > terraform apply"
+  inputs:
+    command: "apply"
+    backendServiceArm: "$(SUBSCRIPTION_NAME)"
+    backendAzureRmResourceGroupName: "$(tf_state_rg)"
+    backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
+    backendAzureRmContainerName: $(tf_state_container_name)
+    backendAzureRmKey: "$(tf_environment).terraform.tstate"
+    commandOptions: out.plan
+    environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
+
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.x'
