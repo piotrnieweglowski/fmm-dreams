@@ -1,6 +1,9 @@
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  SUBSCRIPTION_NAME: "Azure-1" 
+
 steps:  
 - task: AzureKeyVault@1
   inputs:
@@ -11,7 +14,7 @@ steps:
 - task: AzureCLI@2
   displayName: "Remove Azure DevOps service connection"
   inputs:
-    azureSubscription: "Azure-1"
+    azureSubscription: "$(SUBSCRIPTION_NAME)"
     addSpnToEnvironment: true
     scriptType: "bash"
     scriptLocation: "inlineScript"
