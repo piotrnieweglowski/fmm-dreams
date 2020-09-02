@@ -17,7 +17,7 @@ namespace fmmApp.ViewModels.Detail
         #region Properties
         public ObservableCollection<Volunteer> VolunteerDetails { get; set; }
 
-        public ObservableCollection<Dreamer> DreamerList { get; set; }
+        public ObservableCollection<Models.Forms.Dreamer> DreamerList { get; set; }
 
         #endregion
 
@@ -37,15 +37,15 @@ namespace fmmApp.ViewModels.Detail
                     Phone = "(828) 228-2882"
                 }
             };
-            this.DreamerList = new ObservableCollection<Dreamer>()
+            this.DreamerList = new ObservableCollection<Models.Forms.Dreamer>()
             {
-                new Dreamer
+                new Models.Forms.Dreamer
                 {
                     FirstName  = "Jan",
                     LastName = "Kowalski",
                     Dream="My dream"
                 },
-                new Dreamer
+                new Models.Forms.Dreamer
                 {
                     FirstName  = "Anna",
                     LastName = "Nowak",

@@ -1,10 +1,9 @@
 ﻿using Xamarin.Forms;
-using fmmApp.Models.SponsorDetail;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.Internals;
 using fmmApp.Views.Navigation;
 using fmmApp.Views.Forms;
-using fmmApp.Models.Forms;
+using fmmApp.Models;
 
 namespace fmmApp.ViewModels.SponsorDetail
 {
@@ -15,8 +14,8 @@ namespace fmmApp.ViewModels.SponsorDetail
     public class SponsorDetailViewModel : BaseViewModel
     {
         #region Properties
-        public ObservableCollection<Sponsor> SponsorDetails { get; set; }
-        public ObservableCollection<Dreamer> DreamerList { get; set; }
+        public ObservableCollection<Models.SponsorDetail.Sponsor> SponsorDetails { get; set; }
+        public ObservableCollection<Models.Forms.Dreamer> DreamerList { get; set; }
         #endregion
 
         #region Constructor
@@ -26,9 +25,9 @@ namespace fmmApp.ViewModels.SponsorDetail
             this.EditCommand = new Command(this.EditButtonClicked);
             this.DeleteCommand = new Command(this.DeleteButtonClicked);
 
-            this.SponsorDetails = new ObservableCollection<Sponsor>()
+            this.SponsorDetails = new ObservableCollection<Models.SponsorDetail.Sponsor>()
             {
-                new Sponsor
+                new Models.SponsorDetail.Sponsor
                 {
                     Name = "John Doe",
                     EmailAddress = "Home@mail.com",
@@ -36,15 +35,15 @@ namespace fmmApp.ViewModels.SponsorDetail
                     AdditionalInfo="add info"
                 },
             };
-            this.DreamerList = new ObservableCollection<Dreamer>()
+            this.DreamerList = new ObservableCollection<Models.Forms.Dreamer>()
              {
-                new Dreamer
+                new Models.Forms.Dreamer
                 {
                     FirstName  = "Jan",
                     LastName = "Kowalski",
                     Dream="My dream"
                 },
-                new Dreamer
+                new Models.Forms.Dreamer
                 {
                     FirstName  = "Anna",
                     LastName = "Nowak",

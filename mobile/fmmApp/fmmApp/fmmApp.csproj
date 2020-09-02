@@ -27,20 +27,15 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.2.0.46" />
-<<<<<<< HEAD
     <PackageReference Include="Syncfusion.Xamarin.SfBackdrop" Version="18.2.0.46" />
-=======
     <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.2.0.46" />
->>>>>>> Added Category Pages, Dream Pages, Dreamer Pages
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.2.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.DataSource" Version="18.2.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.SfBadgeView" Version="18.2.0.46" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />  
@@ -104,6 +99,7 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MasterMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\DreamerDetail\DreamerDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
