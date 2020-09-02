@@ -1,20 +1,19 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-parameters:
--  name: db_pass
-   type: string
-   displayName: Database password
-steps:   
-- task: UseDotNet@2
-  inputs: 
-    packageType: 'sdk'
-    version: '2.2.x'
-  displayName: Specify dotnet core 2.2.x sdk
-- task: DotNetCoreCLI@2
+steps:  
+- task: AzureKeyVault@1
   inputs:
-    command: 'custom'
-    projects: 'FMM.csproj'
-    custom: 'ef'
-    arguments: 'migrations script --output $(build.artifactstagingdirectory)/migrations.sql -i'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/web/FMM/'
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'cr-create'
+    RunAsPreJob: true
+- task: AzureCLI@2
+  displayName: "Remove Azure DevOps service connection"
+  inputs:
+    azureSubscription: "$(SUBSCRIPTION_NAME)"
+    addSpnToEnvironment: true
+    scriptType: "bash"
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      echo $(cr-create) | az devops service-endpoint list
