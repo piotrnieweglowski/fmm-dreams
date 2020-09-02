@@ -17,6 +17,7 @@ steps:
     azureSubscription: "$(SUBSCRIPTION_NAME)"
     ScriptType: InlineScript
     inline: |
+      Install-Module azure-devops -Force -AllowClobber
       az extension add --name azure-devops
       echo $(cr-create) | az devops login
       az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
