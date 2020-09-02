@@ -19,5 +19,6 @@ steps:
     scriptType: "bash"
     scriptLocation: "inlineScript"
     inlineScript: |
+      echo $(cr-create) | az devops login
       az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
-      echo $(cr-create) | az devops service-endpoint list
+      az devops service-endpoint list
