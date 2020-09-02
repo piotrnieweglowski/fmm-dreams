@@ -11,14 +11,12 @@ steps:
     KeyVaultName: 'fmm-dev'
     SecretsFilter: 'cr-create'
     RunAsPreJob: true
-- task: AzureCLI@2
+- task: AzurePowerShell@5
   displayName: "Get Azure DevOps service connection"
   inputs:
     azureSubscription: "$(SUBSCRIPTION_NAME)"
-    addSpnToEnvironment: true
-    scriptType: "bash"
-    scriptLocation: "inlineScript"
-    inlineScript: |
+    ScriptType: InlineScript
+    inline: |
       echo $(cr-create) | az devops login
       az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
       $env.sc_list = az devops service-endpoint list
