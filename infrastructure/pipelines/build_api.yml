@@ -1,9 +1,9 @@
 variables:
-  dockerRegistryServiceConnection: '17199fd2-456c-4ee8-b38e-f73692240be2'
+  dockerRegistryServiceConnection: 'fmmContainerRegistry'
   imageRepository: 'fmmapi'
   containerRegistry: 'fmmcontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/web/FMM/Dockerfile'
-  tag: '$(Build.BuildId)'
+  tag: 'dev'
 
 pool:
   vmImage: 'ubuntu-latest'

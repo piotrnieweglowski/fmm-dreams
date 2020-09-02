@@ -1,0 +1,34 @@
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  SUBSCRIPTION_NAME: "Azure-1" 
+
+steps:  
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'cr-create'
+    RunAsPreJob: true
+- task: AzureCLI@2
+  displayName: "Get Azure DevOps service connection"
+  inputs:
+    azureSubscription: "$(SUBSCRIPTION_NAME)"
+    addSpnToEnvironment: true
+    scriptType: "bash"
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      echo $(cr-create) | az devops login
+      az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
+      $env.sc_list = az devops service-endpoint list
+
+- task: AzureCLI@2
+  displayName: "Find Azure DevOps service connection"
+  inputs:
+    azureSubscription: "$(SUBSCRIPTION_NAME)"
+    addSpnToEnvironment: true
+    scriptType: ps
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      write-host $env.sc_list

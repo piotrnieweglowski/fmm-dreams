@@ -12,11 +12,28 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'cr-user'
+    RunAsPreJob: true
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'cr-pass'
+    RunAsPreJob: true
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
   displayName: "Install Terraform $(tf_version)"
   inputs:
     terraformVersion: "$(tf_version)"
-
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(ff581936-424c-495e-a9ed-0c247bdd4d78)'
+    KeyVaultName: 'fmm-dev'
+    SecretsFilter: 'db-pass'
+    RunAsPreJob: true
 - task: AzureCLI@2
   displayName: "Create/Check the Terraform Statefile Azure Storage Account"
   inputs:
@@ -41,20 +58,21 @@ steps:
     backendAzureRmStorageAccountName: "$(tf_state_sa_name)"
     backendAzureRmContainerName: $(tf_state_container_name)
     backendAzureRmKey: "$(tf_environment).terraform.tstate"
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/web-app/'
 
 - task: TerraformTaskV1@0
-  displayName: "Run > terraform plan destroy"
+  displayName: "Run > terraform plan"
   inputs:
     command: "plan"
-    commandOptions: -destroy -var db_pass="placeholder" -target azurerm_resource_group.fmmResourceGroup
+    commandOptions: -var cr_user=$(cr-user) -var cr_pass=$(cr-pass) -var db_pass=$(db-pass) 
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/web-app/'
 
 - task: TerraformTaskV1@0
-  displayName: "Run > terraform destroy"
+  displayName: "Run > terraform apply"
   inputs:
-    command: "destroy"
-    commandOptions: -var db_pass="placeholder" -target azurerm_resource_group.fmmResourceGroup
+    command: apply
+    commandOptions: -var cr_user=$(cr-user) -var cr_pass=$(cr-pass) -var db_pass=$(db-pass) 
     environmentServiceNameAzureRM: "$(SUBSCRIPTION_NAME)"
-    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform/web-app/'
+    
