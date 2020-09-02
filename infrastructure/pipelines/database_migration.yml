@@ -12,7 +12,7 @@ steps:
     SecretsFilter: 'cr-create'
     RunAsPreJob: true
 - task: AzureCLI@2
-  displayName: "Remove Azure DevOps service connection"
+  displayName: "Get Azure DevOps service connection"
   inputs:
     azureSubscription: "$(SUBSCRIPTION_NAME)"
     addSpnToEnvironment: true
@@ -21,4 +21,14 @@ steps:
     inlineScript: |
       echo $(cr-create) | az devops login
       az devops configure --defaults organization=https://dev.azure.com/turelit project=fundacjaMamMarzenie --use-git-aliases true
-      az devops service-endpoint list
+      $env.sc_list = az devops service-endpoint list
+
+- task: AzureCLI@2
+  displayName: "Find Azure DevOps service connection"
+  inputs:
+    azureSubscription: "$(SUBSCRIPTION_NAME)"
+    addSpnToEnvironment: true
+    scriptType: ps
+    scriptLocation: "inlineScript"
+    inlineScript: |
+      write-host $env.sc_list
