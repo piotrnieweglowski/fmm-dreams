@@ -11,14 +11,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
     <None Remove="Data\navigation.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="appsettings.json" />
     <EmbeddedResource Include="Data\navigation.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfBackdrop" Version="18.2.0.46" />
@@ -26,6 +31,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.2.0.46" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.2.0.46" />
+    <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>

@@ -15,8 +15,8 @@ namespace fmmApp
         public App()
         {
             InitializeComponent();
+            Startup.Init();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new Master();
         }
 
