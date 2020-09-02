@@ -11,7 +11,7 @@ steps:
 - task: AzureCLI@2
   displayName: "Remove Azure DevOps service connection"
   inputs:
-    azureSubscription: "$(SUBSCRIPTION_NAME)"
+    azureSubscription: "Azure-1"
     addSpnToEnvironment: true
     scriptType: "bash"
     scriptLocation: "inlineScript"
