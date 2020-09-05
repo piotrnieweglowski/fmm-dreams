@@ -52,6 +52,9 @@
     <Compile Update="Views\Forms\AddDreamPage.xaml.cs">
       <DependentUpon>AddDreamPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Forms\AddStepPage.xaml.cs">
+      <DependentUpon>AddStepPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Forms\EditDreamerPage.xaml.cs">
       <DependentUpon>EditDreamerPage.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\BackdropPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\AddStepPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Master.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+        x:Class="fmmApp.Views.Forms.AddDreamerPage"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+        xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+        xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+        xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+        xmlns:converter="clr-namespace:fmmApp.Converters"
+        xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Forms"
+        xmlns:controls="clr-namespace:fmmApp.Controls"
+        Title="Add Dremer"
+        x:Name="NewDreamerPage"
+        BackgroundColor="{DynamicResource Gray-100}"
+        NavigationPage.HasNavigationBar="True">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModel:AddDreamerViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="titleLayout" Spacing="0">
+                <controls:TitleView Title="Add Dreamer">
+                    <controls:TitleView.LeadingView>
+                        <!--  Back button command  -->
+                        <buttons:SfButton x:Name="backButton"
+                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewDreamerPage}}"
+                                          CornerRadius="4" Text="{StaticResource Back}"
+                                          CommandParameter="{x:Reference backButton}"
+                                          Style="{StaticResource IconButtonStyle}"/>
+
+                    </controls:TitleView.LeadingView>
+                </controls:TitleView>
+                <ContentPresenter/>
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="16">
+
+                <Label Style="{StaticResource HeaderLabelStyle}" Text="General Information"/>
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference FirstNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="FirstNameEntry"
+                            Placeholder="First Name" Text="{Binding FirstName}"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference LastNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="LastNameEntry"
+                            Placeholder="Last Name" Text="{Binding LastName}"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+                <Grid>
+
+                    <border:SfBorder
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Padding="12,0,0,0"
+                            Style="{StaticResource FormBorderStyle}">
+
+                        <controls:CalenderDatePicker Date="{Binding Date}"
+                                                     x:Name="CustomDatePicker"
+                                                     FontFamily="{StaticResource Montserrat-Regular}"
+                                                     FontSize="16"
+                                                     Format="dd/MM/yy"
+                                                     PlaceHolderText="DD/MM/YY"
+                                                     TextColor="{DynamicResource Gray-900}"/>
+
+                    </border:SfBorder>
+                    <border:SfBorder
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Padding="6,0,0,0"
+                            BorderColor="{Binding Source={x:Reference GenderPicker}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                            Style="{StaticResource FormBorderStyle}">
+                        <combobox:SfComboBox
+                                x:Name="GenderPicker" SelectedValue="{Binding Gender, Mode=TwoWay}"
+                                Style="{StaticResource ComboBoxStyle}"
+                                Watermark="Gender">
+                            <combobox:SfComboBox.ComboBoxSource>
+                                <ListCollection:List x:TypeArguments="x:String">
+                                    <x:String>Male</x:String>
+                                    <x:String>Female</x:String>
+                                </ListCollection:List>
+                            </combobox:SfComboBox.ComboBoxSource>
+                            <combobox:SfComboBox.DropDownButtonSettings>
+                                <combobox:DropDownButtonSettings Width="30" Height="30">
+                                    <combobox:DropDownButtonSettings.View>
+                                        <Label
+                                                Margin="0"
+                                                FontFamily="{StaticResource FontIcons}"
+                                                FontSize="25"
+                                                HorizontalTextAlignment="Center"
+                                                Text="{StaticResource DropDownButtonIcon}"
+                                                TextColor="{DynamicResource Gray-600}"
+                                                VerticalTextAlignment="Center"/>
+                                    </combobox:DropDownButtonSettings.View>
+                                </combobox:DropDownButtonSettings>
+                            </combobox:SfComboBox.DropDownButtonSettings>
+                        </combobox:SfComboBox>
+                    </border:SfBorder>
+                </Grid>
+
+                <Label
+                        Margin="0,16,0,0"
+                        Style="{StaticResource HeaderLabelStyle}"
+                        Text="Contact Information"/>
+
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference GuardianFullNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="GuardianFullNameEntry"
+                            Placeholder="Guardian Full Name" Text="{Binding GuardianFullName}"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference EmailEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="EmailEntry"
+                            Placeholder="Email" Text="{Binding EmailAddress}"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference AddressEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="AddressEntry"
+                            Placeholder="Address" Text="{Binding Address}"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+
+                <border:SfBorder BorderColor="{Binding Source={x:Reference CityEntry}, Path=IsFocused,
+                        Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource FormBorderStyle}" Grid.Column="0">
+                    <controls:BorderlessEntry
+                            x:Name="CityEntry"
+                            Placeholder="City" Text="{Binding City}"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference PhoneNoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="PhoneNoEntry"
+                            Placeholder="Phone number"
+                            Text="{Binding PhoneNumber}"
+                            Keyboard="Telephone"
+                            Style="{StaticResource EntryTextStyle}">
+                    </controls:BorderlessEntry>
+                </border:SfBorder>
+
+                <Grid>
+                    <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            HorizontalOptions="Center" Command="{Binding CancelCommand}"
+                            Style="{StaticResource SfButtonStyle}"
+                            Text="CANCEL"
+                            WidthRequest="200"/>
+
+                    <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            HorizontalOptions="Center" Command="{Binding SubmitCommand}"
+                            Style="{StaticResource SfButtonStyle}"
+                            Text="SUBMIT"
+                            WidthRequest="200"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

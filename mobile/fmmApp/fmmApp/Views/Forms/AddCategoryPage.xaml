@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+        x:Class="fmmApp.Views.Forms.AddCategoryPage"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+        xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+        xmlns:control="clr-namespace:fmmApp.Controls"
+        xmlns:converter="clr-namespace:fmmApp.Converters"
+        x:Name="NewCategoryPage"
+        xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Forms"
+        Title="New Category"
+        BackgroundColor="{DynamicResource Gray-White}"
+        NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModel:AddCategoryViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="titleLayout" Spacing="0">
+                <control:TitleView Title="Add Category">
+                    <control:TitleView.LeadingView>
+                        <!--  Back button command  -->
+                        <buttons:SfButton x:Name="backButton"
+                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewCategoryPage}}"
+                                          CornerRadius="4" Text="{StaticResource Back}"
+                                          CommandParameter="{x:Reference backButton}"
+                                          Style="{StaticResource IconButtonStyle}"/>
+
+                    </control:TitleView.LeadingView>
+                </control:TitleView>
+                <ContentPresenter/>
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="16" Spacing="16">
+
+                <!--  First name entry with border  -->
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry
+                            x:Name="NameEntry"
+                            Placeholder="Name"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+
+                <Grid>
+                    <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="0,16,0,0"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource SfButtonStyle}"
+                            Text="SAVE CATEGORY"
+                            ClassId="AddButton_Clicked"
+                            WidthRequest="200"/>
+
+                    <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,16,0,0"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource SfButtonStyle}"
+                            Text="CALCEL"
+                            Clicked="CancelButton_Clicked"
+                            WidthRequest="200"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

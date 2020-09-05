@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+        x:Class="fmmApp.Views.Forms.AddStepPage"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+        xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+        xmlns:control="clr-namespace:fmmApp.Controls"
+        xmlns:converter="clr-namespace:fmmApp.Converters"
+        xmlns:ViewModel="clr-namespace:fmmApp.ViewModels.Forms"
+        Title="New Step"
+        BackgroundColor="{DynamicResource Gray-White}"
+        NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <ViewModel:AddStepViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="16" Spacing="16">
+
+                <Label Margin="16,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
+                       HorizontalOptions="CenterAndExpand" TextColor="{DynamicResource Gray-900}"
+                       LineHeight="1.25" Text="Add Step" VerticalOptions="Center"
+                       VerticalTextAlignment="Center"/>
+
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference StepDescriptionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry
+                            x:Name="StepDescriptionEntry"
+                            Placeholder="Step Title"
+                            MaxLength="500"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference TaskDescriptionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
+                    <control:BorderlessEntry
+                            x:Name="TaskDescriptionEntry"
+                            Placeholder="Task Description"
+                            MaxLength="500"
+                            Style="{StaticResource EntryTextStyle}"/>
+                </border:SfBorder>
+
+                <Picker x:Name="StatusProgress"
+                        Title="Select Step Status"
+                        FontFamily="{StaticResource Montserrat-Regular}"
+                        FontSize="Medium"
+                        TextColor="{DynamicResource Gray-700}"
+                        SelectedItem="{Binding Status}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Not Started</x:String>
+                            <x:String>In progress</x:String>
+                            <x:String>Completed</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Grid>
+
+                    <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="0,16,0,0"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource SfButtonStyle}"
+                            Text="ADD STEP"
+                            Clicked="AddButton_Clicked"
+                            WidthRequest="200"/>
+
+                    <buttons:SfButton
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,16,0,0"
+                            HorizontalOptions="Center"
+                            Style="{StaticResource SfButtonStyle}"
+                            Text="CANCEL"
+                            Clicked="CancelButton_Clicked"
+                            WidthRequest="200"/>
+
+                </Grid>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

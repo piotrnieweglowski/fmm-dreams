@@ -1,4 +1,5 @@
 ﻿using fmmApp.Validations;
+using fmmApp.Views.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ namespace fmmApp.ViewModels
     {
         public AddSponsorViewModel()
         {
+            this.BackCommand = new Command(this.BackButtonClicked);
             _name = new ValidatableObject<string>();
             AddValidations();
         }
@@ -32,6 +34,8 @@ namespace fmmApp.ViewModels
 
         public ICommand ValidateNameCommand => new Command(() => ValidateName());
 
+        public Command BackCommand { get; set; }
+
         private bool Validate()
         {
             bool isValidName = ValidateName();
@@ -49,6 +53,12 @@ namespace fmmApp.ViewModels
         {
             _name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A name is required." });
 
+        }
+
+        private void BackButtonClicked(object obj)
+        {
+
+            App.Current.MainPage = new SponsorsListPage();
         }
 
     }
