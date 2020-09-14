@@ -39,6 +39,7 @@ namespace fmmApp
         static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
             services.AddTransient<IDataStore<Dreamer>, DreamersDataStore>();
+            services.AddTransient<IDataStore<Sponsor>, SponsorsDataStore>();
             services.AddHttpClient<FmmClient>(x => x.BaseAddress = new Uri(ctx.Configuration.GetValue<string>("ApiEndpoint")));
             services.AddSingleton<JsonSerializer>();
         }
