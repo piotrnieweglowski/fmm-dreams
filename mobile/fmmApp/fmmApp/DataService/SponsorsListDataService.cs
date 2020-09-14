@@ -1,6 +1,11 @@
-﻿using fmmApp.ViewModels.Navigation;
+﻿using fmmApp.Models;
+using fmmApp.Services;
+using fmmApp.ViewModels.Navigation;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 
 namespace fmmApp.DataService
@@ -28,37 +33,24 @@ namespace fmmApp.DataService
         public static SponsorsListDataService Instance => instance ?? (instance = new SponsorsListDataService());
 
         /// <summary>
-        /// Gets or sets the value of icon name list page view model.
-        /// </summary>
-        public SponsorsListViewModel SponsorsListViewModel =>
-            this.sponsorsListViewModel ??
-            (this.sponsorsListViewModel = PopulateData<SponsorsListViewModel>("navigation.json"));
+        /// Gets or sets the value of icon name list page vi
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// Populates the data for view model from json file.
-        /// </summary>
-        /// <typeparam name="T">Type of view model.</typeparam>
-        /// <param name="fileName">Json file to fetch data.</param>
-        /// <returns>Returns the view model object.</returns>
-        private static T PopulateData<T>(string fileName)
+        public async Task<SponsorsListViewModel> PopulateData()
         {
-            var file = "fmmApp.Data." + fileName;
-
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-
-            T obj;
-
-            using (var stream = assembly.GetManifestResourceStream(file))
+            var service = Startup.ServiceProvider.GetService<IDataStore<Sponsor>>();
+            var sponsors = await service.GetItemsAsync();
+            var viewModel = new SponsorsListViewModel();
+            viewModel.SponsorsList = new System.Collections.ObjectModel.ObservableCollection<Models.Navigation.SponsorModel>();
+            foreach (var sponsor in sponsors)
             {
-                var serializer = new DataContractJsonSerializer(typeof(T));
-                obj = (T)serializer.ReadObject(stream);
+                viewModel.SponsorsList.Add(new Models.Navigation.SponsorModel { Name = sponsor.Name });
             }
 
-            return obj;
+            return viewModel;
         }
 
         #endregion

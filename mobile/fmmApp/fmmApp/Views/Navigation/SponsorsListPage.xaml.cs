@@ -5,6 +5,8 @@ using Xamarin.Forms.Xaml;
 using fmmApp.DataService;
 using fmmApp.Views.Forms;
 using fmmApp.Views.SponsorDetail;
+using fmmApp.Services;
+using fmmApp.Models;
 
 namespace fmmApp.Views.Navigation
 {
@@ -15,10 +17,10 @@ namespace fmmApp.Views.Navigation
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SponsorsListPage
     {
+
         public SponsorsListPage()
         {
             InitializeComponent();
-            this.BindingContext = SponsorsListDataService.Instance.SponsorsListViewModel;
         }
         /// <summary>
         /// Invoked when view size is changed.
@@ -36,6 +38,12 @@ namespace fmmApp.Views.Navigation
                     Search.WidthRequest = width;
                 }
             }
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            this.BindingContext = await SponsorsListDataService.Instance.PopulateData();
         }
 
         /// <summary>
