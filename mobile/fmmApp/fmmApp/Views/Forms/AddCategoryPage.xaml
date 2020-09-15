@@ -67,7 +67,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="SAVE CATEGORY"
-                            ClassId="AddButton_Clicked"
+                            Clicked="AddButton_Clicked"
                             WidthRequest="200"/>
 
                     <buttons:SfButton

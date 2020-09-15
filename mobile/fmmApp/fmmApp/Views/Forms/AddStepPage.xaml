@@ -8,6 +8,7 @@
         xmlns:control="clr-namespace:fmmApp.Controls"
         xmlns:converter="clr-namespace:fmmApp.Converters"
         xmlns:ViewModel="clr-namespace:fmmApp.ViewModels.Forms"
+    x:Name="NewStepPage"
         Title="New Step"
         BackgroundColor="{DynamicResource Gray-White}"
         NavigationPage.HasNavigationBar="False">
@@ -24,6 +25,23 @@
         <ViewModel:AddStepViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="titleLayout" Spacing="0">
+                <control:TitleView Title="Add Step">
+                    <control:TitleView.LeadingView>
+                        <!--  Back button command  -->
+                        <buttons:SfButton x:Name="backButton" Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewStepPage}}" 
+                                          CornerRadius="4" Text="{StaticResource Back}"
+                                          CommandParameter="{x:Reference backButton}" Style="{StaticResource IconButtonStyle}"/>
+
+                    </control:TitleView.LeadingView>
+                </control:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="16" Spacing="16">

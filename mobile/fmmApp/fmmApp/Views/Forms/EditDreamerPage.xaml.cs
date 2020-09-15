@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
-using fmmApp.Models.Forms;
+using fmmApp.Models;
 
 namespace fmmApp.Views.Forms
 {

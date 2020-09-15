@@ -55,6 +55,9 @@
     <Compile Update="Views\Forms\AddStepPage.xaml.cs">
       <DependentUpon>AddStepPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Forms\EditDreamPage.xaml.cs">
+      <DependentUpon>EditDreamPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Forms\EditDreamerPage.xaml.cs">
       <DependentUpon>EditDreamerPage.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Forms\AddStepPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Forms\EditDreamPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Master.xaml">

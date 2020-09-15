@@ -121,7 +121,7 @@
                                 HorizontalOptions="Center"
                                 Style="{StaticResource SfButtonStyle}"
                                 Text="SAVE CHANGES"
-                                Clicked="AddButton_Clicked"
+                                Clicked="SaveButton_Clicked"
                                 WidthRequest="175"/>
                     </StackLayout>
                 </StackLayout>

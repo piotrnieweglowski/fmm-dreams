@@ -31,7 +31,7 @@ namespace fmmApp.Views.Forms
             {
                 Name = "sponsor name",
                 EmailAddress = "mail@mail.com",
-                ContactNumber="123456789",
+                PhoneNumber="123456789",
                 AdditionalInfo="Additional Info"                
             };
             viewModel = new EditSponsorViewModel(sponsor);
@@ -43,9 +43,15 @@ namespace fmmApp.Views.Forms
             App.Current.MainPage = new SponsorDetailPage();
         }
 
-        private void AddButton_Clicked(object sender, EventArgs e)
+        private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            App.Current.MainPage = new SponsorDetailPage();
+            var Sponsor = new Sponsor
+            {
+                Name = this.NameEntry.Text,
+                PhoneNumber = this.PhoneNoEntry.Text,
+                EmailAddress = this.EmailAddressEntry.Text,
+                AdditionalInfo = this.AdditionalInfoEntry.Text
+            };
         }
     }
 }

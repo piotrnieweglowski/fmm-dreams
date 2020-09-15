@@ -29,7 +29,7 @@ namespace fmmApp.Models.SponsorDetail
         /// <summary>
         /// Gets or sets the contact number.
         /// </summary>
-        public string ContactNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         #endregion
     }

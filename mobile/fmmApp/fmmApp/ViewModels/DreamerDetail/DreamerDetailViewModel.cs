@@ -1,5 +1,5 @@
 ﻿using Xamarin.Forms;
-using fmmApp.Models.Forms;
+using fmmApp.Models;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.Internals;
 using fmmApp.Views.Forms;
@@ -31,12 +31,11 @@ namespace fmmApp.ViewModels.Detail
                     FirstName = "John",
                     LastName = "Doe",
                     City = "Home",
-                    Address = "114 Ridge St NW, Hudson, NC 28638",
+                    GuardianAddress = "114 Ridge St NW, Hudson, NC 28638",
                     PhoneNumber = "(828) 228-2882",
-                    UrlAddress = "www.onet.pl",
-                    Dream="I have a dream"
-        }
-    };
+                    Url = "www.onet.pl"
+                }
+             };
         }
 
         #endregion

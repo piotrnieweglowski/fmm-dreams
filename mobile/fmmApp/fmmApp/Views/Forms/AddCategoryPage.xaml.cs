@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using fmmApp.Views.Navigation;
+using fmmApp.Models.Navigation;
 
 namespace fmmApp.Views.Forms
 {
@@ -26,7 +27,10 @@ namespace fmmApp.Views.Forms
 
         private void AddButton_Clicked(object sender, EventArgs e)
         {
-
+            var Category = new Category
+            {
+                CategoryName = this.NameEntry.Text
+            };
         }
     }
 }

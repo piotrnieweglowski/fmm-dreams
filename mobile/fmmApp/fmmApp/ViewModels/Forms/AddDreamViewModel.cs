@@ -1,4 +1,5 @@
 ﻿using fmmApp.Models;
+using fmmApp.Models.Detail;
 using fmmApp.Models.Navigation;
 using fmmApp.Views.Forms;
 using Syncfusion.XForms.ProgressBar;
@@ -32,6 +33,7 @@ namespace fmmApp.ViewModels.Forms
             stepList.Add(CreateStepInfo("Ordered and Approved3", StepStatus.Completed, 100, "Task 3 desc"));
 
             CategoryList = GetCategories();
+            VolunteersList = GetVolunteers();
             StepList = stepList;
 
             this.BackCommand = new Command(this.BackButtonClicked);
@@ -42,6 +44,7 @@ namespace fmmApp.ViewModels.Forms
 
         private List<Category> GetCategories()
         {
+            //shoul be feeded from the db
             var category = new Category
             {
                 CategoryName = "Category"
@@ -56,11 +59,26 @@ namespace fmmApp.ViewModels.Forms
             return categoryList;
         }
 
-        
+        private List<Volunteer> GetVolunteers()
+        {
+            //shoul be feeded from the db
+            var volOne = new Volunteer
+            {
+                FullName = "First Volo"
+            };
+            var volTwo = new Volunteer
+            {
+                FullName = "Second Volo"
+            };
+            var volunteerList = new List<Volunteer>();
+            volunteerList.Add(volOne);
+            volunteerList.Add(volTwo);
+            return volunteerList;
+        }
 
         public Step CreateStepInfo(string description, StepStatus status, int progress, string taskDescription)
         {
-     
+
             Step step = new Step()
             {
                 Description = description,
@@ -77,19 +95,10 @@ namespace fmmApp.ViewModels.Forms
 
         #region Properties
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Full Name from user.
-        /// </summary>
         public string DreamTitle { get; set; }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Business Name from user.
-        /// </summary>
         public string Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with a ComboBox that gets the Business from user.
-        /// </summary>
         List<Category> categoryList;
         public List<Category> CategoryList
         {
@@ -118,6 +127,34 @@ namespace fmmApp.ViewModels.Forms
             }
         }
 
+        List<Volunteer> volunteersList;
+        public List<Volunteer> VolunteersList
+        {
+            get { return volunteersList; }
+            set
+            {
+                if (volunteersList != value)
+                {
+                    volunteersList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        Volunteer selectedVolunteer;
+        public Volunteer SelectedVolunteer
+        {
+            get { return selectedVolunteer; }
+            set
+            {
+                if (selectedVolunteer != value)
+                {
+                    selectedVolunteer = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -129,14 +166,7 @@ namespace fmmApp.ViewModels.Forms
             }
         }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Phone Number from user.
-        /// </summary>
         public string Voulunteers { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the City from user.
-        /// </summary>
 
         public ObservableCollection<Step> StepList { get; set; }
 
@@ -166,6 +196,14 @@ namespace fmmApp.ViewModels.Forms
         private void SubmitClicked(Object obj)
         {
 
+            var dream = new Dream()
+            {
+                Title = this.DreamTitle,
+                Category = this.SelectedCategory.CategoryName,
+                Description = this.Description,
+                Volunteer = this.SelectedVolunteer
+                //add this dream to a dreamer
+            };
         }
 
         private void CancelClicked(Object obj)
@@ -180,7 +218,6 @@ namespace fmmApp.ViewModels.Forms
 
         private void BackButtonClicked(object obj)
         {
-
             //App.Current.MainPage = new DreamerListPage();
         }
         #endregion

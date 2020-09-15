@@ -23,6 +23,12 @@ namespace fmmApp.Views.Forms
         private void AddButton_Clicked(object sender, EventArgs e)
         {
 
+            var Step = new Step
+            {
+                Description = this.StepDescriptionEntry.Text,
+                //StepStatus = this.StatusProgress.SelectedItem,
+                TaskDescription = this.TaskDescriptionEntry.Text
+            };
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)

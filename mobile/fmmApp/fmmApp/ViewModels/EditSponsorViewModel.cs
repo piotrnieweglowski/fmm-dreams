@@ -21,7 +21,7 @@ namespace fmmApp.ViewModels
         {
             Name = sponsor.Name;
             EmailAddress = sponsor.EmailAddress;
-            PhoneNumber = sponsor.ContactNumber;
+            PhoneNumber = sponsor.PhoneNumber;
             AdditionalInfo = sponsor.AdditionalInfo;
         }
 

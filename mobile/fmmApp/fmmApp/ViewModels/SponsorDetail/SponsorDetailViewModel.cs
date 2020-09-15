@@ -15,7 +15,7 @@ namespace fmmApp.ViewModels.SponsorDetail
     {
         #region Properties
         public ObservableCollection<Models.SponsorDetail.Sponsor> SponsorDetails { get; set; }
-        public ObservableCollection<Models.Forms.Dreamer> DreamerList { get; set; }
+        public ObservableCollection<Dreamer> DreamerList { get; set; }
         #endregion
 
         #region Constructor
@@ -25,29 +25,34 @@ namespace fmmApp.ViewModels.SponsorDetail
             this.EditCommand = new Command(this.EditButtonClicked);
             this.DeleteCommand = new Command(this.DeleteButtonClicked);
 
+            var dream = new Dream()
+            {
+                Description = "dream"
+            };
+
             this.SponsorDetails = new ObservableCollection<Models.SponsorDetail.Sponsor>()
             {
                 new Models.SponsorDetail.Sponsor
                 {
                     Name = "John Doe",
                     EmailAddress = "Home@mail.com",
-                    ContactNumber = "(828) 228-2882",
+                    PhoneNumber = "(828) 228-2882",
                     AdditionalInfo="add info"
                 },
             };
-            this.DreamerList = new ObservableCollection<Models.Forms.Dreamer>()
+            this.DreamerList = new ObservableCollection<Dreamer>()
              {
-                new Models.Forms.Dreamer
+                new Dreamer
                 {
                     FirstName  = "Jan",
                     LastName = "Kowalski",
-                    Dream="My dream"
+                    Dream=dream
                 },
-                new Models.Forms.Dreamer
+                new Dreamer
                 {
                     FirstName  = "Anna",
                     LastName = "Nowak",
-                    Dream="My dream"
+                    Dream=dream
                 }
             };
         }

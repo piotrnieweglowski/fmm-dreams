@@ -3,6 +3,7 @@ using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using System;
 using fmmApp.Views.Navigation;
+using fmmApp.Models;
 
 namespace fmmApp.Views.Forms
 {
@@ -25,7 +26,13 @@ namespace fmmApp.Views.Forms
 
         private void AddButton_Clicked(object sender, EventArgs e)
         {
-            
+            var Sponsor = new Sponsor
+            {
+                Name = this.NameEntry.Text,
+                PhoneNumber = this.PhoneNoEntry.Text,
+                EmailAddress = this.EmailAddressEntry.Text,
+                AdditionalInfo = this.AdditionalInfoEntry.Text
+            };
         }
     }
 }

@@ -31,7 +31,6 @@ namespace fmmApp.ViewModels.Navigation
         /// </summary>
         public CategoryListViewModel()
         {
-
         }
         #endregion
 

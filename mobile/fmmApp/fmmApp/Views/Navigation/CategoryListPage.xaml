@@ -20,7 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+  
     <ContentPage.Content>
         <Grid >
             <Grid.RowDefinitions>
