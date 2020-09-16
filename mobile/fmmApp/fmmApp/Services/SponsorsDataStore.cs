@@ -1,12 +1,12 @@
-﻿using fmmApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fmmApp.Models;
 
 namespace fmmApp.Services
 {
-    class SponsorsDataStore : IDataStore<Sponsor>
+    public class SponsorsDataStore : IDataStore<Sponsor>
     {
         private readonly FmmClient _client;
         readonly List<Sponsor> _sponsors;
