@@ -47,11 +47,11 @@ namespace fmmApp.ViewModels.Forms
             //shoul be feeded from the db
             var category = new Category
             {
-                CategoryName = "Category"
+                Description = "Category"
             };
             var categoryTwo = new Category
             {
-                CategoryName = "SecondCategory"
+                Description = "SecondCategory"
             };
             var categoryList = new List<Category>();
             categoryList.Add(category);
@@ -199,7 +199,7 @@ namespace fmmApp.ViewModels.Forms
             var dream = new Dream()
             {
                 Title = this.DreamTitle,
-                Category = this.SelectedCategory.CategoryName,
+                Category = this.SelectedCategory.Description,
                 Description = this.Description,
                 Volunteer = this.SelectedVolunteer
                 //add this dream to a dreamer

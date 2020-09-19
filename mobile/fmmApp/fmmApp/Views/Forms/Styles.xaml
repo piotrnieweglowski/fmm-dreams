@@ -22,13 +22,14 @@
     <Color x:Key="LightGreen">#35c659</Color>
     <Color x:Key="FacebookLogin">#3b5998</Color>
     <Color x:Key="Transparent">Transparent</Color>
-
+    
     <x:String x:Key="DropDownButtonIcon">&#xe70b;</x:String>
     <x:String x:Key="AvatarIcon">&#xe723;</x:String>
     <x:String x:Key="FaceBook">&#xe70f;</x:String>
     <x:String x:Key="Google">&#xe74d;</x:String>
     <x:String x:Key="Twitter">&#xe749;</x:String>
     <x:String x:Key="Back">&#xe709;</x:String>
+    <x:String x:Key="Delete">&#xe716;</x:String>
 
     <!--  Common style for content pages  -->
     <Style x:Key="ContentPageStyle" TargetType="ContentPage">

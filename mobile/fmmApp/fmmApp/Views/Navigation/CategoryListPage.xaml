@@ -9,10 +9,6 @@
              BackgroundColor="{DynamicResource Gray-White}"
              NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.BindingContext>
-        <viewModel:CategoryListViewModel/>
-    </ContentPage.BindingContext>
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,7 +16,11 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-  
+
+    <ContentPage.BindingContext>
+        <viewModel:CategoryListViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <Grid >
             <Grid.RowDefinitions>
@@ -51,8 +51,7 @@
                         CornerRadius="4"
                         Style="{StaticResource IconButtonStyle}"
                         Text="{StaticResource Back}" />
-
-                    <!--  Songs page Title  -->
+                    
                     <Label Margin="16,0"
                         HeightRequest="24"
                         FontFamily="{StaticResource Montserrat-Medium}"
@@ -115,7 +114,8 @@
                     IsScrollBarVisible="false"
                     FocusBorderThickness="0"
                     ItemSpacing="0"
-                    ItemsSource="{Binding CategoryPageList }"
+                    ItemsSource="{Binding CategoryList }"
+                    ItemTapped="CategoryPageList_ItemTapped"
                     SearchText="{Binding SearchText}"
                     SelectionBackgroundColor="Transparent"
                     RowSpacing="0"
@@ -135,24 +135,24 @@
 
                                         <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" 
                                                      VerticalOptions="FillAndExpand" Spacing="0" >
-                                            <!--  Name of the Song  -->
-                                            <Label Margin="16,13,0,0"
+                                            <Label x:Name="CategoryDescription"
+                                                Margin="16,13,0,0"
                                                 HeightRequest="24"
                                                 FontFamily="{StaticResource Montserrat-Medium}"
                                                 FontSize="16"
                                                 LineHeight="{OnPlatform Android=1.5,
                                                                        Default=-1}"
-                                                Text="{Binding CategoryName}"
+                                                Text="{Binding Description}"
                                                 TextColor="{DynamicResource Gray-900}" />
                                         </StackLayout>
 
-                                        <!-- Menu button -->
-                                        <buttons:SfButton x:Name="MenuButton"
-                                                          Margin="16,0"
-                                                          Grid.Column="1"
-                                                          Style="{StaticResource MoreButton}"
-                                                          Text="{StaticResource More}" 
-                                                          Clicked="MoreButton_Clicked"/>
+                                        <!--  Delete button command  -->
+                                        <buttons:SfButton  x:Name="DeleteButton" CornerRadius="4" Grid.Column="3" HorizontalOptions="EndAndExpand"
+                                                   VerticalOptions="StartAndExpand" Style="{StaticResource IconButtonStyle}"
+                                                   Text="{StaticResource Delete}"
+                                                           AutomationId="{Binding Cstegory.Id}"
+                                                    Clicked="DeleteButton_Clicked"/>
+                                        
                                     </Grid>
                                     <!-- Seperator -->
                                     <BoxView Style="{StaticResource BoxViewStyle}" />

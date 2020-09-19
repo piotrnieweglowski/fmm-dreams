@@ -4,6 +4,8 @@ using Xamarin.Forms.Xaml;
 using System;
 using fmmApp.Views.Navigation;
 using fmmApp.Models;
+using fmmApp.DataService;
+using System.Threading.Tasks;
 
 namespace fmmApp.Views.Forms
 {
@@ -24,15 +26,30 @@ namespace fmmApp.Views.Forms
             App.Current.MainPage = new SponsorsListPage();
         }
 
-        private void AddButton_Clicked(object sender, EventArgs e)
+
+        public void AddButton_Clicked(object sender, EventArgs e)
         {
-            var Sponsor = new Sponsor
+            var sponsor = new Sponsor
             {
                 Name = this.NameEntry.Text,
                 PhoneNumber = this.PhoneNoEntry.Text,
                 EmailAddress = this.EmailAddressEntry.Text,
                 AdditionalInfo = this.AdditionalInfoEntry.Text
             };
+            //return await SponsorsListDataService.Instance.SaveNewSponsor(sponsor);
+        } 
+
+        /* private async Task<bool> AddButton_Clicked(object sender, EventArgs e)
+        {
+            var sponsor = new Sponsor
+            {
+                Name = this.NameEntry.Text,
+                PhoneNumber = this.PhoneNoEntry.Text,
+                EmailAddress = this.EmailAddressEntry.Text,
+                AdditionalInfo = this.AdditionalInfoEntry.Text
+            };
+            return await SponsorsListDataService.Instance.SaveNewSponsor(sponsor);
         }
+        */
     }
 }

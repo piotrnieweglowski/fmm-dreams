@@ -6,6 +6,7 @@ using fmmApp.Views.Navigation;
 using fmmApp.Models;
 using fmmApp.DataService;
 using System.Threading.Tasks;
+using fmmApp.ViewModels.Forms;
 
 namespace fmmApp.Views.Forms
 {
@@ -14,11 +15,20 @@ namespace fmmApp.Views.Forms
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddCategoryPage : ContentPage
+    public partial class EditCategoryPage : ContentPage
     {
-        public AddCategoryPage()
+        Category _selectedCategory;
+        public EditCategoryPage()
         {
             InitializeComponent();
+        }
+
+        public EditCategoryPage(Category category)
+        {
+            InitializeComponent();
+            _selectedCategory = category;
+            var viewModel = new EditCategoryViewModel(category);
+            this.BindingContext = viewModel;
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)
@@ -26,13 +36,9 @@ namespace fmmApp.Views.Forms
             App.Current.MainPage = new CategoryListPage();
         }
         
-        public async void AddButton_Clicked(object sender, EventArgs e)
+        public async void SaveButton_Clicked(object sender, EventArgs e)
         {
-            var category = new Category
-            {
-                Description = this.NameEntry.Text
-            };
-            await CategoryListDataService.Instance.SaveNewCategory(category);
+            await CategoryListDataService.Instance.UpdateCategory(_selectedCategory);
             App.Current.MainPage = new CategoryListPage();
         }
       

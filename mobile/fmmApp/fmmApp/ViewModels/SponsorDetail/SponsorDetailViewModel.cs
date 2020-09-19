@@ -30,15 +30,58 @@ namespace fmmApp.ViewModels.SponsorDetail
                 Description = "dream"
             };
 
+            /*
             this.SponsorDetails = new ObservableCollection<Models.SponsorDetail.Sponsor>()
             {
-                new Models.SponsorDetail.Sponsor
+                sponsor
+                /*new Models.SponsorDetail.Sponsor
                 {
                     Name = "John Doe",
                     EmailAddress = "Home@mail.com",
                     PhoneNumber = "(828) 228-2882",
                     AdditionalInfo="add info"
                 },
+                
+            };
+        */
+            this.DreamerList = new ObservableCollection<Dreamer>()
+             {
+                new Dreamer
+                {
+                    FirstName  = "Jan",
+                    LastName = "Kowalski",
+                    Dream=dream
+                },
+                new Dreamer
+                {
+                    FirstName  = "Anna",
+                    LastName = "Nowak",
+                    Dream=dream
+                }
+            };
+        }
+        public SponsorDetailViewModel(Models.SponsorDetail.Sponsor sponsor)
+        {
+            this.BackCommand = new Command(this.BackButtonClicked);
+            this.EditCommand = new Command(this.EditButtonClicked);
+            this.DeleteCommand = new Command(this.DeleteButtonClicked);
+
+            var dream = new Dream()
+            {
+                Description = "dream"
+            };
+
+            this.SponsorDetails = new ObservableCollection<Models.SponsorDetail.Sponsor>()
+            {
+                sponsor
+                /*new Models.SponsorDetail.Sponsor
+                {
+                    Name = "John Doe",
+                    EmailAddress = "Home@mail.com",
+                    PhoneNumber = "(828) 228-2882",
+                    AdditionalInfo="add info"
+                },
+                */
             };
             this.DreamerList = new ObservableCollection<Dreamer>()
              {

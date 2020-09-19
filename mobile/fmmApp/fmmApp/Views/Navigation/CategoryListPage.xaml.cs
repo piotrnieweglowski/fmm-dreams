@@ -1,5 +1,7 @@
 ﻿using fmmApp.DataService;
+using fmmApp.Models;
 using fmmApp.Views.Forms;
+using Syncfusion.XForms.Buttons;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -20,7 +22,6 @@ namespace fmmApp.Views.Navigation
         public CategoryListPage()
         {
             InitializeComponent();
-            this.BindingContext = CategoryListDataService.Instance.CategoryListViewModel;
         }
 
         /// <summary>
@@ -41,6 +42,12 @@ namespace fmmApp.Views.Navigation
             }
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            this.BindingContext = await CategoryListDataService.Instance.PopulateData();
+        }
+
         /// <summary>
         /// Invoked when search button is clicked.
         /// </summary>
@@ -51,6 +58,7 @@ namespace fmmApp.Views.Navigation
             this.Search.IsVisible = true;
             this.Title.IsVisible = false;
             this.SearchButton.IsVisible = false;
+            var searchName = this.SearchEntry.Text;
 
             if (this.TitleView != null)
             {
@@ -111,9 +119,14 @@ namespace fmmApp.Views.Navigation
             this.SearchEntry.Focus();
         }
 
-        private void MoreButton_Clicked(object sender, EventArgs e)
+        public async void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Alert","Message","Cancel");
+            //check if user is sure to delete element
+            var btn = sender as SfButton;
+            var categorToDelete = btn.BindingContext as Category;
+            await CategoryListDataService.Instance.DeleteCategory(categorToDelete);
+            App.Current.MainPage = new CategoryListPage();
+
         }
 
         private void AddButton_Clicked(object sender, EventArgs e)
@@ -121,5 +134,10 @@ namespace fmmApp.Views.Navigation
             App.Current.MainPage = new AddCategoryPage();
         }
 
+        private void CategoryPageList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        {
+            var category = e.ItemData as Category;
+            App.Current.MainPage = new EditCategoryPage(category);
+        }
     }
 }

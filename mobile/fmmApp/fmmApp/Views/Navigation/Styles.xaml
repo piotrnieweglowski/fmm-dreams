@@ -37,6 +37,7 @@
     <x:String x:Key="MoreIcon">&#xe715;</x:String>
     <x:String x:Key="Category">&#xe733;</x:String>
     <x:String x:Key="FileExplorer">&#xe74a;</x:String>
+    <x:String x:Key="Delete">&#xe716;</x:String>
 
     <!-- Common style for rating labels -->
     <Style x:Key="RatingLabelStyle" TargetType="Label">
