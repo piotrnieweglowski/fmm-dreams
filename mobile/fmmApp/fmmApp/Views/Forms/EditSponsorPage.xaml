@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="fmmApp.Views.Forms.EditSponsorPage"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
-    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-    xmlns:control="clr-namespace:fmmApp.Controls"
-    xmlns:behaviours="clr-namespace:fmmApp.Behaviors"
-    xmlns:converter="clr-namespace:fmmApp.Converters"
-    xmlns:viewModel="clr-namespace:fmmApp.ViewModels"
-    Title="Edit Sposnor"
-    BackgroundColor="{DynamicResource Gray-White}"
-    NavigationPage.HasNavigationBar="False">
+        x:Class="fmmApp.Views.Forms.EditSponsorPage"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+        xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+        xmlns:control="clr-namespace:fmmApp.Controls"
+        xmlns:behaviours="clr-namespace:fmmApp.Behaviors"
+        xmlns:converter="clr-namespace:fmmApp.Converters"
+        xmlns:viewModel="clr-namespace:fmmApp.ViewModels"
+        x:Name="EditSpondor"
+        Title="Edit Sposnor"
+        BackgroundColor="{DynamicResource Gray-White}"
+        NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <converter:BooleanToColorConverter x:Key="ColorConverter"/>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml" />
+                <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -25,46 +26,66 @@
         <viewModel:EditSponsorViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="titleLayout" Spacing="0">
+                <control:TitleView Title="Edit Sponsor">
+                    <control:TitleView.LeadingView>
+                        <!--  Back button command  -->
+                        <buttons:SfButton x:Name="backButton"
+                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference EditSpondor}}"
+                                          CornerRadius="4" Text="{StaticResource Back}"
+                                          CommandParameter="{x:Reference backButton}"
+                                          Style="{StaticResource IconButtonStyle}"/>
+
+                    </control:TitleView.LeadingView>
+                </control:TitleView>
+                <ContentPresenter/>
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="16" Spacing="16">
 
-                <Label  Margin="16,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
-                            HorizontalOptions="CenterAndExpand" TextColor="{DynamicResource Gray-900}"
-                            LineHeight="1.25"  Text="Edit Sponsor"  VerticalOptions="Center" VerticalTextAlignment="Center" />
-                
                 <!--  First name entry with border  -->
-                <border:SfBorder BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" Style="{StaticResource FormBorderStyle}">
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
-                        x:Name="NameEntry"
-                        Placeholder="Name"
-                        Text="{Binding Name}"
-                        Style="{StaticResource EntryTextStyle}" />
+                            x:Name="NameEntry"
+                            Placeholder="Name"
+                            MaxLength="100"
+                            Text="{Binding Name}"
+                            Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
                 <!--  Last name entry with border  -->
                 <border:SfBorder
-                    Grid.Column="2"
-                    BorderColor="{Binding Source={x:Reference EmailAddressEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                    Style="{StaticResource FormBorderStyle}">
+                        Grid.Column="2"
+                        BorderColor="{Binding Source={x:Reference EmailAddressEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
-                        x:Name="EmailAddressEntry"
-                        Placeholder="Email Address"
-                        Text="{Binding EmailAddress}"
-                        Style="{StaticResource EntryTextStyle}" />
+                            x:Name="EmailAddressEntry"
+                            Placeholder="Email Address"
+                            Keyboard="Email"
+                            Text="{Binding EmailAddress}"
+                            Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
                 <!--  Phone number entry with border  -->
                 <border:SfBorder
-                    Grid.Column="2"
-                    BorderColor="{Binding Source={x:Reference PhoneNoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                    Style="{StaticResource FormBorderStyle}">
+                        Grid.Column="2"
+                        BorderColor="{Binding Source={x:Reference PhoneNoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
-                        x:Name="PhoneNoEntry"
-                        Keyboard="Telephone" 
-                        Placeholder="Phone Number : e.g. XXX-XXX-XXX"
-                        Text="{Binding PhoneNumber}"
-                        Style="{StaticResource EntryTextStyle}" >
+                            x:Name="PhoneNoEntry"
+                            Keyboard="Telephone"
+                            Placeholder="Phone Number : e.g. XXX-XXX-XXX"
+                            Text="{Binding PhoneNumber}"
+                            Style="{StaticResource EntryTextStyle}">
                         <control:BorderlessEntry.Behaviors>
                             <behaviours:EntryMaskedBehavior Mask="(+48)XXX-XXX-XXX" Prefix="(+48)"/>
                         </control:BorderlessEntry.Behaviors>
@@ -72,37 +93,39 @@
                 </border:SfBorder>
 
                 <border:SfBorder
-                    Grid.Column="2"
-                    BorderColor="{Binding Source={x:Reference AdditionalInfoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                    Style="{StaticResource FormBorderStyle}">
+                        Grid.Column="2"
+                        BorderColor="{Binding Source={x:Reference AdditionalInfoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
-                        x:Name="AdditionalInfoEntry"
-                        Placeholder="Additional Info"
-                        Text="{Binding AdditionalInfo}"
-                        Style="{StaticResource EntryTextStyle}" />
+                            x:Name="AdditionalInfoEntry"
+                            Placeholder="Additional Info"
+                            MaxLength='500'
+                            Text="{Binding AdditionalInfo}"
+                            Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
-                <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
-                    <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                         <buttons:SfButton
-                    Margin="0,16,0,0"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource SfButtonStyle}"
-                    Text="CANCEL"
-                    Clicked="CancelButton_Clicked"
-                    WidthRequest="175" />
+                                Margin="0,16,0,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource SfButtonStyle}"
+                                Text="CANCEL"
+                                Clicked="CancelButton_Clicked"
+                                WidthRequest="175"/>
                     </StackLayout>
-                    <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
                         <buttons:SfButton
-                    Margin="0,16,0,0"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource SfButtonStyle}"
-                    Text="SAVE CHANGES"
-                    Clicked="AddButton_Clicked"
-                    WidthRequest="175" />
+                                Margin="0,16,0,0"
+                                HorizontalOptions="Center"
+                                Style="{StaticResource SfButtonStyle}"
+                                Text="SAVE CHANGES"
+                                Clicked="SaveButton_Clicked"
+                                WidthRequest="175"/>
                     </StackLayout>
                 </StackLayout>
-                
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

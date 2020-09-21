@@ -118,7 +118,7 @@ namespace fmmApp.Views.Navigation
 
         private void NextButton_Clicked(object sender, EventArgs e)
         {
-            //should be use command instead of cliked property (in xaml)
+            
             App.Current.MainPage = new SponsorDetailPage();
         }
 

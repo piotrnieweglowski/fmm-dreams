@@ -10,5 +10,6 @@ namespace fmmApp.Models
         public string Description { get; set; }
         public StepStatus Status { get; set; }
         public int ProgressValue { get; set; }
+        public string TaskDescription { get; set; }
     }
 }

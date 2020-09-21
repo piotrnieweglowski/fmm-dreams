@@ -1,5 +1,7 @@
 ﻿using fmmApp.Models;
+using fmmApp.Models.Detail;
 using fmmApp.Models.Navigation;
+using fmmApp.Views.Forms;
 using Syncfusion.XForms.ProgressBar;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,6 @@ namespace fmmApp.ViewModels.Forms
     public class AddDreamViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
-
         #region Constructor
 
         /// <summary>
@@ -26,29 +27,78 @@ namespace fmmApp.ViewModels.Forms
         /// </summary>
         public AddDreamViewModel()
         {
+            var stepList = new ObservableCollection<Step>();
+            stepList.Add(CreateStepInfo("Ordered and Approved1", StepStatus.NotStarted, 0, "Task 1 desc"));
+            stepList.Add(CreateStepInfo("Ordered and Approved2", StepStatus.InProgress, 50, "Task 2 desc"));
+            stepList.Add(CreateStepInfo("Ordered and Approved3", StepStatus.Completed, 100, "Task 3 desc"));
+
+            CategoryList = GetCategories();
+            VolunteersList = GetVolunteers();
+            StepList = stepList;
+
+            this.BackCommand = new Command(this.BackButtonClicked);
             this.SubmitCommand = new Command(this.SubmitClicked);
             this.CancelCommand = new Command(this.CancelClicked);
+            this.AddStepCommand = new Command(this.AddStepClicked);
         }
 
-        
+        private List<Category> GetCategories()
+        {
+            //shoul be feeded from the db
+            var category = new Category
+            {
+                Description = "Category"
+            };
+            var categoryTwo = new Category
+            {
+                Description = "SecondCategory"
+            };
+            var categoryList = new List<Category>();
+            categoryList.Add(category);
+            categoryList.Add(categoryTwo);
+            return categoryList;
+        }
+
+        private List<Volunteer> GetVolunteers()
+        {
+            //shoul be feeded from the db
+            var volOne = new Volunteer
+            {
+                FullName = "First Volo"
+            };
+            var volTwo = new Volunteer
+            {
+                FullName = "Second Volo"
+            };
+            var volunteerList = new List<Volunteer>();
+            volunteerList.Add(volOne);
+            volunteerList.Add(volTwo);
+            return volunteerList;
+        }
+
+        public Step CreateStepInfo(string description, StepStatus status, int progress, string taskDescription)
+        {
+
+            Step step = new Step()
+            {
+                Description = description,
+                Status = status,
+                ProgressValue = progress,
+                TaskDescription = taskDescription
+            };
+
+            return step;
+        }
+
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Full Name from user.
-        /// </summary>
         public string DreamTitle { get; set; }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Business Name from user.
-        /// </summary>
         public string Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with a ComboBox that gets the Business from user.
-        /// </summary>
         List<Category> categoryList;
         public List<Category> CategoryList
         {
@@ -77,6 +127,34 @@ namespace fmmApp.ViewModels.Forms
             }
         }
 
+        List<Volunteer> volunteersList;
+        public List<Volunteer> VolunteersList
+        {
+            get { return volunteersList; }
+            set
+            {
+                if (volunteersList != value)
+                {
+                    volunteersList = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        Volunteer selectedVolunteer;
+        public Volunteer SelectedVolunteer
+        {
+            get { return selectedVolunteer; }
+            set
+            {
+                if (selectedVolunteer != value)
+                {
+                    selectedVolunteer = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -88,14 +166,7 @@ namespace fmmApp.ViewModels.Forms
             }
         }
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Phone Number from user.
-        /// </summary>
         public string Voulunteers { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the City from user.
-        /// </summary>
 
         public ObservableCollection<Step> StepList { get; set; }
 
@@ -110,6 +181,10 @@ namespace fmmApp.ViewModels.Forms
 
         public Command CancelCommand { get; set; }
 
+        public Command AddStepCommand { get; set; }
+
+        public Command BackCommand { get; set; }
+
         #endregion
 
         #region Methods
@@ -121,11 +196,29 @@ namespace fmmApp.ViewModels.Forms
         private void SubmitClicked(Object obj)
         {
 
+            var dream = new Dream()
+            {
+                Title = this.DreamTitle,
+                Category = this.SelectedCategory.Description,
+                Description = this.Description,
+                Volunteer = this.SelectedVolunteer
+                //add this dream to a dreamer
+            };
         }
 
         private void CancelClicked(Object obj)
         {
             //App.Current.MainPage = new DreamListPage();
+        }
+
+        private void AddStepClicked(Object obj)
+        {
+            App.Current.MainPage = new AddStepPage();
+        }
+
+        private void BackButtonClicked(object obj)
+        {
+            //App.Current.MainPage = new DreamerListPage();
         }
         #endregion
     }

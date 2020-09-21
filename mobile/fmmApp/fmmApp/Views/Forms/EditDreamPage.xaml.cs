@@ -1,10 +1,4 @@
-﻿using fmmApp.Models;
-using fmmApp.Models.Navigation;
-using fmmApp.ViewModels.Forms;
-using Syncfusion.XForms.ProgressBar;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
@@ -15,16 +9,14 @@ namespace fmmApp.Views.Forms
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddDreamPage : ContentPage
+    public partial class EditDreamPage : ContentPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddDreamPage" /> class.
+        /// Initializes a new instance of the <see cref="EditDreamPage" /> class.
         /// </summary>
-        public AddDreamPage()
+        public EditDreamPage()
         {
             InitializeComponent();
-            
         }
-        
     }
 }

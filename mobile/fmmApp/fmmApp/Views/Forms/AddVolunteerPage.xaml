@@ -3,14 +3,13 @@
         x:Class="fmmApp.Views.Forms.AddVolunteerPage"
         xmlns="http://xamarin.com/schemas/2014/forms"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       
         xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
         xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-        xmlns:control="clr-namespace:fmmApp.Controls"
+        xmlns:controls="clr-namespace:fmmApp.Controls"
         xmlns:behaviours="clr-namespace:fmmApp.Behaviors"
         xmlns:converter="clr-namespace:fmmApp.Converters"
-        
-    xmlns:ViewModel="clr-namespace:fmmApp.ViewModels"
+        xmlns:ViewModel="clr-namespace:fmmApp.ViewModels"
+        x:Name="NewVolunteerPage"
         Title="New Volunteer"
         BackgroundColor="{DynamicResource Gray-White}"
         NavigationPage.HasNavigationBar="False">
@@ -22,27 +21,42 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.BindingContext>
         <ViewModel:AddVolunteerViewModel/>
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout x:Name="titleLayout" Spacing="0">
+                <controls:TitleView Title="Add Volunteer">
+                    <controls:TitleView.LeadingView>
+                        <!--  Back button command  -->
+                        <buttons:SfButton x:Name="backButton"
+                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewVolunteerPage}}"
+                                          CornerRadius="4" Text="{StaticResource Back}"
+                                          CommandParameter="{x:Reference backButton}"
+                                          Style="{StaticResource IconButtonStyle}"/>
+
+                    </controls:TitleView.LeadingView>
+                </controls:TitleView>
+                <ContentPresenter/>
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="16" Spacing="16">
-                
-                <Label Margin="16,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
-                       HorizontalOptions="CenterAndExpand" TextColor="{DynamicResource Gray-900}"
-                       LineHeight="1.25" Text="Add New Volunteer" VerticalOptions="Center"
-                       VerticalTextAlignment="Center"/>
-                
+
                 <!--  First name entry with border  -->
                 <border:SfBorder
                         BorderColor="{Binding Source={x:Reference FirstNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                         Style="{StaticResource FormBorderStyle}">
-                    <control:BorderlessEntry
+                    <controls:BorderlessEntry
                             x:Name="FirstNameEntry"
                             Placeholder="First Name"
+                            MaxLength="100"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -51,9 +65,10 @@
                         Grid.Column="2"
                         BorderColor="{Binding Source={x:Reference LastNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                         Style="{StaticResource FormBorderStyle}">
-                    <control:BorderlessEntry
+                    <controls:BorderlessEntry
                             x:Name="LastNameEntry"
                             Placeholder="Last Name"
+                            MaxLength="100"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -62,9 +77,10 @@
                         Grid.Column="2"
                         BorderColor="{Binding Source={x:Reference EmailEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                         Style="{StaticResource FormBorderStyle}">
-                    <control:BorderlessEntry
+                    <controls:BorderlessEntry
                             x:Name="EmailEntry"
                             Placeholder="Email"
+                            Keyboard="Email"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -73,15 +89,15 @@
                         Grid.Column="2"
                         BorderColor="{Binding Source={x:Reference PhoneNoEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                         Style="{StaticResource FormBorderStyle}">
-                    <control:BorderlessEntry
+                    <controls:BorderlessEntry
                             x:Name="PhoneNoEntry"
                             Keyboard="Telephone"
-                            Placeholder="Phone Number : e.g. XXXX-XXXXXX"
+                            Placeholder="Phone Number : e.g. XXX-XXX-XXX"
                             Style="{StaticResource EntryTextStyle}">
-                        <control:BorderlessEntry.Behaviors>
-                            <behaviours:EntryMaskedBehavior Mask="(+91)XXXXX-XXXXX" Prefix="(+91)"/>
-                        </control:BorderlessEntry.Behaviors>
-                    </control:BorderlessEntry>
+                        <controls:BorderlessEntry.Behaviors>
+                            <behaviours:EntryMaskedBehavior Mask="(+48)XXX-XXX-XXX" Prefix="(+48)"/>
+                        </controls:BorderlessEntry.Behaviors>
+                    </controls:BorderlessEntry>
                 </border:SfBorder>
 
                 <Picker x:Name="DepartmentPicker"

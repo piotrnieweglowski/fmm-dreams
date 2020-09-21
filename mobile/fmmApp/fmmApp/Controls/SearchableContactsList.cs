@@ -16,9 +16,9 @@ namespace fmmApp.Controls
         /// </summary>
         /// <param name="obj">The list view item</param>
         /// <returns>Returns the filtered item</returns>
-        public override bool FilterContacts(object obj)
+        public override bool Filter(object obj)
         {
-            if (base.FilterContacts(obj))
+            if (base.Filter(obj))
             {
                 var taskInfo = obj as Sponsor;
                 if (taskInfo == null || string.IsNullOrEmpty(taskInfo.Name))

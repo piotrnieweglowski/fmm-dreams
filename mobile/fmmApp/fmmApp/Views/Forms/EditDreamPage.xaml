@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-        x:Class="fmmApp.Views.Forms.AddDreamPage"
-        xmlns="http://xamarin.com/schemas/2014/forms"
-        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-        xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
-        xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-        xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
-        xmlns:controls="clr-namespace:fmmApp.Controls"
-        xmlns:converter="clr-namespace:fmmApp.Converters"
-        xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Forms"
-        Title="Add Dream Form"
-        x:Name="NewDreamPage"
-        BackgroundColor="{DynamicResource Gray-100}"
-        NavigationPage.HasNavigationBar="False">
+    x:Class="fmmApp.Views.Forms.EditDreamPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:controls="clr-namespace:fmmApp.Controls"
+    xmlns:converter="clr-namespace:fmmApp.Converters"
+    xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Forms"
+    xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+    x:Name="EditDream"
+    Title="Edit Dream Page"
+    BackgroundColor="{DynamicResource Gray-100}"
+    NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
-        <viewModel:AddDreamViewModel/>
+        <viewModel:EditDreamViewModel />
     </ContentPage.BindingContext>
-
+    
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:BooleanToColorConverter x:Key="ColorConverter"/>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml"/>
+                <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -30,18 +30,16 @@
     <ContentPage.ControlTemplate>
         <ControlTemplate>
             <StackLayout x:Name="titleLayout" Spacing="0">
-                <controls:TitleView Title="Add Dream">
+                <controls:TitleView Title="Edit Dream">
                     <controls:TitleView.LeadingView>
                         <!--  Back button command  -->
-                        <buttons:SfButton x:Name="backButton"
-                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewDreamPage}}"
+                        <buttons:SfButton x:Name="backButton" Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference EditDream}}" 
                                           CornerRadius="4" Text="{StaticResource Back}"
-                                          CommandParameter="{x:Reference backButton}"
-                                          Style="{StaticResource IconButtonStyle}"/>
+                                          CommandParameter="{x:Reference backButton}" Style="{StaticResource IconButtonStyle}"/>
 
                     </controls:TitleView.LeadingView>
                 </controls:TitleView>
-                <ContentPresenter/>
+                <ContentPresenter />
             </StackLayout>
         </ControlTemplate>
     </ContentPage.ControlTemplate>
@@ -50,54 +48,92 @@
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource Gray-100}" Spacing="0" Padding="16,24">
 
+                <Grid>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontFamily="{StaticResource Montserrat-Medium}"
+                        Margin="0,0,0,10"
+                        HeightRequest="18" 
+                        FontSize="Small"
+                        Text="Is Urgent"
+                        TextColor="{DynamicResource Gray-800}" />
+                    
+                    <Switch 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        IsToggled="false" 
+                        Margin="0,0,0,10"
+                        OnColor="Red"
+                        ThumbColor="Gray"
+                        BindingContext="{Binding IsUrgent}"/>
+                </Grid>
+
+                <Grid>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontFamily="{StaticResource Montserrat-Medium}"
+                        Margin="0,0,0,10"
+                        HeightRequest="18" 
+                        FontSize="Small"
+                        Text="Can be done"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <Switch 
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        IsToggled="false" 
+                        OnColor="Green"
+                        Margin="0,0,0,10"
+                        ThumbColor="Gray"
+                        BindingContext="{Binding CanBeDone}"/>
+                </Grid>
+
                 <Label
                         FontFamily="{StaticResource Montserrat-Medium}"
                         Margin="0,0,0,4"
-                        HeightRequest="18"
-                        FontSize="12"
+                        HeightRequest="18" 
+                        FontSize="Small"
                         Text="Dream Title"
-                        TextColor="{DynamicResource Gray-800}"/>
+                        TextColor="{DynamicResource Gray-800}" />
 
-                <border:SfBorder
-                        BorderColor="{Binding Source={x:Reference DreamTitleEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource BusinessFormBorderStyle}">
+                <border:SfBorder BorderColor="{Binding Source={x:Reference DreamTitleEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}" 
+                                 Style="{StaticResource BusinessFormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="DreamTitleEntry"
                             Text="{Binding DreamTitle}"
-                            MaxLength="100"
-                            Style="{StaticResource EntryTextBoxStyle}"/>
+                            Style="{StaticResource EntryTextBoxStyle}" />
                 </border:SfBorder>
 
                 <Label
                         FontFamily="{StaticResource Montserrat-Medium}"
                         Margin="0,24,0,4"
-                        HeightRequest="18"
-                        FontSize="12"
+                        HeightRequest="18" 
+                        FontSize="Small"
                         Text="Description"
-                        TextColor="{DynamicResource Gray-800}"/>
+                        TextColor="{DynamicResource Gray-800}" />
 
-                <border:SfBorder
-                        BorderColor="{Binding Source={x:Reference DescriptionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource BusinessFormBorderStyle}">
+                <border:SfBorder BorderColor="{Binding Source={x:Reference DescriptionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                 Style="{StaticResource BusinessFormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="DescriptionEntry"
                             Text="{Binding Description}"
-                            MaxLength="500"
-                            Style="{StaticResource EntryTextBoxStyle}"/>
+                            Style="{StaticResource EntryTextBoxStyle}" />
                 </border:SfBorder>
 
                 <Label
                         FontFamily="{StaticResource Montserrat-Medium}"
                         Margin="0,24,0,4"
                         HeightRequest="18"
-                        FontSize="12"
+                        FontSize="Small"
                         Text="Category"
                         TextColor="{DynamicResource Gray-800}"/>
 
                 <Picker x:Name="CategoryPicker"
                         Title="Select Category"
                         FontFamily="{StaticResource Montserrat-Regular}"
-                        FontSize="16"
+                        FontSize="Medium"
                         TextColor="{DynamicResource Gray-700}"
                         ItemsSource="{Binding CategoryList}"
                         ItemDisplayBinding="{Binding CategoryName}"
@@ -107,35 +143,36 @@
                         FontFamily="{StaticResource Montserrat-Medium}"
                         Margin="0,24,0,4"
                         HeightRequest="18"
-                        FontSize="12"
+                        FontSize="Small"
                         Text="Volunteers"
                         TextColor="{DynamicResource Gray-800}"/>
 
-                <Picker x:Name="VolunteerPicker"
-                        Title="Select Volunteer"
-                        FontFamily="{StaticResource Montserrat-Regular}"
-                        FontSize="16"
-                        TextColor="{DynamicResource Gray-700}"
-                        ItemsSource="{Binding VolunteersList}"
-                        ItemDisplayBinding="{Binding FullName}"
-                        SelectedItem="{Binding SelectedVolunteer}"/>
+
+                <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference VolunteersEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource BusinessFormBorderStyle}">
+                    <controls:BorderlessEntry
+                            x:Name="VolunteersEntry"
+                            Text="{Binding Volunteers}"
+                            Style="{StaticResource EntryTextBoxStyle}"/>
+                </border:SfBorder>
 
                 <Label
                         FontFamily="{StaticResource Montserrat-Medium}"
                         Margin="0,24,0,15"
                         HeightRequest="18"
-                        FontSize="12"
+                        FontSize="Small"
                         Text="Steps"
                         TextColor="{DynamicResource Gray-800}"/>
 
                 <progressBar:SfStepProgressBar BindableLayout.ItemsSource="{Binding StepList}"
-                                               TitleAlignment="Start" BackgroundColor="Transparent" TitleSpace="10"
-                                               Orientation="Vertical" x:Name="progress"
-                >
+                                                   TitleAlignment="Start" BackgroundColor="Transparent" TitleSpace="10"
+                                                   Orientation="Vertical" x:Name="progress"
+                                                                               >
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <progressBar:StepView x:Name="ViewStep" ProgressValue="{Binding ProgressValue}"
-                                                  Status="{Binding Status}">
+                                                      Status="{Binding Status}">
                                 <progressBar:StepView.PrimaryFormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Description}" FontSize="Medium"/>
@@ -151,7 +188,7 @@
                 <Grid>
 
                     <buttons:SfButton
-                            Grid.Row="0"
+                                                    Grid.Row="0"
                             Grid.Column="0"
                             Command="{Binding AddStepCommand}"
                             HorizontalOptions="Start"
@@ -187,6 +224,7 @@
                             WidthRequest="200"/>
 
                 </Grid>
+                
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

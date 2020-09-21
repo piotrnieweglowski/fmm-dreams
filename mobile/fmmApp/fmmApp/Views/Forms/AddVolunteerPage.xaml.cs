@@ -1,4 +1,5 @@
 ﻿using fmmApp.Models;
+using fmmApp.Models.Detail;
 using fmmApp.ViewModels;
 using fmmApp.Views.Navigation;
 using System;
@@ -48,7 +49,13 @@ namespace fmmApp.Views.Forms
 
         private void AddButton_Clicked(object sender, EventArgs e)
         {
-
+            var Volunteer = new Volunteer
+            {
+                FullName = this.FirstNameEntry.Text + " " + this.LastNameEntry.Text,
+                Department = this.DepartmentPicker.SelectedItem.ToString(),
+                Phone = this.PhoneNoEntry.Text,
+                Email = this.EmailEntry.Text
+            };
         }
     }
 }

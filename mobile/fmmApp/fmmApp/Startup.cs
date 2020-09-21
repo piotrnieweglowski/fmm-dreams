@@ -40,6 +40,7 @@ namespace fmmApp
         {
             services.AddTransient<IDataStore<Dreamer>, DreamersDataStore>();
             services.AddTransient<IDataStore<Sponsor>, SponsorsDataStore>();
+            services.AddTransient<IDataStore<Category>, CategoriesDataStore>();
             services.AddHttpClient<FmmClient>(x => x.BaseAddress = new Uri(ctx.Configuration.GetValue<string>("ApiEndpoint")));
             services.AddSingleton<JsonSerializer>();
         }

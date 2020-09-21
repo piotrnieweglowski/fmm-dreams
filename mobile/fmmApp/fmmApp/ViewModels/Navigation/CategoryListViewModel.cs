@@ -31,7 +31,6 @@ namespace fmmApp.ViewModels.Navigation
         /// </summary>
         public CategoryListViewModel()
         {
-
         }
         #endregion
 
@@ -52,7 +51,7 @@ namespace fmmApp.ViewModels.Navigation
         /// Gets or sets a collection of values to be displayed in the Songs play list page.
         /// </summary>
         [DataMember(Name = "categoryPageList")]
-        public ObservableCollection<Category> CategoryPageList { get; set; }
+        public ObservableCollection<Category> CategoryList { get; set; }
 
         #endregion
 
@@ -64,7 +63,8 @@ namespace fmmApp.ViewModels.Navigation
         /// <param name="selectedItem">Selected item from the list view.</param>
         private void NavigateToNextPage(object selectedItem)
         {
-            // Do something
+            
+            var obj = selectedItem as Category;       
         }
 
         #endregion

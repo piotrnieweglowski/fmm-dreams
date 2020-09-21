@@ -3,8 +3,6 @@ using fmmApp.Models.Navigation;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Xamarin.Forms.Internals;
-using fmmApp.Views.Forms;
-using fmmApp.Models.Navigation;
 
 namespace fmmApp.ViewModels.Navigation
 {

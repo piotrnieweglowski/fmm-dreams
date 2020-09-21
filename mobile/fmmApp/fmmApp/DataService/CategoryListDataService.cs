@@ -2,6 +2,11 @@
 using System.Runtime.Serialization.Json;
 using fmmApp.ViewModels.Navigation;
 using Xamarin.Forms.Internals;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using fmmApp.Models;
+using fmmApp.Services;
+using System;
 
 namespace fmmApp.DataService
 {
@@ -16,6 +21,7 @@ namespace fmmApp.DataService
 
         private CategoryListViewModel categoryListViewModel;
 
+        IDataStore<Category> _service = Startup.ServiceProvider.GetService<IDataStore<Category>>();
         #endregion
 
         #region Properties
@@ -24,13 +30,6 @@ namespace fmmApp.DataService
         /// Gets an instance of the <see cref="CategoryListDataService"/>.
         /// </summary>
         public static CategoryListDataService Instance => instance ?? (instance = new CategoryListDataService());
-
-        /// <summary>
-        /// Gets or sets the value of Song Play List view model.
-        /// </summary>
-        public CategoryListViewModel CategoryListViewModel =>
-            this.categoryListViewModel ??
-            (this.categoryListViewModel = PopulateData<CategoryListViewModel>("navigation.json"));
 
         #endregion
 
@@ -42,22 +41,44 @@ namespace fmmApp.DataService
         /// <typeparam name="T">Type of view model.</typeparam>
         /// <param name="fileName">Json file to fetch data.</param>
         /// <returns>Returns the view model object.</returns>
-        private static T PopulateData<T>(string fileName)
+
+        public async Task<CategoryListViewModel> PopulateData()
         {
-            var file = "fmmApp.Data." + fileName;
-
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-
-            T obj;
-
-            using (var stream = assembly.GetManifestResourceStream(file))
+            var service = Startup.ServiceProvider.GetService<IDataStore<Category>>();
+            var categories = await service.GetItemsAsync();
+            var viewModel = new CategoryListViewModel();
+            viewModel.CategoryList = new System.Collections.ObjectModel.ObservableCollection<Models.Category>();
+            foreach (var category in categories)
             {
-                var serializer = new DataContractJsonSerializer(typeof(T));
-                obj = (T)serializer.ReadObject(stream);
+                viewModel.CategoryList.Add(new Models.Category { 
+                    Id = category.Id,
+                    Description = category.Description });
             }
 
-            return obj;
+            return viewModel;
         }
+
+        public async Task<bool> SaveNewCategory(Category category)
+        {
+            category.Id = Guid.NewGuid().ToString(); 
+            return await _service.AddItemAsync(category);
+        }
+
+        public async Task<bool> UpdateCategory(Category category)
+        {
+            return await _service.UpdateItemAsync(category);
+        }
+
+        public async Task<bool> DeleteCategory(Category category)
+        {
+            return await _service.DeleteItemAsync(Guid.Parse(category.Id));
+        }
+
+        public async Task<Category> GetCategory(Category category)
+        {
+            return await _service.GetItemAsync(Guid.Parse(category.Id));
+        }
+
         #endregion
     }
 }

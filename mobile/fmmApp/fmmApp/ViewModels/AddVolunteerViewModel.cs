@@ -6,6 +6,7 @@ using fmmApp.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using fmmApp.Views.Navigation;
 
 namespace fmmApp.ViewModels
 {
@@ -41,6 +42,8 @@ namespace fmmApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Command BackCommand { get; set; }
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
@@ -51,7 +54,13 @@ namespace fmmApp.ViewModels
         }
         public AddVolunteerViewModel()
         {
-           
+            this.BackCommand = new Command(this.BackButtonClicked);
+        }
+
+        private void BackButtonClicked(object obj)
+        {
+
+            App.Current.MainPage = new VolunteerListPage();
         }
     }
 }

@@ -52,7 +52,7 @@ namespace fmmApp.Controls
             if (newValue != null && listView.DataSource != null)
             {
                 listView.searchText = (string)newValue;
-                listView.DataSource.Filter = listView.FilterContacts;
+                listView.DataSource.Filter = listView.Filter;
                 listView.DataSource.RefreshFilter();
             }
 
@@ -64,7 +64,7 @@ namespace fmmApp.Controls
         /// </summary>
         /// <param name="obj">The list view item</param>
         /// <returns>Returns the filtered item</returns>
-        public virtual bool FilterContacts(object obj)
+        public virtual bool Filter(object obj)
         {
             if (this.SearchText == null)
             {

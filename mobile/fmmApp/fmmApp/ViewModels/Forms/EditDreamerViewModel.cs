@@ -1,6 +1,8 @@
-﻿using fmmApp.Models.Forms;
+﻿using fmmApp.Models;
 using System;
 using Xamarin.Forms;
+using fmmApp.Views.Detail;
+using fmmApp.Models;
 
 namespace fmmApp.ViewModels.Forms
 {
@@ -15,6 +17,7 @@ namespace fmmApp.ViewModels.Forms
         /// </summary>
         public EditDreamerViewModel()
         {
+            this.BackCommand = new Command(this.BackButtonClicked);
             this.SubmitCommand = new Command(this.SubmitButtonClicked);
             this.CancelCommand = new Command(this.CancelButtonClicked);
         }
@@ -28,51 +31,23 @@ namespace fmmApp.ViewModels.Forms
 
         #region Property
 
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the first name from user in the Add Contact page.
-        /// </summary>
         public string FirstName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the last name from user in the Add Contact page.
-        /// </summary>
         public string LastName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with a date picker that gets the date from user in the Add Contact page.
-        /// </summary>
         public DateTime Date { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with a combo box that gets the gender from user in the Add Contact page.
-        /// </summary>
         public string Gender { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the phone number from user in the Add Contact page.
-        /// </summary>
         public string PhoneNumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Address from user in the Add Contact page.
-        /// </summary>
         public string Address { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the city from user in the Add Contact page.
-        /// </summary>
         public string City { get; set; }
-
+        public string UrlAddress { get; set; }
+        public string Dream { get; set; }
         #endregion
 
         #region Comments
-
-        /// <summary>
-        /// Gets or sets the command that will be executed when the submit button is clicked.
-        /// </summary>
         public Command SubmitCommand { get; set; }
 
         public Command CancelCommand { get; set; }
+
+        public Command BackCommand { get; set; }
 
         #endregion
 
@@ -84,13 +59,31 @@ namespace fmmApp.ViewModels.Forms
         /// <param name="obj">The Object</param>
         private void SubmitButtonClicked(object obj)
         {
-            // Do something
+            var dreamer = new Dreamer()
+            {
+                FirstName = this.FirstName,
+                LastName = this.LastName,
+                Sex=this.Gender,
+                YearOfBirth=this.Date.Year,
+                PhoneNumber=this.PhoneNumber,
+                Url=this.UrlAddress,
+                //dreams guuid
+                GuardianAddress=this.Address,
+                GuardianEmail=this.Email,
+                City=this.City
+            };
         }
 
         private void CancelButtonClicked(object obj)
         {
             //we should pass Dreamer Object to Dreamer Detail Page
-            App.Current.MainPage = new fmmApp.Views.Detail.DreamerDetailPage();
+            App.Current.MainPage = new DreamerDetailPage();
+        }
+
+        private void BackButtonClicked(object obj)
+        {
+
+            //App.Current.MainPage = new DreamerListPage();
         }
 
         #endregion

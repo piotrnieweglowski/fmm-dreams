@@ -2,6 +2,7 @@
 using fmmApp.Services;
 using fmmApp.ViewModels.Navigation;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
@@ -53,6 +54,30 @@ namespace fmmApp.DataService
             return viewModel;
         }
 
+        public async Task<bool> SaveNewSponsor(Sponsor sponsor)
+        {
+            var service = Startup.ServiceProvider.GetService<IDataStore<Sponsor>>();
+            sponsor.Id = Guid.NewGuid().ToString();
+            return await service.AddItemAsync(sponsor);
+        }
+
+        public async Task<bool> UpdateSponsor(Sponsor sponsor)
+        {
+            var service = Startup.ServiceProvider.GetService<IDataStore<Sponsor>>();
+            return await service.UpdateItemAsync(sponsor);
+        }
+
+        public async Task<bool> DeleteSponsor(Sponsor sponsor)
+        {
+            var service = Startup.ServiceProvider.GetService<IDataStore<Sponsor>>();
+            return await service.DeleteItemAsync(Guid.Parse(sponsor.Id));
+        }
+
+        public async Task<Sponsor> GetSponsor(Sponsor sponsor)
+        {
+            var service = Startup.ServiceProvider.GetService<IDataStore<Sponsor>>();
+            return await service.GetItemAsync(Guid.Parse(sponsor.Id));
+        }
         #endregion
 
     }

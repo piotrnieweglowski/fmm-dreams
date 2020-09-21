@@ -16,18 +16,18 @@ namespace fmmApp.Controls
         /// </summary>
         /// <param name="obj">The list view item</param>
         /// <returns>Returns the filtered item</returns>
-        public override bool FilterContacts(object obj)
+        public override bool Filter(object obj)
         {
-            if (base.FilterContacts(obj))
+            if (base.Filter(obj))
             {
-                var taskInfo = obj as Models.Navigation.Category;
+                var taskInfo = obj as Models.Category;
 
-                if (taskInfo == null || string.IsNullOrEmpty(taskInfo.CategoryName))
+                if (taskInfo == null || string.IsNullOrEmpty(taskInfo.Description))
                 {
                     return false;
                 }
 
-                return taskInfo.CategoryName.ToUpperInvariant().Contains(this.SearchText.ToUpperInvariant());
+                return taskInfo.Description.ToUpperInvariant().Contains(this.SearchText.ToUpperInvariant());
             }
             return false;
         }

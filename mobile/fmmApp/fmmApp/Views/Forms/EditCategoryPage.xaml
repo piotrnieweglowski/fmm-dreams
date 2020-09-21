@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-        x:Class="fmmApp.Views.Forms.AddCategoryPage"
+        x:Class="fmmApp.Views.Forms.EditCategoryPage"
         xmlns="http://xamarin.com/schemas/2014/forms"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
         xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
         xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
         xmlns:control="clr-namespace:fmmApp.Controls"
         xmlns:converter="clr-namespace:fmmApp.Converters"
-        x:Name="NewCategoryPage"
+        x:Name="EditCategory"
         xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Forms"
-        Title="New Category"
+        Title="Edit Category"
         BackgroundColor="{DynamicResource Gray-White}"
         NavigationPage.HasNavigationBar="False">
 
@@ -23,17 +23,17 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <viewModel:AddCategoryViewModel/>
+        <viewModel:EditCategoryViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.ControlTemplate>
         <ControlTemplate>
             <StackLayout x:Name="titleLayout" Spacing="0">
-                <control:TitleView Title="Add Category">
+                <control:TitleView Title="Edit Category">
                     <control:TitleView.LeadingView>
                         <!--  Back button command  -->
                         <buttons:SfButton x:Name="backButton"
-                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewCategoryPage}}"
+                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference EditCategory}}"
                                           CornerRadius="4" Text="{StaticResource Back}"
                                           CommandParameter="{x:Reference backButton}"
                                           Style="{StaticResource IconButtonStyle}"/>
@@ -55,7 +55,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
                             x:Name="NameEntry"
-                            Placeholder="Name"
+                            Text="{Binding Category.Description}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -67,7 +67,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="SAVE CATEGORY"
-                            Clicked="AddButton_Clicked"
+                            Clicked="SaveButton_Clicked"
                             WidthRequest="200"/>
 
                     <buttons:SfButton

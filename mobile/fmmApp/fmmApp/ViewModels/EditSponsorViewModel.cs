@@ -1,32 +1,27 @@
 ﻿using fmmApp.Models.SponsorDetail;
 using fmmApp.Validations;
+using fmmApp.Views.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using fmmApp.Views.SponsorDetail;
 
 namespace fmmApp.ViewModels
 {
     public class EditSponsorViewModel : BaseViewModel
     {
-        /*
         public EditSponsorViewModel()
         {
-            _name = new ValidatableObject<string>();
-            AddValidations();
-        }
-        */
-        public EditSponsorViewModel()
-        {
-            
+            this.BackCommand = new Command(this.BackButtonClicked);
         }
         public EditSponsorViewModel(Sponsor sponsor = null)
         {
             Name = sponsor.Name;
             EmailAddress = sponsor.EmailAddress;
-            PhoneNumber = sponsor.ContactNumber;
+            PhoneNumber = sponsor.PhoneNumber;
             AdditionalInfo = sponsor.AdditionalInfo;
         }
 
@@ -89,42 +84,12 @@ namespace fmmApp.ViewModels
                 RaisePropertyChanged(() => _phoneNumber);
             }
         }
-        /*
-        private ValidatableObject<string> _name;
 
-        public ValidatableObject<string> Name
+        public Command BackCommand { get; set; }
+
+        private void BackButtonClicked(object obj)
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-                RaisePropertyChanged(() => _name);
-            }
+            App.Current.MainPage = new SponsorDetailPage();
         }
-        
-        public ICommand ValidateNameCommand => new Command(() => ValidateName());
-
-        private bool Validate()
-        {
-            bool isValidName = ValidateName();
-           
-
-            return isValidName;
-        }
-
-        private bool ValidateName()
-        {
-            return _name.Validate();
-        }
-
-        private void AddValidations()
-        {
-            _name.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "A name is required." });
-
-        }
-        */
     }
 }
