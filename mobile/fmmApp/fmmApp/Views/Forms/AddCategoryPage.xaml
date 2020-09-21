@@ -55,6 +55,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
                             x:Name="NameEntry"
+                            Text="{Binding Category.Description}"
                             Placeholder="Name"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
@@ -67,7 +68,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="SAVE CATEGORY"
-                            Clicked="AddButton_Clicked"
+                            Command="{Binding Path=BindingContext.AddCategoryCommand, Source={x:Reference NewCategoryPage}}"
                             WidthRequest="200"/>
 
                     <buttons:SfButton
@@ -77,7 +78,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="CALCEL"
-                            Clicked="CancelButton_Clicked"
+                            Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference NewCategoryPage}}"
                             WidthRequest="200"/>
                 </Grid>
             </StackLayout>
