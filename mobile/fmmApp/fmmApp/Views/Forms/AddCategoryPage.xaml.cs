@@ -21,21 +21,5 @@ namespace fmmApp.Views.Forms
             InitializeComponent();
         }
 
-        private void CancelButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new CategoryListPage();
-        }
-        
-        public async void AddButton_Clicked(object sender, EventArgs e)
-        {
-            var category = new Category
-            {
-                Description = this.NameEntry.Text
-            };
-            await CategoryListDataService.Instance.SaveNewCategory(category);
-            App.Current.MainPage = new CategoryListPage();
-        }
-      
-
     }
 }
