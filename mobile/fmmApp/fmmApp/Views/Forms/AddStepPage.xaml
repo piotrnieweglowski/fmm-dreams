@@ -8,7 +8,7 @@
         xmlns:control="clr-namespace:fmmApp.Controls"
         xmlns:converter="clr-namespace:fmmApp.Converters"
         xmlns:ViewModel="clr-namespace:fmmApp.ViewModels.Forms"
-    x:Name="NewStepPage"
+        x:Name="NewStepPage"
         Title="New Step"
         BackgroundColor="{DynamicResource Gray-White}"
         NavigationPage.HasNavigationBar="False">
@@ -31,25 +31,22 @@
                 <control:TitleView Title="Add Step">
                     <control:TitleView.LeadingView>
                         <!--  Back button command  -->
-                        <buttons:SfButton x:Name="backButton" Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewStepPage}}" 
+                        <buttons:SfButton x:Name="backButton"
+                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewStepPage}}"
                                           CornerRadius="4" Text="{StaticResource Back}"
-                                          CommandParameter="{x:Reference backButton}" Style="{StaticResource IconButtonStyle}"/>
+                                          CommandParameter="{x:Reference backButton}"
+                                          Style="{StaticResource IconButtonStyle}"/>
 
                     </control:TitleView.LeadingView>
                 </control:TitleView>
-                <ContentPresenter />
+                <ContentPresenter/>
             </StackLayout>
         </ControlTemplate>
     </ContentPage.ControlTemplate>
-    
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="16" Spacing="16">
-
-                <Label Margin="16,0" FontFamily="{StaticResource Montserrat-Medium}" FontSize="16"
-                       HorizontalOptions="CenterAndExpand" TextColor="{DynamicResource Gray-900}"
-                       LineHeight="1.25" Text="Add Step" VerticalOptions="Center"
-                       VerticalTextAlignment="Center"/>
 
                 <border:SfBorder
                         BorderColor="{Binding Source={x:Reference StepDescriptionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
@@ -95,7 +92,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="ADD STEP"
-                            Clicked="AddButton_Clicked"
+                            Command="{Binding Path=BindingContext.AddStepCommand, Source={x:Reference NewStepPage}}"
                             WidthRequest="200"/>
 
                     <buttons:SfButton
@@ -105,7 +102,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="CANCEL"
-                            Clicked="CancelButton_Clicked"
+                            Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference NewStepPage}}"
                             WidthRequest="200"/>
 
                 </Grid>

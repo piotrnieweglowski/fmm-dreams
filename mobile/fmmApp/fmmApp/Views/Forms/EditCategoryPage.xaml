@@ -67,7 +67,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="SAVE CATEGORY"
-                            Clicked="SaveButton_Clicked"
+                            Command="{Binding Path=BindingContext.EditCategoryCommand, Source={x:Reference EditCategory}}"
                             WidthRequest="200"/>
 
                     <buttons:SfButton
@@ -77,7 +77,7 @@
                             HorizontalOptions="Center"
                             Style="{StaticResource SfButtonStyle}"
                             Text="CALCEL"
-                            Clicked="CancelButton_Clicked"
+                            Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference EditCategory}}"
                             WidthRequest="200"/>
                 </Grid>
             </StackLayout>

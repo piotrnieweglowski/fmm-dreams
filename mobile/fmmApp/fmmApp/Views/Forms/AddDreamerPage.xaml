@@ -56,7 +56,8 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="FirstNameEntry"
-                            Placeholder="First Name" Text="{Binding FirstName}"
+                            Placeholder="First Name" 
+                            Text="{Binding Dreamer.FirstName}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
                 <border:SfBorder
@@ -64,7 +65,8 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="LastNameEntry"
-                            Placeholder="Last Name" Text="{Binding LastName}"
+                            Placeholder="Last Name" 
+                        Text="{Binding Dreamer.LastName}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
                 <Grid>
@@ -128,7 +130,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="GuardianFullNameEntry"
-                            Placeholder="Guardian Full Name" Text="{Binding GuardianFullName}"
+                            Placeholder="Guardian Full Name" Text="{Binding Dreamer.GuardianFullName}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -137,7 +139,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="EmailEntry"
-                            Placeholder="Email" Text="{Binding EmailAddress}"
+                            Placeholder="Email" Text="{Binding Dreamer.EmailAddress}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -146,7 +148,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="AddressEntry"
-                            Placeholder="Address" Text="{Binding Address}"
+                            Placeholder="Address" Text="{Binding Dreamer.Address}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -155,7 +157,7 @@
                                  Style="{StaticResource FormBorderStyle}" Grid.Column="0">
                     <controls:BorderlessEntry
                             x:Name="CityEntry"
-                            Placeholder="City" Text="{Binding City}"
+                            Placeholder="City" Text="{Binding Dreamer.City}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -165,7 +167,7 @@
                     <controls:BorderlessEntry
                             x:Name="PhoneNoEntry"
                             Placeholder="Phone number"
-                            Text="{Binding PhoneNumber}"
+                            Text="{Binding Dreamer.PhoneNumber}"
                             Keyboard="Telephone"
                             Style="{StaticResource EntryTextStyle}">
                     </controls:BorderlessEntry>
@@ -175,7 +177,7 @@
                     <buttons:SfButton
                             Grid.Row="0"
                             Grid.Column="0"
-                            HorizontalOptions="Center" Command="{Binding CancelCommand}"
+                            HorizontalOptions="Center" Command="{Binding Binding.CancelCommand}"
                             Style="{StaticResource SfButtonStyle}"
                             Text="CANCEL"
                             WidthRequest="200"/>
@@ -183,7 +185,8 @@
                     <buttons:SfButton
                             Grid.Row="0"
                             Grid.Column="1"
-                            HorizontalOptions="Center" Command="{Binding SubmitCommand}"
+                            HorizontalOptions="Center" 
+                        Command="{Binding Path=BindingContext.SubmitCommand, Source={x:Reference NewDreamerPage}}" 
                             Style="{StaticResource SfButtonStyle}"
                             Text="SUBMIT"
                             WidthRequest="200"/>

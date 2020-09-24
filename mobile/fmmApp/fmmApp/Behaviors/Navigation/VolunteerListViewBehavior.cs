@@ -2,6 +2,7 @@
 using Xamarin.Forms.Internals;
 using Syncfusion.DataSource;
 using System.Globalization;
+using fmmApp.Models.Navigation;
 
 namespace fmmApp.Behaviors.Navigation
 {
@@ -30,11 +31,11 @@ namespace fmmApp.Behaviors.Navigation
                 listView = bindable;
                 listView.DataSource.GroupDescriptors.Add(new GroupDescriptor()
                 {
-                    PropertyName = "fullName",
+                    PropertyName = "firstName",
                     KeySelector = (object obj1) =>
                     {
-                        var item = (obj1 as Models.Navigation.VolunteerModel);
-                        return item.FullName[0].ToString(CultureInfo.CurrentCulture);
+                        var item = (obj1 as Volunteer);
+                        return item.FirstName[0].ToString(CultureInfo.CurrentCulture);
                     },
                 });
                 base.OnAttachedTo(bindable);

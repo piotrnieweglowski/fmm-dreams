@@ -19,7 +19,7 @@ namespace fmmApp
         {
             InitializeComponent();
             Startup.Init();
-            MainPage = new CategoryListPage();
+            MainPage = new SponsorsListPage();
         }
 
         protected override void OnStart()

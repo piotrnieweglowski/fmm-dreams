@@ -3,8 +3,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using fmmApp.DataService;
+using fmmApp.Models.Navigation;
 using fmmApp.Views.Detail;
-using fmmApp.Views.Forms;
 
 namespace fmmApp.Views.Navigation
 {
@@ -18,7 +18,8 @@ namespace fmmApp.Views.Navigation
         public VolunteerListPage()
         {
             InitializeComponent();
-            this.BindingContext = VolunteerListDataService.Instance.VolunteerListViewModel;
+            this.BindingContext = new fmmApp.ViewModels.Navigation.VolunteerListViewModel();
+            //this.BindingContext = VolunteerListDataService.Instance.VolunteerListViewModel;
         }
         /// <summary>
         /// Invoked when view size is changed.
@@ -108,14 +109,10 @@ namespace fmmApp.Views.Navigation
             this.SearchEntry.Focus();
         }
 
-        private void AddButton_Clicked(object sender, EventArgs e)
+        private void VolunteerPageList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            App.Current.MainPage = new AddVolunteerPage();
-        }
-
-        private void NextButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new VolunteerDetailPage();
+            var volunteer = e.ItemData as Volunteer;
+            App.Current.MainPage = new VolunteerDetailPage(volunteer);
         }
     }
 }

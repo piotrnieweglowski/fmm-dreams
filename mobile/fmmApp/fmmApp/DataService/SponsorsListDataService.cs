@@ -45,10 +45,14 @@ namespace fmmApp.DataService
             var service = Startup.ServiceProvider.GetService<IDataStore<Sponsor>>();
             var sponsors = await service.GetItemsAsync();
             var viewModel = new SponsorsListViewModel();
-            viewModel.SponsorsList = new System.Collections.ObjectModel.ObservableCollection<Models.Navigation.SponsorModel>();
+            viewModel.SponsorsList = new System.Collections.ObjectModel.ObservableCollection<Sponsor>();
             foreach (var sponsor in sponsors)
             {
-                viewModel.SponsorsList.Add(new Models.Navigation.SponsorModel { Name = sponsor.Name });
+                viewModel.SponsorsList.Add(new Sponsor { Name = sponsor.Name,
+                 AdditionalInfo=sponsor.AdditionalInfo,
+                 EmailAddress=sponsor.EmailAddress,
+                 PhoneNumber=sponsor.PhoneNumber,
+                 Id = sponsor.Id}); 
             }
 
             return viewModel;

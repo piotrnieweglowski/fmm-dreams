@@ -63,7 +63,7 @@
                         Style="{StaticResource BusinessFormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="DreamTitleEntry"
-                            Text="{Binding DreamTitle}"
+                            Text="{Binding Dream.DreamTitle}"
                             MaxLength="100"
                             Style="{StaticResource EntryTextBoxStyle}"/>
                 </border:SfBorder>
@@ -81,7 +81,7 @@
                         Style="{StaticResource BusinessFormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="DescriptionEntry"
-                            Text="{Binding Description}"
+                            Text="{Binding Dream.Description}"
                             MaxLength="500"
                             Style="{StaticResource EntryTextBoxStyle}"/>
                 </border:SfBorder>

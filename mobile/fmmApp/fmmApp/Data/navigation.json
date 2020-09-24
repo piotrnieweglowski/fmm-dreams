@@ -363,109 +363,18 @@
   ],
   "volunteerListPage": [
     {
-      "fullName": "Aaron Thorsson",
+      "firstName": "Aaron Thorsson",
+      "lastName": "cc",
       "department": "Trojmiasto",
       "phone": "123456789",
-      "email": "Mail1@mail.com",
-      "backgroundColor": "#837bff"
+      "email": "Mail1@mail.com"
     },
     {
-      "fullName": "Alexander Allen",
+      "firstName": "Alexander Allen",
+      "lastName": "cc",
       "department": "Olsztyn",
       "phone": "123456789",
-      "email": "Mail1@mail.com",
-      "backgroundColor": "#678cc8"
-    },
-    {
-      "fullName": "Alta Sims",
-      "department": "Bialystok",
-      "phone": "123456789",
-      "email": "Mail2@mail.com",
-      "backgroundColor": "#29aaa0"
-    },
-    {
-      "fullName": "Ann Keller",
-      "department": "Szczecin",
-      "phone": "123456789",
-      "email": "Mail3@mail.com",
-      "backgroundColor": "#db7faa"
-    },
-    {
-      "fullName": "Arthur Kim",
-      "department": "Bydgoszcz",
-      "phone": "123456789",
-      "email": "Mail4@mail.com",
-      "backgroundColor": "#dc9737"
-    },
-    {
-      "fullName": "Bernard Daniels",
-      "department": "Warszawa",
-      "phone": "123456789",
-      "email": "Mail5@mail.com",
-      "backgroundColor": "#a8d35f"
-    },
-    {
-      "fullName": "Bernard Rodriquez",
-      "department": "Poznan",
-      "phone": "123456789",
-      "email": "Mail6@mail.com",
-      "backgroundColor": "#ec5b76"
-    },
-    {
-      "fullName": "Bettie Conlon",
-      "department": "Lodz",
-      "phone": "123456789",
-      "email": "Mail7@mail.com",
-      "backgroundColor": "#6c88ff"
-    },
-    {
-      "fullName": "Blake Moore",
-      "department": "Lublin",
-      "phone": "123456789",
-      "email": "Mail8@mail.com",
-      "backgroundColor": "#cf62e2"
-    },
-    {
-      "fullName": "Brandon Todd",
-      "department": "Kielce",
-      "phone": "123456789",
-      "email": "Mail9@mail.com",
-      "backgroundColor": "#f57780"
-    },
-    {
-      "fullName": "Carlos Esteban",
-      "department": "Wroclaw",
-      "phone": "123456789",
-      "email": "Mail10@mail.com",
-      "backgroundColor": "#a8d35f"
-    },
-    {
-      "fullName": "Charlotte Nash",
-      "department": "Opole",
-      "phone": "123456789",
-      "email": "Mail11@mail.com",
-      "backgroundColor": "#ec5b76"
-    },
-    {
-      "fullName": "Chase Blair",
-      "department": "Katowice",
-      "phone": "123456789",
-      "email": "Mail12@mail.com",
-      "backgroundColor": "#6c88ff"
-    },
-    {
-      "fullName": "Christina Lloyd",
-      "department": "Krakow",
-      "phone": "123456789",
-      "email": "Mail13@mail.com",
-      "backgroundColor": "#cf62e2"
-    },
-    {
-      "fullName": "Christina Hanson",
-      "department": "Rzeszow",
-      "phone": "123456789",
-      "email": "Mail14@mail.com",
-      "backgroundColor": "#f57780"
+      "email": "Mail1@mail.com"
     }
   ],
   "suggestionList": [

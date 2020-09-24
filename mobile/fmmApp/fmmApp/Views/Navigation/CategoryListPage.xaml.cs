@@ -119,21 +119,6 @@ namespace fmmApp.Views.Navigation
             this.SearchEntry.Focus();
         }
 
-        public async void DeleteButton_Clicked(object sender, EventArgs e)
-        {
-            //check if user is sure to delete element
-            var btn = sender as SfButton;
-            var categorToDelete = btn.BindingContext as Category;
-            await CategoryListDataService.Instance.DeleteCategory(categorToDelete);
-            App.Current.MainPage = new CategoryListPage();
-
-        }
-
-        private void AddButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new AddCategoryPage();
-        }
-
         private void CategoryPageList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
             var category = e.ItemData as Category;

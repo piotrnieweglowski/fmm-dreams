@@ -1,10 +1,10 @@
-﻿using fmmApp.Validations;
+﻿using fmmApp.DataService;
+using fmmApp.Models;
+using fmmApp.Validations;
 using fmmApp.Views.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace fmmApp.ViewModels
 {
@@ -12,12 +12,18 @@ namespace fmmApp.ViewModels
     {
         public AddSponsorViewModel()
         {
-            this.BackCommand = new Command(this.BackButtonClicked);
+            Sponsor = new Sponsor();
+            BackCommand = new Command(GoToSponsorListPage);
+            CancelCommand = new Command(GoToSponsorListPage);
+            AddSponsorCommand = new Command(async() => await AddSponsor());
             _name = new ValidatableObject<string>();
             AddValidations();
         }
 
         private ValidatableObject<string> _name;
+
+        public Sponsor Sponsor { get; set; }
+
 
         public ValidatableObject<string> Name
         {
@@ -35,11 +41,13 @@ namespace fmmApp.ViewModels
         public ICommand ValidateNameCommand => new Command(() => ValidateName());
 
         public Command BackCommand { get; set; }
+        public Command CancelCommand { get; set; }
+        public Command AddSponsorCommand { get; set; }
 
         private bool Validate()
         {
             bool isValidName = ValidateName();
-           
+
 
             return isValidName;
         }
@@ -55,11 +63,15 @@ namespace fmmApp.ViewModels
 
         }
 
-        private void BackButtonClicked(object obj)
+        private void GoToSponsorListPage()
         {
-
             App.Current.MainPage = new SponsorsListPage();
         }
 
+        private async Task AddSponsor()
+        {
+            await SponsorsListDataService.Instance.SaveNewSponsor(Sponsor);
+            GoToSponsorListPage();
+        }
     }
 }

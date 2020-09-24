@@ -6,6 +6,7 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Navigation"
              x:Class="fmmApp.Views.Navigation.CategoryListPage"
+             x:Name="CategoryList"
              BackgroundColor="{DynamicResource Gray-White}"
              NavigationPage.HasNavigationBar="False">
 
@@ -46,7 +47,7 @@
 
                     <!--  Back button command  -->
                     <buttons:SfButton x:Name="backButton"
-                        Command="{Binding BackButtonCommand}"
+                        Command="{Binding BindingContext.BackButtonCommand}"
                         CommandParameter="{x:Reference backButton}"
                         CornerRadius="4"
                         Style="{StaticResource IconButtonStyle}"
@@ -99,7 +100,7 @@
 
                 <buttons:SfButton  x:Name="AddButton" 
                                        IsVisible="True" 
-                                       Clicked="AddButton_Clicked" 
+                                       Command="{Binding Path=BindingContext.AddCategoryCommand, Source={x:Reference CategoryList}}" 
                                        Style="{StaticResource IconButtonStyle }"
                                    Text="{StaticResource Add}" />
             </StackLayout>
@@ -151,7 +152,7 @@
                                                    VerticalOptions="StartAndExpand" Style="{StaticResource IconButtonStyle}"
                                                    Text="{StaticResource Delete}"
                                                            AutomationId="{Binding Cstegory.Id}"
-                                                    Clicked="DeleteButton_Clicked"/>
+                                                    Command="{Binding Path=BindingContext.DeleteCategoryCommand, Source={x:Reference CategoryList}}" />
                                         
                                     </Grid>
                                     <!-- Seperator -->

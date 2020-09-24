@@ -1,6 +1,6 @@
 ﻿using fmmApp.Models;
-using fmmApp.Models.Detail;
 using fmmApp.Models.Navigation;
+using fmmApp.Views.Detail;
 using fmmApp.Views.Forms;
 using Syncfusion.XForms.ProgressBar;
 using System;
@@ -22,11 +22,16 @@ namespace fmmApp.ViewModels.Forms
 
         #region Constructor
 
+        public Dream Dream
+        {
+            get; set;
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="AddDreamViewModel" /> class
         /// </summary>
         public AddDreamViewModel()
         {
+            Dream = new Dream();
             var stepList = new ObservableCollection<Step>();
             stepList.Add(CreateStepInfo("Ordered and Approved1", StepStatus.NotStarted, 0, "Task 1 desc"));
             stepList.Add(CreateStepInfo("Ordered and Approved2", StepStatus.InProgress, 50, "Task 2 desc"));
@@ -36,15 +41,15 @@ namespace fmmApp.ViewModels.Forms
             VolunteersList = GetVolunteers();
             StepList = stepList;
 
-            this.BackCommand = new Command(this.BackButtonClicked);
-            this.SubmitCommand = new Command(this.SubmitClicked);
-            this.CancelCommand = new Command(this.CancelClicked);
-            this.AddStepCommand = new Command(this.AddStepClicked);
+            BackCommand = new Command(GoToDreamerDetailPage);
+            SubmitCommand = new Command(SubmitClicked);
+            CancelCommand = new Command(GoToDreamerDetailPage);
+            AddStepCommand = new Command(AddStepClicked);
         }
 
         private List<Category> GetCategories()
         {
-            //shoul be feeded from the db
+            //shoul be fee                                                                                                                                                                                                                          ded from the db
             var category = new Category
             {
                 Description = "Category"
@@ -64,11 +69,11 @@ namespace fmmApp.ViewModels.Forms
             //shoul be feeded from the db
             var volOne = new Volunteer
             {
-                FullName = "First Volo"
+                FirstName = "First Volo"
             };
             var volTwo = new Volunteer
             {
-                FullName = "Second Volo"
+                FirstName = "Second Volo"
             };
             var volunteerList = new List<Volunteer>();
             volunteerList.Add(volOne);
@@ -196,19 +201,6 @@ namespace fmmApp.ViewModels.Forms
         private void SubmitClicked(Object obj)
         {
 
-            var dream = new Dream()
-            {
-                Title = this.DreamTitle,
-                Category = this.SelectedCategory.Description,
-                Description = this.Description,
-                Volunteer = this.SelectedVolunteer
-                //add this dream to a dreamer
-            };
-        }
-
-        private void CancelClicked(Object obj)
-        {
-            //App.Current.MainPage = new DreamListPage();
         }
 
         private void AddStepClicked(Object obj)
@@ -216,9 +208,9 @@ namespace fmmApp.ViewModels.Forms
             App.Current.MainPage = new AddStepPage();
         }
 
-        private void BackButtonClicked(object obj)
+        private void GoToDreamerDetailPage()
         {
-            //App.Current.MainPage = new DreamerListPage();
+            App.Current.MainPage = new DreamerDetailPage();
         }
         #endregion
     }

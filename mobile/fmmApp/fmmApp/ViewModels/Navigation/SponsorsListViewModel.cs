@@ -3,6 +3,9 @@ using fmmApp.Models.Navigation;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Xamarin.Forms.Internals;
+using fmmApp.Views.SponsorDetail;
+using fmmApp.Models;
+using fmmApp.Views.Forms;
 
 namespace fmmApp.ViewModels.Navigation
 {
@@ -14,6 +17,8 @@ namespace fmmApp.ViewModels.Navigation
     public class SponsorsListViewModel
     {
         #region Fields
+
+        private Sponsor sponsor;
 
         private Command<object> itemTappedCommand;
 
@@ -28,11 +33,14 @@ namespace fmmApp.ViewModels.Navigation
         /// </summary>
         public SponsorsListViewModel()
         {
-
+            AddCommand = new Command(AddSponsorCommand);
         }
         #endregion
 
         #region Properties
+
+        public Command AddCommand { get; set; }
+        public Command DetailsCommand { get; set; }
 
         /// <summary>
         /// Gets the command that will be executed when an item is selected.
@@ -60,7 +68,7 @@ namespace fmmApp.ViewModels.Navigation
         /// Gets or sets a collction of value to be displayed in icon names list page.
         /// </summary>
         [DataMember(Name = "sponsorsListPage")]
-        public ObservableCollection<SponsorModel> SponsorsList { get; set; }
+        public ObservableCollection<Sponsor> SponsorsList { get; set; }
 
         #endregion
 
@@ -85,6 +93,10 @@ namespace fmmApp.ViewModels.Navigation
             
         }
 
+        private void AddSponsorCommand()
+        {
+            App.Current.MainPage = new AddSponsorPage();
+        }
         #endregion
     }
 }

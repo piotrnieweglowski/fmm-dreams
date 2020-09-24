@@ -116,16 +116,11 @@ namespace fmmApp.Views.Navigation
             this.SearchEntry.Focus();
         }
 
-        private void NextButton_Clicked(object sender, EventArgs e)
+        private void SponsorListPage_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            
-            App.Current.MainPage = new SponsorDetailPage();
+            var sponsor = e.ItemData as Sponsor;
+            App.Current.MainPage = new SponsorDetailPage(sponsor);
         }
 
-        private void AddButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new AddSponsorPage();
-        }
-        
     }
 }
