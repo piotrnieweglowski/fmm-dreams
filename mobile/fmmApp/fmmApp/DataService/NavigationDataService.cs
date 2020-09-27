@@ -1,9 +1,15 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization.Json;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using fmmApp.Models;
+using fmmApp.Services;
 using fmmApp.ViewModels.Navigation;
+using Xamarin.Forms.Internals;
 
 namespace fmmApp.DataService
 {
+    [Preserve(AllMembers = true)]
     public class NavigationDataService
     {
         #region fields
@@ -24,10 +30,6 @@ namespace fmmApp.DataService
         /// <summary>
         /// Gets or sets the value of navigation page view model.
         /// </summary>
-        public NavigationViewModel NavigationViewModel =>
-            this.navigationViewModel ??
-            (this.navigationViewModel = PopulateData<NavigationViewModel>("navigation.json"));
-
         #endregion
 
         #region Methods
@@ -38,21 +40,18 @@ namespace fmmApp.DataService
         /// <typeparam name="T">Type of view model.</typeparam>
         /// <param name="fileName">Json file to fetch data.</param>
         /// <returns>Returns the view model object.</returns>
-        private static T PopulateData<T>(string fileName)
+        public async Task<NavigationViewModel> PopulateData()
         {
-            var file = "fmmApp.Data." + fileName;
-
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-
-            T obj;
-
-            using (var stream = assembly.GetManifestResourceStream(file))
+            var service = Startup.ServiceProvider.GetService<IDataStore<Dreamer>>();
+            var navigationModels = await service.GetItemsAsync();
+            var viewModel = new NavigationViewModel();
+            viewModel.NavigationList = new System.Collections.ObjectModel.ObservableCollection<Models.Navigation.NavigationModel>();
+            foreach (var navigationModel in navigationModels)
             {
-                var serializer = new DataContractJsonSerializer(typeof(T));
-                obj = (T)serializer.ReadObject(stream);
+                viewModel.NavigationList.Add(new Models.Navigation.NavigationModel { ItemName = navigationModel.FirstName });
             }
 
-            return obj;
+            return viewModel;
         }
 
         #endregion

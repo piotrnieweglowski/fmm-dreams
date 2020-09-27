@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="fmmApp.Views.Navigation.NavigationListCardPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:fmmApp.Controls"
     xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
     xmlns:template="clr-namespace:fmmApp.Views.Templates"
     xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Navigation"
+    x:Class="fmmApp.Views.Navigation.DreamerListCardPage"
     BackgroundColor="{DynamicResource Gray-White}"
     NavigationPage.HasNavigationBar="False">
 
@@ -36,7 +36,7 @@
                     AutoFitMode="Height"
                     IsScrollBarVisible="false"
                     ItemSpacing="0,27,0,0"
-                    ItemsSource="{Binding NavigationList}"
+                    ItemsSource="{Binding DreamerList}"
                     SelectionBackgroundColor="Transparent"
                     TapCommand="{Binding ItemTappedCommand}"
                     VerticalOptions="FillAndExpand">
