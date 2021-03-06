@@ -56,6 +56,7 @@
                     <controls:BorderlessEntry
                             x:Name="FirstNameEntry"
                             Placeholder="First Name"
+                            Text="{Binding Volunteer.FirstName}"
                             MaxLength="100"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
@@ -68,6 +69,7 @@
                     <controls:BorderlessEntry
                             x:Name="LastNameEntry"
                             Placeholder="Last Name"
+                            Text="{Binding Volunteer.LastName}"
                             MaxLength="100"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
@@ -79,6 +81,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="EmailEntry"
+                            Text="{Binding Volunteer.Email}"
                             Placeholder="Email"
                             Keyboard="Email"
                             Style="{StaticResource EntryTextStyle}"/>
@@ -91,6 +94,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="PhoneNoEntry"
+                            Text="{Binding Volunteer.Phone}"
                             Keyboard="Telephone"
                             Placeholder="Phone Number : e.g. XXX-XXX-XXX"
                             Style="{StaticResource EntryTextStyle}">
@@ -116,7 +120,7 @@
                                 HorizontalOptions="Center"
                                 Style="{StaticResource SfButtonStyle}"
                                 Text="CANCEL"
-                                Clicked="CancelButton_Clicked"
+                                Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference NewVolunteerPage}}"
                                 WidthRequest="175"/>
                     </StackLayout>
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -125,7 +129,7 @@
                                 HorizontalOptions="Center"
                                 Style="{StaticResource SfButtonStyle}"
                                 Text="ADD VOLUNTEER"
-                                Clicked="AddButton_Clicked"
+                                Command="{Binding Path=BindingContext.AddVolunteerCommand, Source={x:Reference NewVolunteerPage}}"
                                 WidthRequest="175"/>
                     </StackLayout>
                 </StackLayout>

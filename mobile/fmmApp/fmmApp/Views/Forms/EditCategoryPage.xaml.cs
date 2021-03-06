@@ -30,18 +30,5 @@ namespace fmmApp.Views.Forms
             var viewModel = new EditCategoryViewModel(category);
             this.BindingContext = viewModel;
         }
-
-        private void CancelButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new CategoryListPage();
-        }
-        
-        public async void SaveButton_Clicked(object sender, EventArgs e)
-        {
-            await CategoryListDataService.Instance.UpdateCategory(_selectedCategory);
-            App.Current.MainPage = new CategoryListPage();
-        }
-      
-
     }
 }

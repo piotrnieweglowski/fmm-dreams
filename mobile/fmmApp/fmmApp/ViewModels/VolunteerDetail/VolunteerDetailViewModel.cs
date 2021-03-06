@@ -1,9 +1,10 @@
 ﻿using Xamarin.Forms;
-using fmmApp.Models.Detail;
+using fmmApp.Models;
+using fmmApp.Models.Navigation;
 using System.Collections.ObjectModel;
 using Xamarin.Forms.Internals;
 using fmmApp.Views.Navigation;
-using fmmApp.Models;
+using fmmApp.Views.Detail;
 
 namespace fmmApp.ViewModels.Detail
 {
@@ -23,8 +24,9 @@ namespace fmmApp.ViewModels.Detail
         #region Constructor
         public VolunteerDetailViewModel()
         {
-            this.BackCommand = new Command(this.BackButtonClicked);
-            this.DeleteCommand = new Command(this.DeleteButtonClicked);
+            BackCommand = new Command(BackButtonClicked);
+            DeleteCommand = new Command(DeleteButtonClicked);
+            NextCommand = new Command(NextButton_Clicked);
 
             var dream = new Dream()
             {
@@ -35,7 +37,7 @@ namespace fmmApp.ViewModels.Detail
             {
                 new Volunteer
                 {
-                    FullName = "John Doe",
+                    FirstName = "John Doe",
                     Email = "mail@mail.com",
                     Department = "114 Ridge St NW, Hudson, NC 28638",
                     Phone = "(828) 228-2882"
@@ -59,6 +61,38 @@ namespace fmmApp.ViewModels.Detail
 
         }
 
+        public VolunteerDetailViewModel(Volunteer volunteer)
+        {
+            BackCommand = new Command(BackButtonClicked);
+            DeleteCommand = new Command(DeleteButtonClicked);
+            NextCommand = new Command(NextButton_Clicked);
+
+            var dream = new Dream()
+            {
+                Description = "my dream"
+            };
+
+            this.VolunteerDetails = new ObservableCollection<Volunteer>()
+            {
+                volunteer
+            };
+            this.DreamerList = new ObservableCollection<Dreamer>()
+            {
+                new Dreamer
+                {
+                    FirstName  = "Jan",
+                    LastName = "Kowalski",
+                    Dream=dream
+                },
+                new Dreamer
+                {
+                    FirstName  = "Anna",
+                    LastName = "Nowak",
+                    Dream=dream
+                }
+            };
+
+        }
         #endregion
 
         #region Methods
@@ -83,19 +117,19 @@ namespace fmmApp.ViewModels.Detail
             // Do something
         }
 
+        private void NextButton_Clicked()
+        {
+            App.Current.MainPage = new VolunteerDetailPage();
+        }
         #endregion
 
         #region Command
 
-        /// <summary>
-        /// Gets or sets the command is executed when the back button is clicked.
-        /// </summary>
         public Command BackCommand { get; set; }
 
-        /// <summary>
-        /// Gets or sets the command is executed when the delete button is clicked.
-        /// </summary>
         public Command DeleteCommand { get; set; }
+
+        public Command NextCommand { get; set; }
 
         #endregion
     }

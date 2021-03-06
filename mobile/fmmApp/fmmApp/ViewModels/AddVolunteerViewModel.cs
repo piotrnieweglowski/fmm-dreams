@@ -1,17 +1,18 @@
 ﻿using Xamarin.Forms;
-using fmmApp.Models.Detail;
-using System.Collections.ObjectModel;
-
 using fmmApp.Models;
+using fmmApp.Models.Navigation;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using fmmApp.Views.Navigation;
+using System.Threading.Tasks;
 
 namespace fmmApp.ViewModels
 {
     public class AddVolunteerViewModel : BaseViewModel, INotifyPropertyChanged
     {
+        public Volunteer Volunteer { get; set; }
+
         List<Department> departmentList;
         public List<Department> DepartmentList
         {
@@ -42,6 +43,8 @@ namespace fmmApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public Command AddVolunteerCommand { get; set; }
+        public Command CancelCommand { get; set; }
         public Command BackCommand { get; set; }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -54,13 +57,20 @@ namespace fmmApp.ViewModels
         }
         public AddVolunteerViewModel()
         {
-            this.BackCommand = new Command(this.BackButtonClicked);
+            Volunteer = new Volunteer();
+            BackCommand = new Command(GoToVolunteerListPage);
+            CancelCommand = new Command(GoToVolunteerListPage);
+            AddVolunteerCommand = new Command(async () => AddVolunteer());
         }
 
-        private void BackButtonClicked(object obj)
+        private void GoToVolunteerListPage()
         {
-
             App.Current.MainPage = new VolunteerListPage();
+        }
+
+        private async Task AddVolunteer()
+        {
+            GoToVolunteerListPage();
         }
     }
 }

@@ -16,23 +16,16 @@ namespace fmmApp.ViewModels.Forms
         /// </summary>
         public AddDreamerViewModel()
         {
-            this.BackCommand = new Command(this.BackButtonClicked);
-            this.CancelCommand = new Command(this.CancelButtonClicked);
-            this.SubmitCommand = new Command(this.SubmitButtonClicked);
+            Dreamer = new Dreamer();
+            BackCommand = new Command(BackButtonClicked);
+            CancelCommand = new Command(CancelButtonClicked);
+            SubmitCommand = new Command(SubmitButtonClicked);
         }
 
         #endregion
 
         #region Property
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime Date { get; set; }
-        public string Gender { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string EmailAddress { get; set; }
-        public string GuardianFullName { get; set; }
+        public Dreamer Dreamer { get; set; }
         #endregion
 
         #region Comments
@@ -56,19 +49,7 @@ namespace fmmApp.ViewModels.Forms
         /// <param name="obj">The Object</param>
         private void SubmitButtonClicked(object obj)
         {
-            var dreamer = new Dreamer()
-            {
-                FirstName = this.FirstName,
-                LastName = this.LastName,
-                YearOfBirth = this.Date.Year,
-                Sex = this.Gender,
-                GuardianFullName = this.GuardianFullName,
-                GuardianEmail = this.EmailAddress,
-                GuardianAddress = this.Address,
-                City = this.City,
-                PhoneNumber = this.PhoneNumber,
-                Url=""               
-            };
+            var dreamer = Dreamer;
 
         }
 

@@ -24,26 +24,15 @@ namespace fmmApp.ViewModels.Forms
         /// </summary>
         public EditDreamViewModel()
         {
-            this.SubmitCommand = new Command(this.SubmitClicked);
-            this.BackCommand = new Command(this.BackButtonClicked);
-            this.CancelCommand = new Command(this.CancelClicked);
-            this.AddStepCommand = new Command(this.AddStepClicked);
+            Dream = new Dream();
+            SubmitCommand = new Command(UpdateDream);
+            BackCommand = new Command(GoToDreamerListPAge);
+            CancelCommand = new Command(GoToDreamerListPAge);
+            AddStepCommand = new Command(AddStep);
         }
         #endregion
-
+        public Dream Dream { get; set; }
         #region Properties
-        public bool IsUrgent { get; set; }
-        public bool CanBeDone { get; set; }
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Full Name from user.
-        /// </summary>
-        public string DreamTitle { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property that bounds with an entry that gets the Business Name from user.
-        /// </summary>
-        public string Description { get; set; }
-
         List<Category> categoryList;
         public List<Category> CategoryList
         {
@@ -87,6 +76,7 @@ namespace fmmApp.ViewModels.Forms
         public string Voulunteers { get; set; }
 
         public ObservableCollection<Step> StepList { get; set; }
+       
 
         #endregion 
 
@@ -111,22 +101,17 @@ namespace fmmApp.ViewModels.Forms
         /// Invoked when the Submit button clicked
         /// </summary>
         /// <param name="obj">The object</param>
-        private void SubmitClicked(Object obj)
+        private void UpdateDream(Object obj)
         {
 
         }
 
-        private void BackButtonClicked(object obj)
+        private void GoToDreamerListPAge()
         {
             //App.Current.MainPage = new DreamerListPage();
         }
-
-        private void CancelClicked(Object obj)
-        {
-            //App.Current.MainPage = new DreamListPage();
-        }
-
-        private void AddStepClicked(Object obj)
+        
+        private void AddStep(Object obj)
         {
             App.Current.MainPage = new AddStepPage();
         }

@@ -8,7 +8,9 @@
              xmlns:controls="clr-namespace:fmmApp.Controls"
              xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
              xmlns:behavior="clr-namespace:fmmApp.Behaviors.Navigation"
+             xmlns:viewModel="clr-namespace:fmmApp.ViewModels.Navigation"
              mc:Ignorable="d"
+             x:Name="SponsorList"
              x:Class="fmmApp.Views.Navigation.SponsorsListPage"
              BackgroundColor="{DynamicResource Gray-White}"
              NavigationPage.HasNavigationBar="False">
@@ -21,6 +23,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.BindingContext>
+        <viewModel:SponsorsListViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <Grid RowSpacing="0" >
             <Grid.RowDefinitions>
@@ -68,7 +74,9 @@
                                    Text="{StaticResource Search}" />
 
                 <!--  Add Button  -->
-                <buttons:SfButton  x:Name="AddButton" IsVisible="True" Clicked="AddButton_Clicked" Style="{StaticResource IconButtonStyle }"
+                <buttons:SfButton  x:Name="AddButton" IsVisible="True" 
+                                   Command="{Binding Path=BindingContext.AddCommand, Source={x:Reference SponsorList}}" 
+                                   Style="{StaticResource IconButtonStyle }"
                                    Text="{StaticResource Add}" />
 
             </StackLayout>
@@ -80,7 +88,8 @@
                                                        AllowSwiping="True" AutoFitMode="Height" ItemSpacing="0"
                                                        AllowGroupExpandCollapse="False" SelectionGesture="Tap"
                                                        SelectionMode="Single" VerticalOptions="FillAndExpand"
-                                                       SearchText="{Binding SearchText}" TapCommand="{Binding ItemTappedCommand}"
+                                                       SearchText="{Binding SearchText}" 
+                                                        ItemTapped="SponsorListPage_ItemTapped"
                                                        ItemsSource="{Binding SponsorsList}" SelectionBackgroundColor="Transparent">
 
                     <controls:SearchableContactsList.DataSource>
@@ -142,8 +151,7 @@
 
                                             <!-- Next button icon -->
                                             <buttons:SfButton Margin="0,6" Grid.Column="2" Text="{StaticResource Next}" FontSize="16" Style="{StaticResource NextButton}" 
-                                                              Clicked="NextButton_Clicked"
-                                                            Command="{Binding Path=BindingContext.NextCommand, Source={x:Reference SponsorsList}}" />
+                                                            Command="{Binding Path=BindingContext.DetailsCommand, Source={x:Reference SponsorsList}}" />
 
                                         </Grid>
 

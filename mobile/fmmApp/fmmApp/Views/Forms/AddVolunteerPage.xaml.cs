@@ -1,8 +1,5 @@
 ﻿using fmmApp.Models;
-using fmmApp.Models.Detail;
 using fmmApp.ViewModels;
-using fmmApp.Views.Navigation;
-using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -42,20 +39,5 @@ namespace fmmApp.Views.Forms
             return departmentList;
         }
 
-        private void CancelButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new VolunteerListPage();
-        }
-
-        private void AddButton_Clicked(object sender, EventArgs e)
-        {
-            var Volunteer = new Volunteer
-            {
-                FullName = this.FirstNameEntry.Text + " " + this.LastNameEntry.Text,
-                Department = this.DepartmentPicker.SelectedItem.ToString(),
-                Phone = this.PhoneNoEntry.Text,
-                Email = this.EmailEntry.Text
-            };
-        }
     }
 }

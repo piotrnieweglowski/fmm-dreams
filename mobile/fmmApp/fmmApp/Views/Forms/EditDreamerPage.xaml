@@ -55,7 +55,8 @@
                         Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
                             x:Name="FirstNameEntry"
-                            Placeholder="First Name" Text="{Binding FirstName}"
+                            Placeholder="First Name"
+                            Text="{Binding Dreamer.FirstName}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
                 <border:SfBorder
@@ -64,7 +65,8 @@
                         Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
                             x:Name="LastNameEntry"
-                            Placeholder="Last Name" Text="{Binding LastName}"
+                            Placeholder="Last Name"
+                            Text="{Binding Dreamer.LastName}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
                 <Grid>
@@ -74,7 +76,7 @@
                             Padding="12,0,0,0"
                             Style="{StaticResource FormBorderStyle}">
 
-                        <control:CalenderDatePicker Date="{Binding Date}"
+                        <control:CalenderDatePicker Date="{Binding Dreamer.Date}"
                                                     x:Name="CustomDatePicker"
                                                     FontFamily="{StaticResource Montserrat-Regular}"
                                                     FontSize="16"
@@ -90,7 +92,7 @@
                             BorderColor="{Binding Source={x:Reference GenderPicker}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                             Style="{StaticResource FormBorderStyle}">
                         <combobox:SfComboBox
-                                x:Name="GenderPicker" SelectedValue="{Binding Gender, Mode=TwoWay}"
+                                x:Name="GenderPicker" SelectedValue="{Binding Dreamer.Gender, Mode=TwoWay}"
                                 Style="{StaticResource ComboBoxStyle}"
                                 Watermark="Gender">
                             <combobox:SfComboBox.ComboBoxSource>
@@ -127,7 +129,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
                             x:Name="UrlEntry"
-                            Placeholder="URL" Text="{Binding UrlAddress}"
+                            Placeholder="URL" Text="{Binding Dreamer.UrlAddress}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -136,7 +138,7 @@
                                  Style="{StaticResource FormBorderStyle}" Grid.Column="2">
                     <control:BorderlessEntry
                             x:Name="DreamEntry"
-                            Placeholder="Dream" Text="{Binding Dream}"
+                            Placeholder="Dream" Text="{Binding Dreamer.Dream}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -150,7 +152,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <control:BorderlessEntry
                             x:Name="AddressEntry"
-                            Placeholder="Address" Text="{Binding Address}"
+                            Placeholder="Address" Text="{Binding Dreamer.Address}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -159,7 +161,8 @@
                                  Style="{StaticResource FormBorderStyle}" Grid.Column="2">
                     <control:BorderlessEntry
                             x:Name="CityEntry"
-                            Placeholder="City" Text="{Binding City}"
+                            Placeholder="City"
+                            Text="{Binding Dreamer.City}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -169,7 +172,7 @@
                     <control:BorderlessEntry
                             x:Name="PhoneNoEntry"
                             Placeholder="Phone Number"
-                            Text="{Binding PhoneNumber}"
+                            Text="{Binding Dreamer.PhoneNumber}"
                             Keyboard="Telephone"
                             Style="{StaticResource EntryTextStyle}">
 
@@ -179,7 +182,8 @@
                     <buttons:SfButton
                             Grid.Row="0"
                             Grid.Column="1"
-                            HorizontalOptions="Center" Command="{Binding SubmitCommand}"
+                            HorizontalOptions="Center"
+                            Command="{Binding Path=BindingContext.SubmitCommand, Source={x:Reference EditDreamer}}"
                             Style="{StaticResource SfButtonStyle}"
                             Text="SAVE"
                             WidthRequest="200"/>
@@ -187,7 +191,8 @@
                     <buttons:SfButton
                             Grid.Row="0"
                             Grid.Column="0"
-                            HorizontalOptions="Center" Command="{Binding CancelCommand}"
+                            HorizontalOptions="Center"
+                            Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference EditDreamer}}"
                             Style="{StaticResource SfButtonStyle}"
                             Text="CANCEL"
                             WidthRequest="200"/>

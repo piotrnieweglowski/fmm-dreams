@@ -76,7 +76,7 @@
                                         VerticalOptions="Center" LineHeight="{OnPlatform Default=-1, Android=1.5}" >
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="{Binding FullName}" FontSize="16" TextColor="{DynamicResource Gray-900}" 
+                                            <Span Text="{Binding FirstName}" FontSize="16" TextColor="{DynamicResource Gray-900}" 
                                                   FontFamily="{StaticResource Montserrat-SemiBold}"/>
                                             <Span Text="  "/>
                                         </FormattedString>

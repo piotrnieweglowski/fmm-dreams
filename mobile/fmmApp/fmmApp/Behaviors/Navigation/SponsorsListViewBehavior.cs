@@ -30,10 +30,10 @@ namespace fmmApp.Behaviors.Navigation
                 listView = bindable;
                 listView.DataSource.GroupDescriptors.Add(new GroupDescriptor()
                 {
-                    PropertyName = "name",
+                    PropertyName = "Name",
                     KeySelector = (object obj1) =>
                     {
-                        var item = (obj1 as Models.Navigation.SponsorModel);
+                       var item = (obj1 as Models.Sponsor);
                        return item.Name[0].ToString(CultureInfo.CurrentCulture);
                     },
                 });

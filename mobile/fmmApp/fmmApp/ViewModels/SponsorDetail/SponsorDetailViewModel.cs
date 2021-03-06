@@ -14,7 +14,7 @@ namespace fmmApp.ViewModels.SponsorDetail
     public class SponsorDetailViewModel : BaseViewModel
     {
         #region Properties
-        public ObservableCollection<Models.SponsorDetail.Sponsor> SponsorDetails { get; set; }
+        public ObservableCollection<Sponsor> SponsorDetails { get; set; }
         public ObservableCollection<Dreamer> DreamerList { get; set; }
         #endregion
 
@@ -60,7 +60,7 @@ namespace fmmApp.ViewModels.SponsorDetail
                 }
             };
         }
-        public SponsorDetailViewModel(Models.SponsorDetail.Sponsor sponsor)
+        public SponsorDetailViewModel(Sponsor sponsor)
         {
             this.BackCommand = new Command(this.BackButtonClicked);
             this.EditCommand = new Command(this.EditButtonClicked);
@@ -71,7 +71,7 @@ namespace fmmApp.ViewModels.SponsorDetail
                 Description = "dream"
             };
 
-            this.SponsorDetails = new ObservableCollection<Models.SponsorDetail.Sponsor>()
+            this.SponsorDetails = new ObservableCollection<Sponsor>()
             {
                 sponsor
                 /*new Models.SponsorDetail.Sponsor
@@ -119,7 +119,7 @@ namespace fmmApp.ViewModels.SponsorDetail
         /// <param name="obj">The object</param>
         private void EditButtonClicked(object obj)
         {
-            App.Current.MainPage = new EditSponsorPage();
+            //App.Current.MainPage = new EditSponsorPage();
         }
 
         /// <summary>

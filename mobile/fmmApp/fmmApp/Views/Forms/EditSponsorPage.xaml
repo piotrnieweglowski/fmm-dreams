@@ -58,7 +58,7 @@
                             x:Name="NameEntry"
                             Placeholder="Name"
                             MaxLength="100"
-                            Text="{Binding Name}"
+                            Text="{Binding Sponsor.Name}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -71,7 +71,7 @@
                             x:Name="EmailAddressEntry"
                             Placeholder="Email Address"
                             Keyboard="Email"
-                            Text="{Binding EmailAddress}"
+                            Text="{Binding Sponsor.EmailAddress}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -84,7 +84,7 @@
                             x:Name="PhoneNoEntry"
                             Keyboard="Telephone"
                             Placeholder="Phone Number : e.g. XXX-XXX-XXX"
-                            Text="{Binding PhoneNumber}"
+                            Text="{Binding Sponsor.PhoneNumber}"
                             Style="{StaticResource EntryTextStyle}">
                         <control:BorderlessEntry.Behaviors>
                             <behaviours:EntryMaskedBehavior Mask="(+48)XXX-XXX-XXX" Prefix="(+48)"/>
@@ -100,7 +100,7 @@
                             x:Name="AdditionalInfoEntry"
                             Placeholder="Additional Info"
                             MaxLength='500'
-                            Text="{Binding AdditionalInfo}"
+                            Text="{Binding Sponsor.AdditionalInfo}"
                             Style="{StaticResource EntryTextStyle}"/>
                 </border:SfBorder>
 
@@ -111,7 +111,7 @@
                                 HorizontalOptions="Center"
                                 Style="{StaticResource SfButtonStyle}"
                                 Text="CANCEL"
-                                Clicked="CancelButton_Clicked"
+                                Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference EditSpondor}}"
                                 WidthRequest="175"/>
                     </StackLayout>
 
@@ -121,7 +121,7 @@
                                 HorizontalOptions="Center"
                                 Style="{StaticResource SfButtonStyle}"
                                 Text="SAVE CHANGES"
-                                Clicked="SaveButton_Clicked"
+                            Command="{Binding Path=BindingContext.SaveCommand, Source={x:Reference EditSpondor}}"
                                 WidthRequest="175"/>
                     </StackLayout>
                 </StackLayout>

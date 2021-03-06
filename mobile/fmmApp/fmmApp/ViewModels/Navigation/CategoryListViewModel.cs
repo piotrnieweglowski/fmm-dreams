@@ -1,9 +1,12 @@
-﻿using fmmApp.Models;
+﻿using fmmApp.DataService;
+using fmmApp.Models;
 using fmmApp.Models.Navigation;
+using fmmApp.Views.Forms;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -31,10 +34,18 @@ namespace fmmApp.ViewModels.Navigation
         /// </summary>
         public CategoryListViewModel()
         {
+            AddCategoryCommand = new Command(AddCategory);
+            //BackCategoryCommand = new Command();
+            DeleteCategoryCommand = new Command(async () => await DeleteCommand());
+
         }
         #endregion
 
         #region Properties
+
+        public Command AddCategoryCommand { get; set; }
+        public Command DeleteCategoryCommand { get; set; }
+        public Command BackCategoryCommand { get; set; }
 
         /// <summary>
         /// Gets the command that will be executed when an item is selected.
@@ -65,6 +76,16 @@ namespace fmmApp.ViewModels.Navigation
         {
             
             var obj = selectedItem as Category;       
+        }
+
+        private void AddCategory()
+        {
+            App.Current.MainPage = new AddCategoryPage();
+        }
+
+        private async Task DeleteCommand()
+        {
+            //await CategoryListDataService.Instance.DeleteCategory();            
         }
 
         #endregion

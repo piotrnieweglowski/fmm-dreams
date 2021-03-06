@@ -1,10 +1,8 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
-using System;
-using fmmApp.Views.SponsorDetail;
 using fmmApp.ViewModels;
-using fmmApp.Models.SponsorDetail;
+using fmmApp.Models;
 
 namespace fmmApp.Views.Forms
 {
@@ -18,40 +16,16 @@ namespace fmmApp.Views.Forms
 
         EditSponsorViewModel viewModel;
 
-        public EditSponsorPage(EditSponsorViewModel viewModel)
-        {
-            InitializeComponent();
-            BindingContext = this.viewModel = viewModel;
-        }
-
         public EditSponsorPage()
         {
             InitializeComponent();
-            var sponsor = new Sponsor
-            {
-                Name = "sponsor name",
-                EmailAddress = "mail@mail.com",
-                PhoneNumber="123456789",
-                AdditionalInfo="Additional Info"                
-            };
+        }
+
+        public EditSponsorPage(Sponsor sponsor)
+        {
+            InitializeComponent();
             viewModel = new EditSponsorViewModel(sponsor);
             BindingContext = viewModel;
-        }
-
-        private void CancelButton_Clicked(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new SponsorDetailPage();
-        }
-
-        private void SaveButton_Clicked(object sender, EventArgs e)
-        {
-            var Sponsor = new Sponsor
-            {
-                Name = this.NameEntry.Text,
-                PhoneNumber = this.PhoneNoEntry.Text,
-                EmailAddress = this.EmailAddressEntry.Text,
-                AdditionalInfo = this.AdditionalInfoEntry.Text
-            };
         }
     }
 }

@@ -66,7 +66,7 @@
                         Margin="0,0,0,10"
                         OnColor="Red"
                         ThumbColor="Gray"
-                        BindingContext="{Binding IsUrgent}"/>
+                        BindingContext="{Binding Dream.IsUrgent}"/>
                 </Grid>
 
                 <Grid>
@@ -87,7 +87,7 @@
                         OnColor="Green"
                         Margin="0,0,0,10"
                         ThumbColor="Gray"
-                        BindingContext="{Binding CanBeDone}"/>
+                        BindingContext="{Binding Dream.CanBeDone}"/>
                 </Grid>
 
                 <Label
@@ -102,7 +102,7 @@
                                  Style="{StaticResource BusinessFormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="DreamTitleEntry"
-                            Text="{Binding DreamTitle}"
+                            Text="{Binding Dream.Title}"
                             Style="{StaticResource EntryTextBoxStyle}" />
                 </border:SfBorder>
 
@@ -118,7 +118,7 @@
                                  Style="{StaticResource BusinessFormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="DescriptionEntry"
-                            Text="{Binding Description}"
+                            Text="{Binding Dream.Description}"
                             Style="{StaticResource EntryTextBoxStyle}" />
                 </border:SfBorder>
 
@@ -190,7 +190,7 @@
                     <buttons:SfButton
                                                     Grid.Row="0"
                             Grid.Column="0"
-                            Command="{Binding AddStepCommand}"
+                        Command="{Binding Path=BindingContext.AddStepCommand, Source={x:Reference EditDream}}"
                             HorizontalOptions="Start"
                             VerticalOptions="Start"
                             Margin="0,24,0,24"
@@ -203,7 +203,7 @@
                     <buttons:SfButton
                             Grid.Row="1"
                             Grid.Column="1"
-                            Command="{Binding SubmitCommand}"
+                        Command="{Binding Path=BindingContext.SubmitCommand, Source={x:Reference EditDream}}"
                             HorizontalOptions="Start"
                             VerticalOptions="Start"
                             Margin="0,24,0,0"
@@ -215,7 +215,8 @@
                     <buttons:SfButton
                             Grid.Row="1"
                             Grid.Column="0"
-                            Command="{Binding CancelComand}"
+                            
+                        Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference EditDream}}"
                             HorizontalOptions="Start"
                             VerticalOptions="Start"
                             Margin="0,24,0,0"

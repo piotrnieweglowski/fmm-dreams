@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms.Internals;
+﻿using fmmApp.Models;
+using fmmApp.ViewModels.SponsorDetail;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace fmmApp.Views.SponsorDetail
@@ -18,6 +20,11 @@ namespace fmmApp.Views.SponsorDetail
             InitializeComponent();
         }
 
+        public SponsorDetailPage(Sponsor sponsor)
+        {
+            InitializeComponent();
+            BindingContext=new SponsorDetailViewModel(sponsor);
+        }
 
     }
 }

@@ -1,28 +1,28 @@
-﻿using fmmApp.Models.SponsorDetail;
-using fmmApp.Validations;
-using fmmApp.Views.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
-using System.Windows.Input;
+﻿using fmmApp.Models;
 using Xamarin.Forms;
 using fmmApp.Views.SponsorDetail;
+using System.Threading.Tasks;
+using fmmApp.DataService;
 
 namespace fmmApp.ViewModels
 {
     public class EditSponsorViewModel : BaseViewModel
     {
+        public Sponsor Sponsor { get; set; }
+
         public EditSponsorViewModel()
         {
-            this.BackCommand = new Command(this.BackButtonClicked);
+            BackCommand = new Command(GoToSponsorDetailPage);
+            CancelCommand = new Command(GoToSponsorDetailPage);
+            SaveCommand = new Command(async () => await UpdateSponsor());
         }
-        public EditSponsorViewModel(Sponsor sponsor = null)
+
+        public EditSponsorViewModel(Sponsor sponsor)
         {
-            Name = sponsor.Name;
-            EmailAddress = sponsor.EmailAddress;
-            PhoneNumber = sponsor.PhoneNumber;
-            AdditionalInfo = sponsor.AdditionalInfo;
+            Sponsor = sponsor;
+            BackCommand = new Command(GoToSponsorDetailPage);
+            CancelCommand = new Command(GoToSponsorDetailPage);
+            SaveCommand = new Command(async () => await UpdateSponsor());
         }
 
         private string _name;
@@ -86,10 +86,19 @@ namespace fmmApp.ViewModels
         }
 
         public Command BackCommand { get; set; }
+        public Command CancelCommand { get; set; }
+        public Command SaveCommand { get; set; }
 
-        private void BackButtonClicked(object obj)
+        private void GoToSponsorDetailPage()
         {
             App.Current.MainPage = new SponsorDetailPage();
         }
+
+        private async Task UpdateSponsor()
+        {
+            //await SponsorsListDataService.Instance.Update(Sponsor);
+            GoToSponsorDetailPage();
+        }
+        
     }
 }

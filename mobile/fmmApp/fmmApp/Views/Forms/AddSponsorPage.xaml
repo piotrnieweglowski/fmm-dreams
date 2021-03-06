@@ -9,7 +9,7 @@
         xmlns:converter="clr-namespace:fmmApp.Converters"
         xmlns:ViewModel="clr-namespace:fmmApp.ViewModels"
         Title="New Sponsor"
-        x:Name="NewDreamPage"
+        x:Name="NewSponsorPage"
         xmlns:controls="clr-namespace:fmmApp.Controls"
         BackgroundColor="{DynamicResource Gray-White}"
         NavigationPage.HasNavigationBar="False">
@@ -34,7 +34,7 @@
                     <controls:TitleView.LeadingView>
                         <!--  Back button command  -->
                         <buttons:SfButton x:Name="backButton"
-                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewDreamPage}}"
+                                          Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference NewSponsorPage}}"
                                           CornerRadius="4" Text="{StaticResource Back}"
                                           CommandParameter="{x:Reference backButton}"
                                           Style="{StaticResource IconButtonStyle}"/>
@@ -80,13 +80,13 @@
                         Text="{Binding Name.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
                         Style="{StaticResource ValidationErrorLabelStyle}"/>
 
-                <!--  Last name entry with border  -->
                 <border:SfBorder
                         Grid.Column="2"
                         BorderColor="{Binding Source={x:Reference EmailAddressEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="EmailAddressEntry"
+                            Text="{Binding Sponsor.EmailAddress}"
                             Placeholder="Email Address"
                             Keyboard="Email"
                             Style="{StaticResource EntryTextStyle}"/>
@@ -98,11 +98,12 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="PhoneNoEntry"
+                            Text="{Binding Sponsor.PhoneNumber}"
                             Keyboard="Telephone"
-                            Placeholder="Phone Number : e.g. XXXX-XXXXXX"
+                            Placeholder="Phone Number : e.g. XXX-XXX-XXXX"
                             Style="{StaticResource EntryTextStyle}">
                         <controls:BorderlessEntry.Behaviors>
-                            <behaviours:EntryMaskedBehavior Mask="(+91)XXXXX-XXXXX" Prefix="(+91)"/>
+                            <behaviours:EntryMaskedBehavior Mask="(+48)XXX-XXX-XXXX" Prefix="(+48)"/>
                         </controls:BorderlessEntry.Behaviors>
                     </controls:BorderlessEntry>
                 </border:SfBorder>
@@ -113,6 +114,7 @@
                         Style="{StaticResource FormBorderStyle}">
                     <controls:BorderlessEntry
                             x:Name="AdditionalInfoEntry"
+                            Text="{Binding Sponsor.AdditionalInfo}"
                             Placeholder="Additional Info"
                             MaxLength="500"
                             Style="{StaticResource EntryTextStyle}"/>
@@ -125,7 +127,7 @@
                                 HorizontalOptions="Center"
                                 Style="{StaticResource SfButtonStyle}"
                                 Text="CANCEL"
-                                Clicked="CancelButton_Clicked"
+                                Command="{Binding Path=BindingContext.CancelCommand, Source={x:Reference NewSponsorPage}}"
                                 WidthRequest="175"/>
                     </StackLayout>
                     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -134,7 +136,7 @@
                                 HorizontalOptions="Center"
                                 Style="{StaticResource SfButtonStyle}"
                                 Text="ADD SPONSOR"
-                                Clicked="AddButton_Clicked"
+                                Command="{Binding Path=BindingContext.AddSponsorCommand, Source={x:Reference NewSponsorPage}}"
                                 WidthRequest="175"/>
                     </StackLayout>
                 </StackLayout>
